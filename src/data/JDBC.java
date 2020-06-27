@@ -8,7 +8,7 @@ public class JDBC {
 	private Connection con = null;
 	private Statement st = null;
 	private PreparedStatement pStmt = null;
-	public ResultSet rs = null;
+	public static ResultSet rs = null;
 	
 	public void sqlExecute(String type, String sql, String[] parameter) {
 		try {
@@ -30,13 +30,12 @@ public class JDBC {
 				sqlDelete(sql, parameter);
 				break;
 			}
-			closeJDBC();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-	private void closeJDBC() {
+	public void closeJDBC() {
 		if (rs != null) {
             try {
                 rs.close();
