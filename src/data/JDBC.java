@@ -66,7 +66,7 @@ public class JDBC {
         }
 	}
 
-	// Select 사용 후 'Dbcp.rs'로 결과를 가져오면 된다.('public' ResultSet)
+	// Select 사용 후 'JDBC.rs'로 결과를 가져오면 된다.('public' ResultSet)
 	private void sqlSelect(String sql) {
 		try {
 			st = con.createStatement();
@@ -106,7 +106,7 @@ public class JDBC {
 	
 	// PreparedStatement로 입력될 매개변수는 배열로 넘겨서 받아야한다.
 	// Ex) String[] arrName = {request.getParameter("id"), "admin", ... ,"name"};
-	// 배열 선언 후 Dbcp 매개변수에 넣어주면 된다.
+	// 배열 선언 후 JDBC 매개변수에 넣어주면 된다.
 	public void stGetParam(String[] parameter) {
 		try {
 			for(int i = 0; i < parameter.length; i++) {
