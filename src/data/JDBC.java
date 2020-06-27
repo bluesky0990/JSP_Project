@@ -4,7 +4,7 @@ import java.sql.*;
 import javax.sql.*;
 import javax.naming.*;
 
-public class Dbcp {
+public class JDBC {
 	private Connection con = null;
 	private Statement st = null;
 	private PreparedStatement pStmt = null;
