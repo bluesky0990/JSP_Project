@@ -9,13 +9,16 @@ public class JDBC {
 	private Statement st = null;
 	private PreparedStatement pStmt = null;
 	public static ResultSet rs = null;
-	
+	public static String sError = "";
+	public String SqlTest()
+	{
+		return "Test";
+	}
 	public void sqlExecute(String type, String sql, String[] parameter) {
 		try {
 			Context initCtx = new InitialContext();
 			DataSource ds = (DataSource)initCtx.lookup("java:comp/env/jdbc/hg");
 			con = ds.getConnection();
-			
 			switch (type) {
 			case "select":
 				sqlSelect(sql);
@@ -31,7 +34,7 @@ public class JDBC {
 				break;
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			sError = e.toString();
 		}
 	}
 
@@ -40,39 +43,39 @@ public class JDBC {
             try {
                 rs.close();
             } catch (SQLException e) {
-                e.printStackTrace();
+            	sError = e.toString();
             }
         }
         if (st != null) {
             try {
                 st.close();
             } catch (SQLException e) {
-                e.printStackTrace();
+            	sError = e.toString();
             }
         }
         if (pStmt != null) {
             try {
                 pStmt.close();
             } catch (SQLException e) {
-                e.printStackTrace();
+            	sError = e.toString();
             }
         }
         if (con != null) {
             try {
                 con.close();
             } catch (SQLException e) {
-                e.printStackTrace();
+            	sError = e.toString();
             }
         }
 	}
 
-	// Select 사용 후 'JDBC.rs'로 결과를 가져오면 된다.('public' ResultSet)
+	// Select �궗�슜 �썑 'JDBC.rs'濡� 寃곌낵瑜� 媛��졇�삤硫� �맂�떎.('public' ResultSet)
 	private void sqlSelect(String sql) {
 		try {
 			st = con.createStatement();
 			rs = st.executeQuery(sql);
 		} catch (SQLException e) {
-			e.printStackTrace();
+			sError = e.toString();
 		}
 	}
 	
@@ -81,7 +84,7 @@ public class JDBC {
 			pStmt = con.prepareStatement(sql);
 			stGetParam(parameter);
 		} catch (SQLException e) {
-			e.printStackTrace();
+			sError = e.toString();
 		}
 	}
 	
@@ -90,7 +93,7 @@ public class JDBC {
 			pStmt = con.prepareStatement(sql);
 			stGetParam(parameter);
 		} catch (SQLException e) {
-			e.printStackTrace();
+			sError = e.toString();
 		}
 	}
 	
@@ -99,22 +102,23 @@ public class JDBC {
 			pStmt = con.prepareStatement(sql);
 			stGetParam(parameter);
 		} catch (SQLException e) {
-			e.printStackTrace();
+			sError = e.toString();
 		}
 	}
 	
 	
-	// PreparedStatement로 입력될 매개변수는 배열로 넘겨서 받아야한다.
+	// PreparedStatement濡� �엯�젰�맆 留ㅺ컻蹂��닔�뒗 諛곗뿴濡� �꽆寃⑥꽌 諛쏆븘�빞�븳�떎.
 	// Ex) String[] arrName = {request.getParameter("id"), "admin", ... ,"name"};
-	// 배열 선언 후 JDBC 매개변수에 넣어주면 된다.
+	// 諛곗뿴 �꽑�뼵 �썑 JDBC 留ㅺ컻蹂��닔�뿉 �꽔�뼱二쇰㈃ �맂�떎.
 	public void stGetParam(String[] parameter) {
 		try {
 			for(int i = 0; i < parameter.length; i++) {
 				pStmt.setString(i+1, parameter[i]);
 			}
 			int a = pStmt.executeUpdate();
+			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			sError = e.toString();
 		}
 	}
 }

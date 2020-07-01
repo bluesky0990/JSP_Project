@@ -1,17 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"
-import="JDBCPool.JDBC;"
+import="data.JDBC"
 %>
 <%
 request.setCharacterEncoding("utf-8");
 JDBC jdbc = new JDBC();
 
+
 String Content = request.getParameter("content");
 String title = request.getParameter("title");
 
-jdbc.sqlExecute("INSERT", "INSERT INTO ARTICLE('TITLE','CONTENT','POSTDATE','HITS','WRITER','STATIONID','BOARDID')" 
- + "values(?,?,SYSDATE,?,?,?,?)", new String[] {title, Content, "0", "123", "1", "0"});
-
+jdbc.sqlExecute("INSERT", "INSERT INTO ARTICLE(TITLE,CONTENT,POSTDATE,HITS,WRITER,STATIONID,BOARDID)" 
+ + "values(?,?,?,?,?,?,?)", new String[] {title, Content, "SYSDATE","0", "Lisithromyxin", "1", "0"});
+out.print(jdbc.sError);
 %>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
