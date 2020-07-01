@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" import="com.oreilly.servlet.MultipartRequest,
                       com.oreilly.servlet.multipart.DefaultFileRenamePolicy,
                       java.util.*,
-                      java.io.*,
-					  data.JDBC"%>
+                      java.io.*"%>
+<%@include file="/SQLHelper.jsp"%>
 
 <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
@@ -15,13 +15,13 @@
 <html>
 <%
 	request.setCharacterEncoding("utf-8");
-	JDBC jdbc = new JDBC();
+	SQLHelper sql = new SQLHelper();
+String articleNo = request.getParameter("articleNo");
 
-jdbc.sqlExecute("SELECT", "SELECT * FROM ARTICLE WHERE NO=27", new String[] {});
-if (jdbc.rs.next()) {
-	out.print(jdbc.rs.getString("CONTENT"));
-	out.print(jdbc.sError);
+sql.sqlExecute("SELECT", "SELECT * FROM ARTICLE WHERE NO=" + articleNo.toString(), new String[] {});
+if (sql.rs.next()) {
+	out.print(sql.rs.getString("CONTENT"));
 }
-jdbc.closeJDBC();
+sql.closeSQL();
 %>
 </html>

@@ -1,42 +1,39 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" import="com.oreilly.servlet.MultipartRequest,
                       com.oreilly.servlet.multipart.DefaultFileRenamePolicy,
                       java.util.*,
-                      java.io.*,
-					  data.JDBC"%>
+                      java.io.*"%>
+<%@include file="/SQLHelper.jsp"%>
 <%
+	SQLHelper SQL = new SQLHelper();
+
 request.setCharacterEncoding("utf-8");
-JDBC jdbc = new JDBC();
 String realFolder = ""; //파일경로를 알아보기위한 임시변수를 하나 만들고,
 String saveFolder = "filestorage"; //파일저장 폴더명을 설정한 뒤에...
 String encType = "utf-8"; //인코딩방식도 함께 설정한 뒤,
 ServletContext context = getServletContext();
 realFolder = context.getRealPath(saveFolder);
-try
-{
-	MultipartRequest multi = new MultipartRequest(
-			request, realFolder, 1024*1024*1024, encType,
-			new DefaultFileRenamePolicy());
-	
+try {
+	MultipartRequest multi = new MultipartRequest(request, realFolder, 1024 * 1024 * 1024, encType,
+	new DefaultFileRenamePolicy());
+
 	Enumeration params = multi.getParameterNames();
 
-	/*while(params.hasMoreElements()){
-	      String name = (String)params.nextElement();//파라메터이름을 가져온뒤
-	      String value = multi.getParameter(name);//이름을 이용해  값을가져온다
-	      out.println(name + " = " + value +"<br>");
-	   }*/
+	String Content = multi.getParameter("content");
+	String title = multi.getParameter("title");
+	String articleNo = "";
 
-String Content = multi.getParameter("content");
-String title = multi.getParameter("title");
-//out.print(Content);
-//
-jdbc.sqlExecute("INSERT", "INSERT INTO ARTICLE(TITLE,CONTENT,POSTDATE,HITS,WRITER,STATIONID,BOARDID)" 
- + "values(?,?,SYSDATE,?,?,?,?)", new String[] {title, Content, "0", "Lisithromyxin", "1", "0"});
-out.print(jdbc.sError);
+	SQL.sqlExecute("INSERT",
+	"INSERT INTO ARTICLE(NO,TITLE,CONTENT,POSTDATE,HITS,WRITER,STATIONID,BOARDID) values(ARTICLE_SEQ.NEXTVAL,?,?,SYSDATE,?,?,?,?)",
+	new String[] { title, Content, "0", "Lisithromyxin", "1", "0" });
 
-jdbc.closeJDBC();
-}
-catch(IOException e)
-{
+	SQL.sqlExecute("SELECT", "SELECT ARTICLE_SEQ.CURRVAL from DUAL", null);
+	while (SQL.rs.next()) {
+		articleNo = SQL.rs.getString("CURRVAL");
+	}
+
+	SQL.closeSQL();
+	response.sendRedirect("/getArticle.jsp?articleNo=" + articleNo);
+} catch (Exception e) {
 	out.print(e);
 }
 %>
