@@ -16,8 +16,8 @@
 </head>
 
 <body>
-	<form method="post" action="sendArticle.jsp">
-		<input type="text" class="form-control" id="title" aria-label="제목" aria-describedby="inputGroup-sizing-default">
+	<form method="post" enctype="multipart/form-data" action="sendArticle.jsp">
+		<input type="text" class="form-control" id="title" name="title" aria-label="제목" aria-describedby="inputGroup-sizing-default">
 		<div class="input-group mb-3">
 			<div class="input-group-prepend">
 				<label class="input-group-text" for="inputGroupSelect01">게시판</label>
@@ -29,7 +29,7 @@
 				<option value="3">Three</option>
 			</select>
 		</div>
-		<textarea id="content" class="summernote"></textarea>
+		<textarea id="content" name="content" class="summernote"></textarea>
 		<button type="submit" class="btn btn-primary">Send</button>
 	</form>
 	<script>

@@ -7,7 +7,7 @@ import javax.naming.*;
 public class JDBC {
 	private Connection con = null;
 	private Statement st = null;
-	private PreparedStatement pStmt = null;
+	public PreparedStatement pStmt = null;
 	public static ResultSet rs = null;
 	public static String sError = "";
 	public String SqlTest()
@@ -19,17 +19,19 @@ public class JDBC {
 			Context initCtx = new InitialContext();
 			DataSource ds = (DataSource)initCtx.lookup("java:comp/env/jdbc/hg");
 			con = ds.getConnection();
+			type = type.toUpperCase();
+		
 			switch (type) {
-			case "select":
+			case "SELECT":
 				sqlSelect(sql);
 				break;
-			case "insert":
+			case "INSERT":
 				sqlInsert(sql, parameter);
 				break;
-			case "update":
+			case "UPDATE":
 				sqlUpdate(sql, parameter);
 				break;
-			case "delete":
+			case "DELETE":
 				sqlDelete(sql, parameter);
 				break;
 			}
@@ -112,11 +114,12 @@ public class JDBC {
 	// 諛곗뿴 �꽑�뼵 �썑 JDBC 留ㅺ컻蹂��닔�뿉 �꽔�뼱二쇰㈃ �맂�떎.
 	public void stGetParam(String[] parameter) {
 		try {
+			
 			for(int i = 0; i < parameter.length; i++) {
 				pStmt.setString(i+1, parameter[i]);
 			}
-			int a = pStmt.executeUpdate();
-			
+			sError = "INSERT CONNECTED3333";
+			pStmt.executeUpdate();
 		} catch (SQLException e) {
 			sError = e.toString();
 		}
