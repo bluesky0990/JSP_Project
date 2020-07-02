@@ -34,7 +34,7 @@
 	    driverClassName = "oracle.jdbc.driver.OracleDriver"
 	    username = "JSP"
 	    password = "1111"
-	    url = "jdbc:oracle:thin:@//52.78.220.154:1521/xepdb1"
+	    url = "jdbc:oracle:thin:@//52.78.220.154:1521/xe"
 	    maxWait = "5000"
     />
 </Context>

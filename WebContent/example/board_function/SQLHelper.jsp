@@ -1,26 +1,33 @@
-package data;
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" import=
+"javax.sql.*,
+java.sql.*,
+javax.naming.*,
+data.ConnectionPool"
+%>
 
-import java.sql.*;
-import javax.sql.*;
-import javax.naming.*;
-
-public class JDBC {
+<%!
+public static class SQLHelper {
+	private static ConnectionPool cp = null;
 	private Connection con = null;
 	private Statement st = null;
 	public PreparedStatement pStmt = null;
 	public static ResultSet rs = null;
 	public static String sError = "";
-	public String SqlTest()
+	public SQLHelper()
 	{
-		return "Test";
+		try
+		{
+			if (cp == null) cp = new ConnectionPool();
+			con = cp.getConnection();
+			
+		} catch (Exception e) {
+			sError = "JDBC INIT ERROR\n" + e.toString();
+		}
 	}
 	public void sqlExecute(String type, String sql, String[] parameter) {
 		try {
-			Context initCtx = new InitialContext();
-			DataSource ds = (DataSource)initCtx.lookup("java:comp/env/jdbc/hg");
-			con = ds.getConnection();
+			
 			type = type.toUpperCase();
-		
 			switch (type) {
 			case "SELECT":
 				sqlSelect(sql);
@@ -40,7 +47,7 @@ public class JDBC {
 		}
 	}
 
-	public void closeJDBC() {
+	public void closeSQL() {
 		if (rs != null) {
             try {
                 rs.close();
@@ -71,12 +78,12 @@ public class JDBC {
         }
 	}
 
-	// Select �궗�슜 �썑 'JDBC.rs'濡� 寃곌낵瑜� 媛��졇�삤硫� �맂�떎.('public' ResultSet)
 	private void sqlSelect(String sql) {
 		try {
 			st = con.createStatement();
+			st.setQueryTimeout(3);
 			rs = st.executeQuery(sql);
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			sError = e.toString();
 		}
 	}
@@ -84,8 +91,9 @@ public class JDBC {
 	private void sqlInsert(String sql, String[] parameter) {
 		try {
 			pStmt = con.prepareStatement(sql);
+			pStmt.setQueryTimeout(3);
 			stGetParam(parameter);
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			sError = e.toString();
 		}
 	}
@@ -93,8 +101,9 @@ public class JDBC {
 	private void sqlUpdate(String sql, String[] parameter) {
 		try {
 			pStmt = con.prepareStatement(sql);
+			pStmt.setQueryTimeout(3);
 			stGetParam(parameter);
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			sError = e.toString();
 		}
 	}
@@ -102,26 +111,23 @@ public class JDBC {
 	private void sqlDelete(String sql, String[] parameter) {
 		try {
 			pStmt = con.prepareStatement(sql);
+			pStmt.setQueryTimeout(3);
 			stGetParam(parameter);
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			sError = e.toString();
 		}
 	}
 	
-	
-	// PreparedStatement濡� �엯�젰�맆 留ㅺ컻蹂��닔�뒗 諛곗뿴濡� �꽆寃⑥꽌 諛쏆븘�빞�븳�떎.
-	// Ex) String[] arrName = {request.getParameter("id"), "admin", ... ,"name"};
-	// 諛곗뿴 �꽑�뼵 �썑 JDBC 留ㅺ컻蹂��닔�뿉 �꽔�뼱二쇰㈃ �맂�떎.
 	public void stGetParam(String[] parameter) {
 		try {
 			
 			for(int i = 0; i < parameter.length; i++) {
 				pStmt.setString(i+1, parameter[i]);
-			}
-			sError = "INSERT CONNECTED3333";
+			}			
 			pStmt.executeUpdate();
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			sError = e.toString();
 		}
 	}
 }
+%>
