@@ -2,10 +2,9 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<title>Osaka グルメ :: SignUp</title>
+<title>Osaka グルメ :: 맛집소개</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
 <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,500,500i,600,600i,700,700i&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -57,41 +56,42 @@
 	</nav>
 	<!-- END nav -->
 
-	<section class="py-5">
+	<section class="hero-wrap hero-wrap-2" style="background-image: url('images/delRes2.png');" data-stellar-background-ratio="0.5">
+		<div class="overlay"></div>
 		<div class="container">
-			<div class="row justify-content-center">
-				<div class="py-5 col-lg-4">
-					<form action="./login/chkLogin.jsp" method="post" class="appointment-form">
-						<h3 class="mb-3 text-center">Sign Up</h3>
-						<br>
-						<div class="py-3 row">
-							<div class="py-1 col-md-12">
-								<div class="form-group">
-									<input type="text" id="login_nickname" class="form-control" placeholder="Nickname">
-								</div>
-							</div>
-							<div class="py-1 col-md-12">
-								<div class="form-group">
-									<input type="text" id="login_id" class="form-control" placeholder="ID">
-								</div>
-							</div>
-							<div class="py-1 col-md-12">
-								<div class="form-group">
-									<input type="password" id="login_pw" class="form-control" placeholder="Password">
-								</div>
-							</div>
-							<div class="py-1 col-md-12">
-								<div class="form-group">
-									<input type="email" id="login_email" class="form-control" placeholder="E-Mail">
-								</div>
-							</div>
-							<div class="py-1 col-md-12 d-flex justify-content-center">
-								<div class="form-group">
-									<input type="submit" value="Sign Up" class="btn btn-primary py-3 px-4">
-								</div>
-							</div>
-						</div>
-					</form>
+			<div class="row no-gutters slider-text align-items-center justify-content-center">
+				<div class="col-md-9 ftco-animate text-center">
+					<p class="breadcrumbs mb-2">
+						<span class="mr-2"><a href="index.jsp">Home <i class="fa fa-chevron-right"></i></a></span> <span class="mr-2"><a href="deliciousRestaurant.jsp">Delicious <i class="fa fa-chevron-right"></i></a></span>
+					</p>
+					<h1 class="mb-0 bread">리뷰 게시판</h1>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section>
+		<div>
+			<div class="container">
+				<table>
+					<tr>
+						
+					</tr>
+				</table>
+			</div>
+			<div class="row py-5">
+				<div class="col text-center">
+					<div class="block-27">
+						<ul>
+							<li><a href="#">&lt;</a></li>
+							<li class="active"><span>1</span></li>
+							<li><a href="#">2</a></li>
+							<li><a href="#">3</a></li>
+							<li><a href="#">4</a></li>
+							<li><a href="#">5</a></li>
+							<li><a href="#">&gt;</a></li>
+						</ul>
+					</div>
 				</div>
 			</div>
 		</div>
