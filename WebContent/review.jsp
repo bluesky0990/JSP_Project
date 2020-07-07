@@ -56,7 +56,7 @@
 	</nav>
 	<!-- END nav -->
 
-	<section class="hero-wrap hero-wrap-2" style="background-image: url('images/delRes2.png');" data-stellar-background-ratio="0.5">
+	<section class="hero-wrap hero-wrap-2" style="background-image: url('images/review.jpg');" data-stellar-background-ratio="0.5">
 		<div class="overlay"></div>
 		<div class="container">
 			<div class="row no-gutters slider-text align-items-center justify-content-center">
@@ -71,13 +71,71 @@
 	</section>
 
 	<section>
+	<br><br>
 		<div>
-			<div class="container">
-				<table>
-					<tr>
-						
-					</tr>
-				</table>
+		<div class="container">
+		    <div class="row">
+		      <div class="col-lg-8 col-md-10 mx-auto">
+		        <div class="post-preview">
+		          <a href="post.html">
+		            <h2 class="post-title">
+		              	타코야키 정말 맛있었엇는데 좀...
+		            </h2>
+		            <h3 class="post-subtitle">
+		              	
+		            </h3>
+		          </a>
+		          <p class="post-meta">작성자
+		            <a href="#">원랜디 마렵다</a>
+		            on September 24, 2019</p>
+		        </div>
+		        <hr>
+		        <div class="post-preview">
+		          <a href="post.html">
+		            <h2 class="post-title">
+		             	라면 정말 맛있었어요. 특히 국물이 좋네요.
+		            </h2>
+		          </a>
+		          <p class="post-meta">Posted by
+		            <a href="#">Start Bootstrap</a>
+		            on September 18, 2019</p>
+		        </div>
+		        <hr>
+		        <div class="post-preview">
+		          <a href="post.html">
+		            <h2 class="post-title">
+		              ㅁㄴㅇㄴㅁㅇㅁㄴㅇ
+		            </h2>
+		            <h3 class="post-subtitle">
+		              
+		            </h3>
+		          </a>
+		          <p class="post-meta">Posted by
+		            <a href="#">Start Bootstrap</a>
+		            on August 24, 2019</p>
+		        </div>
+		        <hr>
+		        <div class="post-preview">
+		          <a href="post.html">
+		            <h2 class="post-title">
+		             ㄴㅁㅇㅁㅇㄴㅁㅇㅁㄴㅇㄴㄴㅁㅇ
+		            </h2>
+		            <h3 class="post-subtitle">
+		             
+		            </h3>
+		          </a>
+		          <p class="post-meta">Posted by
+		            <a href="#">Start Bootstrap</a>
+		            on July 8, 2019</p>
+		        </div>
+		       
+		        <!-- Pager -->
+
+		      </div>
+		    </div>
+		  </div>
+		
+		  <hr>
 			</div>
 			<div class="row py-5">
 				<div class="col text-center">
