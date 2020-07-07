@@ -11,8 +11,8 @@ try
 	request.setCharacterEncoding("utf-8");
 
 
-	String Id = request.getParameter("content");
-	String Pw = request.getParameter("title");
+	String Id = request.getParameter("userId");
+	String Pw = request.getParameter("userPw");
 	
 	SQL.sqlExecute("SELECT", "SELECT * FROM MEMBER WHERE ID=" + Id, null);
 	
