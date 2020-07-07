@@ -16,22 +16,26 @@ try {
 	MultipartRequest multi = new MultipartRequest(request, realFolder, 1024 * 1024 * 1024, encType,
 	new DefaultFileRenamePolicy());
 
-
+	String userId = session.getAttribute("userId").toString();
 	String Content = multi.getParameter("content");
 	String title = multi.getParameter("title");
+	String boardId = multi.getParameter("boardId");
+	String stationId = multi.getParameter("stationId");
 	String articleNo = "";
-
+	
 	SQL.sqlExecute("INSERT",
-	"INSERT INTO ARTICLE(NO,TITLE,CONTENT,POSTDATE,HITS,WRITER,STATIONID,BOARDID) values(ARTICLE_SEQ.NEXTVAL,?,?,SYSDATE,?,?,?,?)",
-	new String[] { title, Content, "0", "Lisithromyxin", "1", "0" });
-
+	"INSERT INTO ARTICLE(NO,TITLE,CONTENT,POSTDATE,HITS,WRITER,STATIONID,BOARDID) values(ARTICLE_SEQ.NEXTVAL,?,?,SYSDATE,'0',?,?,?)",
+	new String[] { title, Content, userId, stationId, boardId});
+	
 	SQL.sqlExecute("SELECT", "SELECT ARTICLE_SEQ.CURRVAL from DUAL", null);
+	
+	
 	while (SQL.rs.next()) {
 		articleNo = SQL.rs.getString("CURRVAL");
 	}
 
 	SQL.closeSQL();
-	response.sendRedirect("/getArticle.jsp?articleNo=" + articleNo);
+	response.sendRedirect("./getArticle.jsp?articleNo=" + articleNo);
 } catch (Exception e) {
 	out.print(e);
 }

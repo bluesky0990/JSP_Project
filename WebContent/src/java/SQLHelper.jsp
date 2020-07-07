@@ -2,6 +2,7 @@
 "javax.sql.*,
 java.sql.*,
 javax.naming.*,
+javax.sql.rowset.CachedRowSet,
 data.ConnectionPool"
 %>
 

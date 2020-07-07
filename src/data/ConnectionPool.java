@@ -2,13 +2,13 @@ package data;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-import javax.sql.*;
 import javax.sql.DataSource;
 import javax.naming.InitialContext;
 
 public class ConnectionPool {
+	
 	private static DataSource ds = null;
-
+	
 	public ConnectionPool() {
 		try {
 			InitialContext context = new InitialContext();
