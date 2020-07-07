@@ -22,7 +22,7 @@
 				</div>
 				<div class="form-group">
 					<label for="pw">Password</label>
-					<input tpye="password" class="form-control" id="pw" name="pw">
+					<input type="password" class="form-control" id="pw" name="pw">
 				</div>
 				<div class="form-group">
 					<label for="nickname">Nickname</label>
