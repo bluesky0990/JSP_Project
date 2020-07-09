@@ -1,13 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@include file="./src/java/SQLHelper.jsp"%>
-<% request.setCharacterEncoding("utf-8"); %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<title>Osaka グルメ :: SignUp</title>
+<title>Osaka グルメ :: 맛집소개</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
 <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,500,500i,600,600i,700,700i&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -59,87 +56,63 @@
 	</nav>
 	<!-- END nav -->
 
-	<section class="py-5">
+	<section class="hero-wrap hero-wrap-2" style="background-image: url('images/review.jpg');" data-stellar-background-ratio="0.5">
+		<div class="overlay"></div>
 		<div class="container">
-			<div class="row justify-content-center">
-				<div class="py-5 col-lg-4">
-					<form action="./member_signup.jsp" method="post" class="appointment-form" onsubmit="">
-						<h3 class="mb-3 text-center">Sign Up</h3>
-						<br>
-						<%
-	// DuplicateCheck
-	 if (request.getParameter("duplicateCheck") != null)
-	 {
-		 String id = request.getParameter("userId");
-		 SQLHelper sql = new SQLHelper();
-		String dbID = null;
-		sql.sqlExecute("select", "select id from member where id = " + id, null);
-		if(sql.rs.next()) {
-			%><div class="alert alert-danger" role="alert">
-			  이미 존재하는 계정입니다.
-			</div><%
-		}
-		else
-		{
-			session.setAttribute("duplicateCheck", "true");
-		}
-	 }
-	//Join
-	if (request.getParameter("signUp") != null)
-	{
-		String id = request.getParameter("id");
-		String pw = request.getParameter("pw");
-		String nick = request.getParameter("nick");
-		String email = request.getParameter("email");
-		if (id == null || pw == null || nick == null || email == null)
-		{
-			%><div class="alert alert-danger" role="alert">
-			  빈 칸을 모두 입력해 주시길 바랍니다.
-			</div><%
-		}
-		else if(session.getAttribute("duplicateCheck") == null)
-		{
-			%><div class="alert alert-danger" role="alert">
-			  아이디 중복확인을 해주시길 바랍니다.
-			</div><%
-		}
+			<div class="row no-gutters slider-text align-items-center justify-content-center">
+				<div class="col-md-9 ftco-animate text-center">
+					<p class="breadcrumbs mb-2">
+						<span class="mr-2"><a href="index.jsp">Home <i class="fa fa-chevron-right"></i></a></span> <span class="mr-2"><a href="deliciousRestaurant.jsp">Delicious <i class="fa fa-chevron-right"></i></a></span>
+					</p>
+					<h1 class="mb-0 bread">리뷰 게시판</h1>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section>
+	<br><br>
+		<div>
+		<div class="container">
+		    <div class="row">
+		      <div class="col-lg-8 col-md-10 mx-auto">
+		        <div class="post-preview">
+		          <a href="post.html">
+		            <h2 class="post-title">
+		              	타코야키 정말 맛있었엇는데 좀...
+		            </h2>
+		            <h3 class="post-subtitle">
+		              	
+		            </h3>
+		          </a>
+		          <p class="post-meta">작성자
+		            <a href="#">원랜디 마렵다</a>
+		            on September 24, 2019</p>
+		        </div>
+		        <hr>
+		       
+		       
+		        <!-- Pager -->
+
+		      </div>
+		    </div>
+		  </div>
 		
-		%><div class="alert alert-success" role="alert">
-		  회원가입 성공
-		</div><%
-	}
-	%>
-						<div class="py-3 row">
-							<div class="py-1 col-md-12">
-								<div class="form-group">
-									<div class="input-group">
-										<input type="text" id="login_id" name="login_id" class="form-control" placeholder="ID">
-										<button class="btn btn-primary" onclick="">확인</button>
-									</div>
-								</div>
-							</div>
-							<div class="py-1 col-md-12">
-								<div class="form-group">
-									<input type="password" id="login_pw" name="login_pw" class="form-control" placeholder="Password">
-								</div>
-							</div>
-							<div class="py-1 col-md-12">
-								<div class="form-group">
-									<input type="text" id="login_nickname" name="login_nickname" class="form-control" placeholder="Nickname">
-								</div>
-							</div>
-							<div class="py-1 col-md-12">
-								<div class="form-group">
-									<input type="email" id="login_email" name="login_email" class="form-control" placeholder="E-Mail">
-								</div>
-							</div>
-							<div class="py-1 col-md-12 d-flex justify-content-center">
-								<div class="form-group">
-									<input type="submit" value="Sign Up" class="btn btn-primary py-3 px-4">
-								</div>
-							</div>
-						</div>
-					</form>
+		  <hr>
+			</div>
+			<div class="row py-5">
+				<div class="col text-center">
+					<div class="block-27">
+						<ul>
+							<li><a href="#">&lt;</a></li>
+							<li class="active"><span>1</span></li>
+							<li><a href="#">2</a></li>
+							<li><a href="#">3</a></li>
+							<li><a href="#">4</a></li>
+							<li><a href="#">5</a></li>
+							<li><a href="#">&gt;</a></li>
+						</ul>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -225,8 +198,8 @@
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
 	<script src="js/google-map.js"></script>
 	<script src="js/main.js"></script>
-	
-	
+
+
 
 </body>
 </html>

@@ -1,4 +1,14 @@
+<<<<<<< HEAD
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
+	include file="./src/java/SQLHelper.jsp"
+%>
+<%
+	request.setCharacterEncoding("utf-8");
+%>
+=======
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@include file="./src_example/board_function/getArticleList.jsp"%>
+>>>>>>> 2db3783e2d9c0c360a1d47e9a015ecb83f7b537d
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -16,6 +26,7 @@
 <link rel="stylesheet" href="css/jquery.timepicker.css">
 <link rel="stylesheet" href="css/flaticon.css">
 <link rel="stylesheet" href="css/style.css">
+
 </head>
 <body>
 	<div class="wrap">
@@ -44,19 +55,18 @@
 			</button>
 			<div class="collapse navbar-collapse" id="ftco-nav">
 				<ul class="navbar-nav ml-auto">
-					<li class="nav-item active"><a href="index.html" class="nav-link">Home</a></li>
-					<li class="nav-item"><a href="about.html" class="nav-link">Delicious</a></li>
+					<li class="nav-item active"><a href="index.jsp" class="nav-link">Home</a></li>
+					<li class="nav-item"><a href="deliciousRestaurant.jsp" class="nav-link">Delicious</a></li>
 					<li class="nav-item"><a href="services.html" class="nav-link">Best</a></li>
-					<!-- <li class="nav-item"><a href="rooms.html" class="nav-link"></a></li> -->
 					<li class="nav-item"><a href="blog.html" class="nav-link">Board</a></li>
-					<li class="nav-item"><a href="contact.html" class="nav-link">Review</a></li>
+					<li class="nav-item"><a href="review.jsp" class="nav-link">Review</a></li>
 				</ul>
 			</div>
 		</div>
 	</nav>
 	<!-- END nav -->
 
-	<section class="hero-wrap hero-wrap-2" style="background-image: url('images/delRes2.png');" data-stellar-background-ratio="0.5">
+	<section class="hero-wrap hero-wrap-2" style="background-image: url('images/review.jpg');" data-stellar-background-ratio="0.5">
 		<div class="overlay"></div>
 		<div class="container">
 			<div class="row no-gutters slider-text align-items-center justify-content-center">
@@ -71,13 +81,23 @@
 	</section>
 
 	<section>
+	<br><br>
 		<div>
-			<div class="container">
-				<table>
-					<tr>
-						
-					</tr>
-				</table>
+		<div class="container">
+		    <div class="row">
+		      <div class="col-lg-8 col-md-10 mx-auto">
+		      
+		       <%
+				request.setCharacterEncoding("utf-8");
+				printArticleList(out,0,1,"센니치마에");
+				%>
+		        <!-- Pager -->
+
+		      </div>
+		    </div>
+		  </div>
+		
+		  <hr>
 			</div>
 			<div class="row py-5">
 				<div class="col text-center">

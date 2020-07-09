@@ -48,9 +48,8 @@
 					<li class="nav-item active"><a href="index.jsp" class="nav-link">Home</a></li>
 					<li class="nav-item"><a href="deliciousRestaurant.jsp" class="nav-link">Delicious</a></li>
 					<li class="nav-item"><a href="services.html" class="nav-link">Best</a></li>
-					<!-- <li class="nav-item"><a href="rooms.html" class="nav-link"></a></li> -->
 					<li class="nav-item"><a href="blog.html" class="nav-link">Board</a></li>
-					<li class="nav-item"><a href="contact.html" class="nav-link">Review</a></li>
+					<li class="nav-item"><a href="review.jsp" class="nav-link">Review</a></li>
 				</ul>
 			</div>
 		</div>
