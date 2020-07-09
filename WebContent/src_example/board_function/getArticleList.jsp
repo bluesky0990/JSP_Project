@@ -9,6 +9,7 @@
 	public static void printArticleList(JspWriter out, int iStartOffset, int SearchMode, String strSearch)
 	{
 		SQLHelper sql = new SQLHelper();
+		SQLHelper subsql = new SQLHelper();
 		try
 		{
 		switch(SearchMode)
@@ -25,12 +26,35 @@
 			{
 				StationArray = StationArray + ", " + sql.rs.getString("ID");
 			}
-			
-			sql.sqlExecute("SELECT", "SELECT * FROM ARTICLE WHERE STATIONID IN (" + StationArray + ")", new String[] {});
-			while (sql.rs.next())
+
+			subsql.sqlExecute("SELECT", "SELECT * FROM ARTICLE WHERE STATIONID IN (" + StationArray + ")", new String[] {});
+			while (subsql.rs.next())
 			{
-				out.print("검색페이지입니다. </br>");
-				out.print(sql.rs.getString("CONTENT"));
+				try
+				{
+				
+				String articleNo = subsql.rs.getString(1);
+				String title = subsql.rs.getString(2);
+				String writer = subsql.rs.getString(6);
+				String postDate = subsql.rs.getString(4);
+				out.println("<div class=\"post-preview\">");
+				out.println("<a href=\"./src_example/board_function/getArticle.jsp?articleNo=" + articleNo  + "\">");
+				out.println("<h2 class=\"post-title\">");
+				out.println(title);
+				out.println("</h2>");
+				out.println("<h3 class=\"post-subtitle\">");
+		              	
+				out.println("</h3>");
+				out.println("</a>");
+				out.println("<p class=\"post-meta\">작성자");
+				out.println("<a href=\"#\">" + writer + "</a>");
+				out.println(postDate + "</p>");
+				out.println("</div>");
+				}
+				catch(Exception e)
+				{
+					out.println(e.toString());
+				}
 			}
 
 		}
@@ -62,7 +86,7 @@
 			}
 			break;
 		}
-		
+		subsql.closeSQL();
 		sql.closeSQL();
 		}
 		catch(Exception e)
@@ -83,7 +107,7 @@
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
 <html>
 <%
-	request.setCharacterEncoding("utf-8");
-	printArticleList(out,0,2,"난바");
+	//request.setCharacterEncoding("utf-8");
+	//printArticleList(out,0,1,"센니치마에");
 %>
 </html>

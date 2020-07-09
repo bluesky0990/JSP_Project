@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@include file="./src_example/board_function/getArticleList.jsp"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -16,6 +17,7 @@
 <link rel="stylesheet" href="css/jquery.timepicker.css">
 <link rel="stylesheet" href="css/flaticon.css">
 <link rel="stylesheet" href="css/style.css">
+
 </head>
 <body>
 	<div class="wrap">
@@ -76,59 +78,11 @@
 		<div class="container">
 		    <div class="row">
 		      <div class="col-lg-8 col-md-10 mx-auto">
-		        <div class="post-preview">
-		          <a href="post.html">
-		            <h2 class="post-title">
-		              	타코야키 정말 맛있었엇는데 좀...
-		            </h2>
-		            <h3 class="post-subtitle">
-		              	
-		            </h3>
-		          </a>
-		          <p class="post-meta">작성자
-		            <a href="#">원랜디 마렵다</a>
-		            on September 24, 2019</p>
-		        </div>
-		        <hr>
-		        <div class="post-preview">
-		          <a href="post.html">
-		            <h2 class="post-title">
-		             	라면 정말 맛있었어요. 특히 국물이 좋네요.
-		            </h2>
-		          </a>
-		          <p class="post-meta">Posted by
-		            <a href="#">Start Bootstrap</a>
-		            on September 18, 2019</p>
-		        </div>
-		        <hr>
-		        <div class="post-preview">
-		          <a href="post.html">
-		            <h2 class="post-title">
-		              ㅁㄴㅇㄴㅁㅇㅁㄴㅇ
-		            </h2>
-		            <h3 class="post-subtitle">
-		              
-		            </h3>
-		          </a>
-		          <p class="post-meta">Posted by
-		            <a href="#">Start Bootstrap</a>
-		            on August 24, 2019</p>
-		        </div>
-		        <hr>
-		        <div class="post-preview">
-		          <a href="post.html">
-		            <h2 class="post-title">
-		             ㄴㅁㅇㅁㅇㄴㅁㅇㅁㄴㅇㄴㄴㅁㅇ
-		            </h2>
-		            <h3 class="post-subtitle">
-		             
-		            </h3>
-		          </a>
-		          <p class="post-meta">Posted by
-		            <a href="#">Start Bootstrap</a>
-		            on July 8, 2019</p>
-		        </div>
-		       
+		      
+		       <%
+				request.setCharacterEncoding("utf-8");
+				printArticleList(out,0,1,"센니치마에");
+				%>
 		        <!-- Pager -->
 
 		      </div>
