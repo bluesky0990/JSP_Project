@@ -7,4 +7,5 @@
 	session.removeAttribute("userId");
 	session.removeAttribute("isAdmin");
 	response.sendRedirect("../../index.jsp");
+	
 %>
