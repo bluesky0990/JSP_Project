@@ -2,13 +2,11 @@
                       com.oreilly.servlet.multipart.DefaultFileRenamePolicy,
                       java.util.*,
                       java.io.*"%>
-<%@include file="../../src/java/SQLHelper.jsp"%>
-
-
+<%@include file="../_query/SQLHelper.jsp"%>
 <%!
 	public static void printArticleList(JspWriter out, int iStartOffset, int SearchMode, String strSearch)
 	{
-		SQLHelper sql = new SQLHelper();
+		final SQLHelper sql = new SQLHelper();
 		SQLHelper subsql = new SQLHelper();
 		try
 		{
@@ -38,7 +36,7 @@
 				String writer = subsql.rs.getString(6);
 				String postDate = subsql.rs.getString(4);
 				out.println("<div class=\"post-preview\">");
-				out.println("<a href=\"./src_example/board_function/getArticle.jsp?articleNo=" + articleNo  + "\">");
+				out.println("<a href=\"./_board/getArticle.jsp?articleNo=" + articleNo  + "\">");
 				out.println("<h2 class=\"post-title\">");
 				out.println(title);
 				out.println("</h2>");
@@ -96,18 +94,3 @@
 		
 	}
 %>
-
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-
-<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
-<html>
-<%
-	//request.setCharacterEncoding("utf-8");
-	//printArticleList(out,0,1,"센니치마에");
-%>
-</html>

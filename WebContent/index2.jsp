@@ -17,69 +17,8 @@
 <link rel="stylesheet" href="css/jquery.timepicker.css">
 <link rel="stylesheet" href="css/flaticon.css">
 <link rel="stylesheet" href="css/style.css">
-<link rel="stylesheet" href="css/message-Popup.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-
 </head>
 <body>
-<div id="popupLoginFail" class="modal fade">
-	<div class="modal-dialog msgError-confirm">
-		<div class="modal-content">
-			<div class="modal-header flex-column">
-				<div class="icon-box">
-					<i class="material-icons">&#xE5CD;</i>
-				</div>						
-				<h4 class="modal-title w-100">로그인 실패</h4>	
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-			</div>
-			<div class="modal-body">
-				<p>로그인에 실패하였습니다.</p>
-				<div id="LoginFailMessage"><p>아이디나 비밀번호를 확인해주세요.</p></div>
-			</div>
-			<div class="modal-footer justify-content-center">
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">돌아가기</button>
-			</div>
-		</div>
-	</div>
-</div>
-<div id="popupLoginError" class="modal fade">
-	<div class="modal-dialog msgError-confirm">
-		<div class="modal-content">
-			<div class="modal-header flex-column">
-				<div class="icon-box">
-					<i class="material-icons">&#xE5CD;</i>
-				</div>						
-				<h4 class="modal-title w-100">로그인 오류</h4>	
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-			</div>
-			<div class="modal-body">
-				<p>알 수 없는 이유로 인해 로그인에 실패하였습니다.</p>
-				<p>관리자에게 연락바랍니다.</p>
-			</div>
-			<div class="modal-footer justify-content-center">
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">돌아가기</button>
-			</div>
-		</div>
-	</div>
-</div>
-<div id="popupLoginSuccess" class="modal fade">
-	<div class="modal-dialog msgSuccess-confirm">
-		<div class="modal-content">
-			<div class="modal-header">
-				<div class="icon-box">
-					<i class="material-icons">&#xE876;</i>
-				</div>				
-				<h4 class="modal-title w-100">로그인 성공</h4>	
-			</div>
-			<div class="modal-body">
-				<p class="text-center">로그인 성공! 환영합니다!</p>
-			</div>
-			<div class="modal-footer">
-				<button class="btn btn-success btn-block" data-dismiss="modal">확인</button>
-			</div>
-		</div>
-	</div>
-</div>  
 	<div class="wrap">
 		<div class="container">
 			<div class="row justify-content-between">
@@ -136,41 +75,30 @@
 		<div class="container">
 			<div class="row justify-content-end">
 				<div class="col-lg-4">
-					<form class="appointment-form">
-					<%
-					if (session.getAttribute("userId") != null)
-					{
-						%>
-							<div class="col-md-12">
-								<div class="form-group">
-									<p>사용자 아이디 : <% out.print(session.getAttribute("userId").toString()); %></p>
-								</div>
-							</div> 
-					<%}else{%>
-						<h3 class="mb-3">로그인</h3>
+					<form action="./login/chkLogin.jsp" method="post" class="appointment-form">
+						<h3 class="mb-3">Login</h3>
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
-									<input type="text" id="userId" class="form-control" placeholder="아이디">
+									<input type="text" id="login_id" class="form-control" placeholder="ID">
 								</div>
 							</div>
 							<div class="col-md-12">
 								<div class="form-group">
-									<input type="password" id="userPw" class="form-control" placeholder="패스워드">
+									<input type="password" id="login_pw" class="form-control" placeholder="Password">
 								</div>
 							</div>
 							<div class="col-md-12">
 								<div class="form-group">
-									<input type="submit" id="doLogin" value="로그인" class="btn btn-primary py-3 px-4">
+									<input type="submit" value="Login" class="btn btn-primary py-3 px-4">
 								</div>
 							</div>
 							<div class="col-md-12">
 								<div class="form-group">
-									<input type="button" value="회원가입" onclick="location.href='./member_signup.jsp'" class="btn btn-primary py-3 px-4">
+									<input type="button" value="Sign Up" onclick="location.href='./member_signup.jsp'" class="btn btn-primary py-3 px-4">
 								</div>
 							</div>
 						</div>
-						<%} %>
 					</form>
 				</div>
 			</div>
@@ -588,39 +516,7 @@
 	<script src="js/google-map.js"></script>
 	<script src="js/main.js"></script>
 
-<script>
-$(document).ready(function(){
-		
-	  $("#doLogin").click(function(){
-		  
-		  var postData = 'userId=' + $("#userId").val() +
-		  '&userPw=' + $("#userPw").val();
-		  event.preventDefault();
-		  $.ajax({
-			  type: "post",
-			  url: "./_member/doLogin.jsp", 
-		        data: postData,
-		        success: function(result){
-		        	if(result.includes("LoginFail") == true)
-		        		{
-		        			$("#LoginFailMessage p").html(result.split("@")[1]);
-		        			$("#popupLoginFail").modal();
-		        		}
-		        	else
-		        		{
-		        			$("#popupLoginSuccess").modal();
-		        		}
-		    	},
-		  		error: function(xhr, status, error)
-		  		{
-		  			$("#popupLoginError").modal();
-		  		}
-		  });
-		  
-		  event.preventDefault();
-	  });
-});
-</script>
+
 
 </body>
 </html>

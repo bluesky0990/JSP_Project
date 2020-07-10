@@ -1,16 +1,13 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
-%>
-<%@include file="./_board/getArticleList.jsp"%>
-<%
-	request.setCharacterEncoding("utf-8");
-%>
-
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@include file="./_query/SQLHelper.jsp"%>
+<% request.setCharacterEncoding("utf-8"); %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<title>Osaka グルメ :: 맛집소개</title>
+<title>Osaka グルメ :: SignUp</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
 <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,500,500i,600,600i,700,700i&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -22,7 +19,8 @@
 <link rel="stylesheet" href="css/jquery.timepicker.css">
 <link rel="stylesheet" href="css/flaticon.css">
 <link rel="stylesheet" href="css/style.css">
-
+<link rel="stylesheet" href="css/message-Popup.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
 <body>
 	<div class="wrap">
@@ -51,63 +49,58 @@
 			</button>
 			<div class="collapse navbar-collapse" id="ftco-nav">
 				<ul class="navbar-nav ml-auto">
-					<li class="nav-item active"><a href="index.jsp" class="nav-link">Home</a></li>
-					<li class="nav-item"><a href="deliciousRestaurant.jsp" class="nav-link">Delicious</a></li>
+					<li class="nav-item active"><a href="index.html" class="nav-link">Home</a></li>
+					<li class="nav-item"><a href="about.html" class="nav-link">Delicious</a></li>
 					<li class="nav-item"><a href="services.html" class="nav-link">Best</a></li>
+					<!-- <li class="nav-item"><a href="rooms.html" class="nav-link"></a></li> -->
 					<li class="nav-item"><a href="blog.html" class="nav-link">Board</a></li>
-					<li class="nav-item"><a href="review.jsp" class="nav-link">Review</a></li>
+					<li class="nav-item"><a href="contact.html" class="nav-link">Review</a></li>
 				</ul>
 			</div>
 		</div>
 	</nav>
 	<!-- END nav -->
 
-	<section class="hero-wrap hero-wrap-2" style="background-image: url('images/review.jpg');" data-stellar-background-ratio="0.5">
-		<div class="overlay"></div>
+	<section class="py-5">
 		<div class="container">
-			<div class="row no-gutters slider-text align-items-center justify-content-center">
-				<div class="col-md-9 ftco-animate text-center">
-					<p class="breadcrumbs mb-2">
-						<span class="mr-2"><a href="index.jsp">Home <i class="fa fa-chevron-right"></i></a></span> <span class="mr-2"><a href="deliciousRestaurant.jsp">Delicious <i class="fa fa-chevron-right"></i></a></span>
-					</p>
-					<h1 class="mb-0 bread">리뷰 게시판</h1>
-				</div>
-			</div>
-		</div>
-	</section>
-
-	<section>
-	<br><br>
-		<div>
-		<div class="container">
-		    <div class="row">
-		      <div class="col-lg-8 col-md-10 mx-auto">
-		      
-		       <%
-				request.setCharacterEncoding("utf-8");
-				printArticleList(out,0,1,"센니치마에");
-				%>
-		        <!-- Pager -->
-
-		      </div>
-		    </div>
-		  </div>
-		
-		  <hr>
-			</div>
-			<div class="row py-5">
-				<div class="col text-center">
-					<div class="block-27">
-						<ul>
-							<li><a href="#">&lt;</a></li>
-							<li class="active"><span>1</span></li>
-							<li><a href="#">2</a></li>
-							<li><a href="#">3</a></li>
-							<li><a href="#">4</a></li>
-							<li><a href="#">5</a></li>
-							<li><a href="#">&gt;</a></li>
-						</ul>
-					</div>
+			<div class="row justify-content-center">
+				<div class="py-5 col-lg-4">
+					<form class="appointment-form">
+						<h3 class="mb-3 text-center">Sign Up</h3>
+						<br>
+	
+						<div class="container" id="alertInfo"></div>
+						<div class="py-3 row">
+							<div class="py-1 col-md-12">
+								<div class="form-group">
+									<div class="input-group">
+										<input type="text" id="userId" name="userId" class="form-control" placeholder="아이디">
+										<input type="submit" id="duplicateCheck" value="확인" class="btn btn-primary">
+									</div>
+								</div>
+							</div>
+							<div class="py-1 col-md-12">
+								<div class="form-group">
+									<input type="password" id="userPw" name="userPw" class="form-control" placeholder="패스워드">
+								</div>
+							</div>
+							<div class="py-1 col-md-12">
+								<div class="form-group">
+									<input type="text" id="userNick" name="userNick" class="form-control" placeholder="닉네임">
+								</div>
+							</div>
+							<div class="py-1 col-md-12">
+								<div class="form-group">
+									<input type="email" id="userEmail" name="userEmail" class="form-control" placeholder="이메일 주소">
+								</div>
+							</div>
+							<div class="py-1 col-md-12 d-flex justify-content-center">
+								<div class="form-group">
+									<input type="submit" id="signUp" value="회원가입" class="btn btn-primary py-3 px-4">
+								</div>
+							</div>
+						</div>
+					</form>
 				</div>
 			</div>
 		</div>
@@ -193,8 +186,40 @@
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
 	<script src="js/google-map.js"></script>
 	<script src="js/main.js"></script>
+	
+	<script>
+$(document).ready(function(){
+		
+	  $("#duplicateCheck").click(function(){
+		  
+		  var postData = 'userId=' + $("#userId").val();
+		  event.preventDefault();
+		  $.ajax({url: "./_member/isDuplicated.jsp", 
+		        data: postData,
+		        success: function(result){
+		        	console.log(result);
+		        	$("#alertInfo").prepend(result);
+		    	}
+		  });
 
-
+	  });
+	  $("#signUp").click(function(){
+		  var postData = 'userId=' + $("#userId").val() +
+		  '&userPw=' + $("#userPw").val() +
+		  '&userNick=' + $("#userNick").val() +
+		  '&userEmail=' + $("#userEmail").val();
+		  
+		  event.preventDefault();
+		  $.ajax({url: "./_member/doRegister.jsp", 
+		        data: postData,
+		        success: function(result){
+		        	$("#alertInfo").prepend(result);		        	
+		    	}
+		  });
+		  
+	  });
+});
+</script>
 
 </body>
 </html>

@@ -4,16 +4,10 @@ java.sql.*,
 javax.naming.*,
 javax.sql.rowset.CachedRowSet,
 data.ConnectionPool"
-%>
-
-<%!
+%><%!
 public static class SQLHelper {
-	private static ConnectionPool cp = null;
-	private Connection con = null;
-	private Statement st = null;
-	public PreparedStatement pStmt = null;
-	public static ResultSet rs = null;
-	public static String sError = "";
+	
+	
 	public SQLHelper()
 	{
 		try
@@ -24,6 +18,17 @@ public static class SQLHelper {
 		} catch (Exception e) {
 			sError = "JDBC INIT ERROR\n" + e.toString();
 		}
+	}
+	private ConnectionPool cp = null;
+	private Connection con = null;
+	private Statement st = null;
+	private PreparedStatement pStmt = null;
+	private ResultSet rs = null;
+	private String sError = "";
+	
+	public ResultSet getrs()
+	{
+		return rs;
 	}
 	public void sqlExecute(String type, String sql, String[] parameter) {
 		try {

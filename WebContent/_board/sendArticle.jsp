@@ -2,11 +2,8 @@
                       com.oreilly.servlet.multipart.DefaultFileRenamePolicy,
                       java.util.*,
                       java.io.*"%>
-<<<<<<< HEAD:WebContent/sendArticle.jsp
 <%@include file="./src/java/SQLHelper.jsp"%>
-=======
-<%@include file="../../src/java/SQLHelper.jsp"%>
->>>>>>> 2db3783e2d9c0c360a1d47e9a015ecb83f7b537d:WebContent/src_example/board_function/sendArticle.jsp
+
 <%
 	SQLHelper SQL = new SQLHelper();
 

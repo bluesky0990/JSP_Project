@@ -1,0 +1,149 @@
+.msgSuccess-confirm {		
+	color: #636363;
+	width: 325px;
+	font-size: 14px;
+}
+.msgSuccess-confirm .msgSuccess-content {
+	padding: 20px;
+	border-radius: 5px;
+	border: none;
+}
+.msgSuccess-confirm .msgSuccess-header {
+	border-bottom: none;   
+	position: relative;
+}
+.msgSuccess-confirm h4 {
+	text-align: center;
+	font-size: 26px;
+	margin: 30px 0 -15px;
+}
+.msgSuccess-confirm .form-control, .msgSuccess-confirm .btn {
+	min-height: 40px;
+	border-radius: 3px; 
+}
+.msgSuccess-confirm .close {
+	position: absolute;
+	top: -5px;
+	right: -5px;
+}	
+.msgSuccess-confirm .msgSuccess-footer {
+	border: none;
+	text-align: center;
+	border-radius: 5px;
+	font-size: 13px;
+}	
+.msgSuccess-confirm .icon-box {
+	color: #fff;		
+	position: absolute;
+	margin: 0 auto;
+	left: 0;
+	right: 0;
+	top: -70px;
+	width: 95px;
+	height: 95px;
+	border-radius: 50%;
+	z-index: 9;
+	background: #82ce34;
+	padding: 15px;
+	text-align: center;
+	box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
+}
+.msgSuccess-confirm .icon-box i {
+	font-size: 58px;
+	position: relative;
+	top: 3px;
+}
+.msgSuccess-confirm.msgSuccess-dialog {
+	margin-top: 80px;
+}
+.msgSuccess-confirm .btn {
+	color: #fff;
+	border-radius: 4px;
+	background: #82ce34;
+	text-decoration: none;
+	transition: all 0.4s;
+	line-height: normal;
+	border: none;
+}
+.msgSuccess-confirm .btn:hover, .msgSuccess-confirm .btn:focus {
+	background: #6fb32b;
+	outline: none;
+}
+.msgError-confirm {		
+	color: #636363;
+	width: 400px;
+}
+.msgError-confirm .modal-content {
+	padding: 20px;
+	border-radius: 5px;
+	border: none;
+	text-align: center;
+	font-size: 14px;
+}
+.msgError-confirm .modal-header {
+	border-bottom: none;   
+	position: relative;
+}
+.msgError-confirm h4 {
+	text-align: center;
+	font-size: 26px;
+	margin: 30px 0 -10px;
+}
+.msgError-confirm .close {
+	position: absolute;
+	top: -5px;
+	right: -2px;
+}
+.msgError-confirm .modal-body {
+	color: #999;
+}
+.msgError-confirm .modal-footer {
+	border: none;
+	text-align: center;		
+	border-radius: 5px;
+	font-size: 13px;
+	padding: 10px 15px 25px;
+}
+.msgError-confirm .modal-footer a {
+	color: #999;
+}		
+.msgError-confirm .icon-box {
+	width: 80px;
+	height: 80px;
+	margin: 0 auto;
+	border-radius: 50%;
+	z-index: 9;
+	text-align: center;
+	border: 3px solid #f15e5e;
+}
+.msgError-confirm .icon-box i {
+	color: #f15e5e;
+	font-size: 46px;
+	display: inline-block;
+	margin-top: 13px;
+}
+.msgError-confirm .btn, .msgError-confirm .btn:active {
+	color: #fff;
+	border-radius: 4px;
+	background: #60c7c1;
+	text-decoration: none;
+	transition: all 0.4s;
+	line-height: normal;
+	min-width: 120px;
+	border: none;
+	min-height: 40px;
+	border-radius: 3px;
+	margin: 0 5px;
+}
+.msgError-confirm .btn-secondary {
+	background: #c1c1c1;
+}
+.msgError-confirm .btn-secondary:hover, .msgError-confirm .btn-secondary:focus {
+	background: #a8a8a8;
+}
+.msgError-confirm .btn-danger {
+	background: #f15e5e;
+}
+.msgError-confirm .btn-danger:hover, .msgError-confirm .btn-danger:focus {
+	background: #ee3535;
+}
