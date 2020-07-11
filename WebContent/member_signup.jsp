@@ -50,7 +50,7 @@
 					<form action="./" method="post" class="appointment-form" onsubmit="">
 						<h3 class="mb-3 text-center">Sign Up</h3>
 						<br>
-						<div class="container" id="alertInfo"></div>
+						<div class="container" id="alertInfo">1</div>
 						<div class="py-3 row">
 							<div class="py-1 col-md-12">
 								<div class="form-group">
