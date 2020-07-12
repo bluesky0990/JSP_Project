@@ -2,7 +2,7 @@
                       com.oreilly.servlet.multipart.DefaultFileRenamePolicy,
                       java.util.*,
                       java.io.*"%>
-<%@include file="./src/java/SQLHelper.jsp"%>
+<%@include file="../_query/SQLHelper.jsp"%>
 
 <%
 	SQLHelper SQL = new SQLHelper();
@@ -13,7 +13,8 @@ String saveFolder = "filestorage"; //파일저장 폴더명을 설정한 뒤에.
 String encType = "utf-8"; //인코딩방식도 함께 설정한 뒤,
 ServletContext context = getServletContext();
 realFolder = context.getRealPath(saveFolder);
-try {
+try
+{
 	MultipartRequest multi = new MultipartRequest(request, realFolder, 1024 * 1024 * 1024, encType,
 	new DefaultFileRenamePolicy());
 
@@ -23,21 +24,23 @@ try {
 	String boardId = multi.getParameter("boardId");
 	String stationId = multi.getParameter("stationId");
 	String articleNo = "";
-	
+
 	SQL.sqlExecute("INSERT",
 	"INSERT INTO ARTICLE(NO,TITLE,CONTENT,POSTDATE,HITS,WRITER,STATIONID,BOARDID) values(ARTICLE_SEQ.NEXTVAL,?,?,SYSDATE,'0',?,?,?)",
-	new String[] { title, Content, userId, stationId, boardId});
-	
+	new String[]
+	{ title, Content, userId, stationId, boardId });
+
 	SQL.sqlExecute("SELECT", "SELECT ARTICLE_SEQ.CURRVAL from DUAL", null);
-	
-	
-	while (SQL.rs.next()) {
+
+	while (SQL.rs.next())
+	{
 		articleNo = SQL.rs.getString("CURRVAL");
 	}
 
 	SQL.closeSQL();
-	response.sendRedirect("./getArticle.jsp?articleNo=" + articleNo);
-} catch (Exception e) {
+	response.sendRedirect("../readArticle.jsp?articleNo=" + articleNo);
+} catch (Exception e)
+{
 	out.print(e);
 }
 %>

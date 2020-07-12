@@ -133,10 +133,8 @@
 					<h2 class="footer-heading">Sitemap</h2>
 					<ul class="list-unstyled">
 						<li><a href="./index.jsp" class="py-1 d-block">Home</a></li>
-						<li><a href="#" class="py-1 d-block">Delicious</a></li>
-						<li><a href="#" class="py-1 d-block">Best</a></li>
-						<li><a href="#" class="py-1 d-block">Board</a></li>
-						<li><a href="#" class="py-1 d-block">Review</a></li>
+						<li><a href="./deliciousRestaurant.jsp" class="py-1 d-block">Delicious</a></li>
+						<li><a href="./review.jsp" class="py-1 d-block">Review</a></li>
 					</ul>
 				</div>
 				<div class="col-md-6 col-lg-3 mb-md-0 mb-4">

@@ -1,13 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@include file="./_query/SQLHelper.jsp"%>
-<% request.setCharacterEncoding("utf-8"); %>
+<%@include file="./_board/getArticleList.jsp"%>
+<%
+	request.setCharacterEncoding("utf-8");
+%>
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<title>Osaka グルメ :: SignUp</title>
+<title>Osaka グルメ :: 맛집소개</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
 <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,500,500i,600,600i,700,700i&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -19,8 +21,8 @@
 <link rel="stylesheet" href="css/jquery.timepicker.css">
 <link rel="stylesheet" href="css/flaticon.css">
 <link rel="stylesheet" href="css/style.css">
-<link rel="stylesheet" href="css/message-Popup.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
+
 </head>
 <body>
 	<div class="wrap">
@@ -49,60 +51,57 @@
 			</button>
 			<div class="collapse navbar-collapse" id="ftco-nav">
 				<ul class="navbar-nav ml-auto">
-					<li class="nav-item active"><a href="index.html" class="nav-link">Home</a></li>
-					<li class="nav-item"><a href="about.html" class="nav-link">Delicious</a></li>
-					<li class="nav-item"><a href="services.html" class="nav-link">Best</a></li>
-					<!-- <li class="nav-item"><a href="rooms.html" class="nav-link"></a></li> -->
-					<li class="nav-item"><a href="blog.html" class="nav-link">Board</a></li>
-					<li class="nav-item"><a href="contact.html" class="nav-link">Review</a></li>
+					<li class="nav-item"><a href="index.jsp" class="nav-link">Home</a></li>
+					<li class="nav-item"><a href="deliciousRestaurant.jsp" class="nav-link">Delicious</a></li>
+					<li class="nav-item active"><a href="review.jsp" class="nav-link">Review</a></li>
 				</ul>
 			</div>
 		</div>
 	</nav>
 	<!-- END nav -->
 
-	<section class="py-5">
+	<section class="hero-wrap hero-wrap-2" style="background-image: url('images/review.jpg');" data-stellar-background-ratio="0.5">
+		<div class="overlay"></div>
 		<div class="container">
-			<div class="row justify-content-center">
-				<div class="py-5 col-lg-4">
-					<form class="appointment-form">
-						<h3 class="mb-3 text-center">Sign Up</h3>
-						<br>
-	
-						<div class="container" id="alertInfo"></div>
-						<div class="py-3 row">
-							<div class="py-1 col-md-12">
-								<div class="form-group">
-									<div class="input-group">
-										<input type="text" id="userId" name="userId" class="form-control" placeholder="아이디">
-										<input type="submit" id="duplicateCheck" value="확인" class="btn btn-primary">
-									</div>
-								</div>
-							</div>
-							<div class="py-1 col-md-12">
-								<div class="form-group">
-									<input type="password" id="userPw" name="userPw" class="form-control" placeholder="패스워드">
-								</div>
-							</div>
-							<div class="py-1 col-md-12">
-								<div class="form-group">
-									<input type="text" id="userNick" name="userNick" class="form-control" placeholder="닉네임">
-								</div>
-							</div>
-							<div class="py-1 col-md-12">
-								<div class="form-group">
-									<input type="email" id="userEmail" name="userEmail" class="form-control" placeholder="이메일 주소">
-								</div>
-							</div>
-							<div class="py-1 col-md-12 d-flex justify-content-center">
-								<div class="form-group">
-									<input type="submit" id="signUp" value="회원가입" class="btn btn-primary py-3 px-4">
-								</div>
-							</div>
-						</div>
-					</form>
+			<div class="row no-gutters slider-text align-items-center justify-content-center">
+				<div class="col-md-9 ftco-animate text-center">
+					<h1 class="mb-0 bread">리뷰 게시글 보기</h1>
 				</div>
 			</div>
+		</div>
+	</section>
+
+	<section>
+		<br> <br>
+		<div>
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-8 col-md-10 mx-auto">
+						<%
+							request.setCharacterEncoding("utf-8");
+							SQLHelper sql = new SQLHelper();
+							String articleNo = request.getParameter("articleNo");
+
+
+							sql.sqlExecute("SELECT", "SELECT * FROM ARTICLE WHERE NO=" + articleNo, new String[] {});
+							if (sql.rs.next())
+							{
+								%>
+								<h1><%=sql.rs.getString("TITLE") %></h1>
+								<h2>작성자 : <%=sql.rs.getString("WRITER") %></h2>
+								<p style="text-align:right"><%=sql.rs.getString("POSTDATE") %></p>
+								<hr>
+								<%
+								out.print(sql.rs.getString("CONTENT"));
+							}
+							sql.closeSQL();
+						%>
+
+					</div>
+				</div>
+			</div>
+
+			<hr>
 		</div>
 	</section>
 
@@ -120,10 +119,8 @@
 					<h2 class="footer-heading">Sitemap</h2>
 					<ul class="list-unstyled">
 						<li><a href="./index.jsp" class="py-1 d-block">Home</a></li>
-						<li><a href="#" class="py-1 d-block">Delicious</a></li>
-						<li><a href="#" class="py-1 d-block">Best</a></li>
-						<li><a href="#" class="py-1 d-block">Board</a></li>
-						<li><a href="#" class="py-1 d-block">Review</a></li>
+						<li><a href="./deliciousRestaurant.jsp" class="py-1 d-block">Delicious</a></li>
+						<li><a href="./review.jsp" class="py-1 d-block">Review</a></li>
 					</ul>
 				</div>
 				<div class="col-md-6 col-lg-3 mb-md-0 mb-4">
@@ -150,7 +147,9 @@
 						<p class="copyright mb-0">
 							<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 							Copyright &copy;
-							<script>document.write(new Date().getFullYear());</script>
+							<script>
+				document.write(new Date().getFullYear());
+			    </script>
 							All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib.com</a>
 							<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 						</p>
@@ -169,7 +168,6 @@
 			<circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00" /></svg>
 	</div>
 
-
 	<script src="js/jquery.min.js"></script>
 	<script src="js/jquery-migrate-3.0.1.min.js"></script>
 	<script src="js/popper.min.js"></script>
@@ -186,40 +184,19 @@
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
 	<script src="js/google-map.js"></script>
 	<script src="js/main.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
 	
 	<script>
-$(document).ready(function(){
-		
-	  $("#duplicateCheck").click(function(){
-		  
-		  var postData = 'userId=' + $("#userId").val();
-		  event.preventDefault();
-		  $.ajax({url: "./_member/isDuplicated.jsp", 
-		        data: postData,
-		        success: function(result){
-		        	console.log(result);
-		        	$("#alertInfo").prepend(result);
-		    	}
-		  });
+	
+	
+	    $('#content').summernote(
+	    {
+		height: 600,
+		lang : 'ko-KR'
+	    });
 
-	  });
-	  $("#signUp").click(function(){
-		  var postData = 'userId=' + $("#userId").val() +
-		  '&userPw=' + $("#userPw").val() +
-		  '&userNick=' + $("#userNick").val() +
-		  '&userEmail=' + $("#userEmail").val();
-		  
-		  event.preventDefault();
-		  $.ajax({url: "./_member/doRegister.jsp", 
-		        data: postData,
-		        success: function(result){
-		        	$("#alertInfo").prepend(result);		        	
-		    	}
-		  });
-		  
-	  });
-});
-</script>
+    </script>
 
 </body>
 </html>

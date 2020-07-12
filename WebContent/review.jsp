@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
-%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@include file="./_board/getArticleList.jsp"%>
 <%
 	request.setCharacterEncoding("utf-8");
@@ -51,11 +50,9 @@
 			</button>
 			<div class="collapse navbar-collapse" id="ftco-nav">
 				<ul class="navbar-nav ml-auto">
-					<li class="nav-item active"><a href="index.jsp" class="nav-link">Home</a></li>
+					<li class="nav-item"><a href="index.jsp" class="nav-link">Home</a></li>
 					<li class="nav-item"><a href="deliciousRestaurant.jsp" class="nav-link">Delicious</a></li>
-					<li class="nav-item"><a href="services.html" class="nav-link">Best</a></li>
-					<li class="nav-item"><a href="blog.html" class="nav-link">Board</a></li>
-					<li class="nav-item"><a href="review.jsp" class="nav-link">Review</a></li>
+					<li class="nav-item active"><a href="review.jsp" class="nav-link">Review</a></li>
 				</ul>
 			</div>
 		</div>
@@ -77,39 +74,81 @@
 	</section>
 
 	<section>
-	<br><br>
+		<br> <br>
 		<div>
-		<div class="container">
-		    <div class="row">
-		      <div class="col-lg-8 col-md-10 mx-auto">
-		      
-		       <%
-				request.setCharacterEncoding("utf-8");
-				printArticleList(out,0,1,"센니치마에");
-				%>
-		        <!-- Pager -->
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-8 col-md-10 mx-auto">
 
-		      </div>
-		    </div>
-		  </div>
-		
-		  <hr>
-			</div>
-			<div class="row py-5">
-				<div class="col text-center">
-					<div class="block-27">
-						<ul>
-							<li><a href="#">&lt;</a></li>
-							<li class="active"><span>1</span></li>
-							<li><a href="#">2</a></li>
-							<li><a href="#">3</a></li>
-							<li><a href="#">4</a></li>
-							<li><a href="#">5</a></li>
-							<li><a href="#">&gt;</a></li>
-						</ul>
+						<%
+						SQLHelper sql = new SQLHelper();
+						sql.sqlExecute("SELECT", "SELECT * FROM ARTICLE",// OFFSET " + iStartOffset + " ROWS FETCH NEXT 20 ROWS ONLY",
+								new String[] {});
+						while (sql.rs.next())
+						{
+							try
+							{
+
+								String articleNo = sql.rs.getString(1);
+								String title = sql.rs.getString(2);
+								String writer = sql.rs.getString(6);
+								String postDate = sql.rs.getString(4);
+								/*out.println("<div class=\"post-preview\">");
+								out.println("<a href=\"./_board/getArticle.jsp?articleNo=" + articleNo + "\">");
+								out.println("<h2 class=\"post-title\">");
+								out.println(title);
+								out.println("</h2>");
+								out.println("<h3 class=\"post-subtitle\">");
+
+								out.println("</h3>");
+								out.println("</a>");
+								out.println("<p class=\"post-meta\">작성자");
+								out.println("<a href=\"#\">" + writer + "</a>");
+								out.println(postDate + "</p>");
+								out.println("</div>");*/
+								%>
+								<div class="post-preview">
+								<a href="./readArticle.jsp?articleNo=<%=articleNo%>">
+								<h2 class="post-title">
+								<%=title%>
+								</h2>
+								<h3 class="post-subtitle">
+								</h3>
+								</a>
+								<p class="post-meta">작성자
+								<%=postDate%></p>
+								</div>
+								<%
+							}
+							catch (Exception e)
+							{
+								out.println(e.toString());
+							}
+						}
+						%>
+						<!-- Pager -->
+
 					</div>
 				</div>
 			</div>
+
+			<hr>
+		</div>
+		<div class="row py-5">
+			<div class="col text-center">
+				<div class="block-27">
+					<ul>
+						<li><a href="#">&lt;</a></li>
+						<li class="active"><span>1</span></li>
+						<li><a href="#">2</a></li>
+						<li><a href="#">3</a></li>
+						<li><a href="#">4</a></li>
+						<li><a href="#">5</a></li>
+						<li><a href="#">&gt;</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
 		</div>
 	</section>
 
@@ -127,10 +166,8 @@
 					<h2 class="footer-heading">Sitemap</h2>
 					<ul class="list-unstyled">
 						<li><a href="./index.jsp" class="py-1 d-block">Home</a></li>
-						<li><a href="#" class="py-1 d-block">Delicious</a></li>
-						<li><a href="#" class="py-1 d-block">Best</a></li>
-						<li><a href="#" class="py-1 d-block">Board</a></li>
-						<li><a href="#" class="py-1 d-block">Review</a></li>
+						<li><a href="./deliciousRestaurant.jsp" class="py-1 d-block">Delicious</a></li>
+						<li><a href="./review.jsp" class="py-1 d-block">Review</a></li>
 					</ul>
 				</div>
 				<div class="col-md-6 col-lg-3 mb-md-0 mb-4">
@@ -157,7 +194,9 @@
 						<p class="copyright mb-0">
 							<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 							Copyright &copy;
-							<script>document.write(new Date().getFullYear());</script>
+							<script>
+				document.write(new Date().getFullYear());
+			    </script>
 							All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib.com</a>
 							<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 						</p>

@@ -1,4 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@include file="./_board/getArticleList.jsp"%>
+<%
+	request.setCharacterEncoding("utf-8");
+%>
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -16,6 +21,14 @@
 <link rel="stylesheet" href="css/jquery.timepicker.css">
 <link rel="stylesheet" href="css/flaticon.css">
 <link rel="stylesheet" href="css/style.css">
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
+<%
+	if (session.getAttribute("userId") == null) {
+	//로그인 되어 있지 않음, 게시글 작성 불가.
+	out.print("<script>alert('로그인을 해주세요. 게시글 작성이 불가능합니다.');");
+	out.print("window.location.href = \"./index.jsp\"</script>");
+}
+%>
 </head>
 <body>
 	<div class="wrap">
@@ -45,186 +58,89 @@
 			<div class="collapse navbar-collapse" id="ftco-nav">
 				<ul class="navbar-nav ml-auto">
 					<li class="nav-item"><a href="index.jsp" class="nav-link">Home</a></li>
-					<li class="nav-item active"><a href="deliciousRestaurant.jsp" class="nav-link">Delicious</a></li>
-					<li class="nav-item"><a href="review.jsp" class="nav-link">Review</a></li>
+					<li class="nav-item"><a href="deliciousRestaurant.jsp" class="nav-link">Delicious</a></li>
+					<li class="nav-item active"><a href="review.jsp" class="nav-link">Review</a></li>
 				</ul>
 			</div>
 		</div>
 	</nav>
 	<!-- END nav -->
-	
-	<section class="hero-wrap hero-wrap-2" style="background-image: url('images/delRes2.png');" data-stellar-background-ratio="0.5">
+
+	<section class="hero-wrap hero-wrap-2" style="background-image: url('images/review.jpg');" data-stellar-background-ratio="0.5">
 		<div class="overlay"></div>
 		<div class="container">
 			<div class="row no-gutters slider-text align-items-center justify-content-center">
 				<div class="col-md-9 ftco-animate text-center">
-					<p class="breadcrumbs mb-2">
-						<span class="mr-2"><a href="index.jsp">Home <i class="fa fa-chevron-right"></i></a></span> <span class="mr-2"><a href="deliciousRestaurant.jsp">Delicious <i class="fa fa-chevron-right"></i></a></span>
-					</p>
-					<h1 class="mb-0 bread">글쓰기</h1>
+					<h1 class="mb-0 bread">게시글 작성</h1>
 				</div>
 			</div>
 		</div>
 	</section>
-	<div class="container">
-	<div class="col-md-12">
-		<div class="form-group">
-			<input type="submit" id="doLogout" value="로그아웃" class="btn btn-primary py-3 px-4">
-		</div>
-	</div>
-	</div>
-	<section class="ftco-section bg-light">
-		<div class="container">
-			<div class="row d-flex">
-				<div class="col-md-4 d-flex ftco-animate">
-					<div class="blog-entry align-self-stretch">
-						<a href="blog-single.html" class="block-20 rounded" style="background-image: url('images/image_1.jpg');"></a>
-						<div class="text p-4 text-center">
-							<h3 class="heading">
-								<a href="#">Work Hard, Party Hard in a Luxury Chalet in the Alps</a>
-							</h3>
-							<div class="meta mb-2">
-								<div>
-									<a href="#">January 30, 2020</a>
-								</div>
-								<div>
-									<a href="#">Admin</a>
-								</div>
-								<div>
-									<a href="#" class="meta-chat"><span class="fa fa-comment"></span> 3</a>
-								</div>
-							</div>
-							<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4 d-flex ftco-animate">
-					<div class="blog-entry align-self-stretch">
-						<a href="blog-single.html" class="block-20 rounded" style="background-image: url('images/image_2.jpg');"> </a>
-						<div class="text p-4 text-center">
-							<h3 class="heading">
-								<a href="#">Work Hard, Party Hard in a Luxury Chalet in the Alps</a>
-							</h3>
-							<div class="meta mb-2">
-								<div>
-									<a href="#">January 30, 2020</a>
-								</div>
-								<div>
-									<a href="#">Admin</a>
-								</div>
-								<div>
-									<a href="#" class="meta-chat"><span class="fa fa-comment"></span> 3</a>
-								</div>
-							</div>
-							<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4 d-flex ftco-animate">
-					<div class="blog-entry align-self-stretch">
-						<a href="blog-single.html" class="block-20 rounded" style="background-image: url('images/image_3.jpg');"> </a>
-						<div class="text p-4 text-center">
-							<h3 class="heading">
-								<a href="#">Work Hard, Party Hard in a Luxury Chalet in the Alps</a>
-							</h3>
-							<div class="meta mb-2">
-								<div>
-									<a href="#">January 30, 2020</a>
-								</div>
-								<div>
-									<a href="#">Admin</a>
-								</div>
-								<div>
-									<a href="#" class="meta-chat"><span class="fa fa-comment"></span> 3</a>
-								</div>
-							</div>
-							<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia</p>
-						</div>
-					</div>
-				</div>
 
-				<div class="col-md-4 d-flex ftco-animate">
-					<div class="blog-entry align-self-stretch">
-						<a href="blog-single.html" class="block-20 rounded" style="background-image: url('images/image_4.jpg');"> </a>
-						<div class="text p-4 text-center">
-							<h3 class="heading">
-								<a href="#">Work Hard, Party Hard in a Luxury Chalet in the Alps</a>
-							</h3>
-							<div class="meta mb-2">
-								<div>
-									<a href="#">January 30, 2020</a>
-								</div>
-								<div>
-									<a href="#">Admin</a>
-								</div>
-								<div>
-									<a href="#" class="meta-chat"><span class="fa fa-comment"></span> 3</a>
+	<section>
+		<br> <br>
+		<div>
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-8 col-md-10 mx-auto">
+						<form method="post" enctype="multipart/form-data" action="sendArticle.jsp">
+							<div class="input-group-prepend">
+								<div class="input-group mb-3">
+									<input type="text" class="form-control" id="title" name="title" aria-label="제목" aria-describedby="inputGroup-sizing-default">
 								</div>
 							</div>
-							<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4 d-flex ftco-animate">
-					<div class="blog-entry align-self-stretch">
-						<a href="blog-single.html" class="block-20 rounded" style="background-image: url('images/image_5.jpg');"> </a>
-						<div class="text p-4 text-center">
-							<h3 class="heading">
-								<a href="#">Work Hard, Party Hard in a Luxury Chalet in the Alps</a>
-							</h3>
-							<div class="meta mb-2">
-								<div>
-									<a href="#">January 30, 2020</a>
+							<div class="input-group mb-3">
+								<div class="input-group-prepend">
+
+									<label class="input-group-text" for="inputGroupSelect01">게시판</label>
 								</div>
-								<div>
-									<a href="#">Admin</a>
-								</div>
-								<div>
-									<a href="#" class="meta-chat"><span class="fa fa-comment"></span> 3</a>
-								</div>
+								<select class="custom-select" id="boardId" name="boardId">
+									<%
+										try {
+										SQLHelper sql = new SQLHelper();
+										sql.sqlExecute("SELECT", "SELECT * FROM BOARD", new String[]{});
+										if (sql.rs.next())
+											out.print("<option selected value=\"" + sql.rs.getInt("ID") + "\">" + sql.rs.getString("NAME") + "</option>");
+										while (sql.rs.next()) {
+											out.print("<option value=\"" + sql.rs.getInt("ID") + "\">" + sql.rs.getString("NAME") + "</option>");
+										}
+										sql.closeSQL();
+									} catch (Exception e) {
+									}
+									%>
+								</select>
 							</div>
-							<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4 d-flex ftco-animate">
-					<div class="blog-entry align-self-stretch">
-						<a href="blog-single.html" class="block-20 rounded" style="background-image: url('images/image_6.jpg');"> </a>
-						<div class="text p-4 text-center">
-							<h3 class="heading">
-								<a href="#">Work Hard, Party Hard in a Luxury Chalet in the Alps</a>
-							</h3>
-							<div class="meta mb-2">
-								<div>
-									<a href="#">January 30, 2020</a>
+							<div class="input-group mb-3">
+								<div class="input-group-prepend">
+									<label class="input-group-text" for="inputGroupSelect02">역</label>
 								</div>
-								<div>
-									<a href="#">Admin</a>
-								</div>
-								<div>
-									<a href="#" class="meta-chat"><span class="fa fa-comment"></span> 3</a>
-								</div>
+								<select class="custom-select" id="stationId" name="stationId">
+									<%
+										try {
+										SQLHelper sql = new SQLHelper();
+										sql.sqlExecute("SELECT", "SELECT * FROM STATION", new String[]{});
+										if (sql.rs.next())
+											out.print(
+											"<option selected value=\"" + sql.rs.getInt("ID") + "\">" + sql.rs.getString("STATION") + "</option>");
+										while (sql.rs.next()) {
+											out.print("<option value=\"" + sql.rs.getInt("ID") + "\">" + sql.rs.getString("STATION") + "</option>");
+										}
+										sql.closeSQL();
+									} catch (Exception e) {
+									}
+									%>
+								</select>
 							</div>
-							<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia</p>
-						</div>
+							<textarea id="content" name="content"></textarea>
+							<button type="submit" class="btn btn-primary">작성</button>
+						</form>
+
+
 					</div>
 				</div>
 			</div>
-			<div class="row mt-5">
-				<div class="col text-center">
-					<div class="block-27">
-						<ul>
-							<li><a href="#">&lt;</a></li>
-							<li class="active"><span>1</span></li>
-							<li><a href="#">2</a></li>
-							<li><a href="#">3</a></li>
-							<li><a href="#">4</a></li>
-							<li><a href="#">5</a></li>
-							<li><a href="#">&gt;</a></li>
-						</ul>
-					</div>
-				</div>
-			</div>
+
+			<hr>
 		</div>
 	</section>
 
@@ -270,7 +186,9 @@
 						<p class="copyright mb-0">
 							<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 							Copyright &copy;
-							<script>document.write(new Date().getFullYear());</script>
+							<script>
+				document.write(new Date().getFullYear());
+			    </script>
 							All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib.com</a>
 							<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 						</p>
@@ -289,7 +207,6 @@
 			<circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00" /></svg>
 	</div>
 
-
 	<script src="js/jquery.min.js"></script>
 	<script src="js/jquery-migrate-3.0.1.min.js"></script>
 	<script src="js/popper.min.js"></script>
@@ -306,8 +223,19 @@
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
 	<script src="js/google-map.js"></script>
 	<script src="js/main.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
+	
+	<script>
+	
+	
+	    $('#content').summernote(
+	    {
+		height: 600,
+		lang : 'ko-KR'
+	    });
 
-
+    </script>
 
 </body>
 </html>

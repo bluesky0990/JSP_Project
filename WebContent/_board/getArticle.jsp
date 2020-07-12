@@ -15,21 +15,5 @@
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
 <html>
-<%
-	request.setCharacterEncoding("utf-8");
-	SQLHelper sql = new SQLHelper();
-	String articleNo = request.getParameter("articleNo");
-	
-	sql.sqlExecute("SELECT", "SELECT * FROM ARTICLE WHERE NO=" + articleNo.toString(), new String[] {});
-	if (sql.rs.next()) {
-		out.print(sql.rs.getString("CONTENT"));
-	}
-	sql.closeSQL();
 
-sql.sqlExecute("SELECT", "SELECT * FROM ARTICLE WHERE NO=" + articleNo, new String[] {});
-if (sql.rs.next()) {
-	out.print(sql.rs.getString("CONTENT"));
-}
-sql.closeSQL();
-%>
 </html>

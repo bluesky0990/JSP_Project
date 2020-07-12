@@ -42,18 +42,18 @@
 		</div>
 	</div>
 </div>
-<div id="popupLoginError" class="modal fade">
+<div id="popupError" class="modal fade">
 	<div class="modal-dialog msgError-confirm">
 		<div class="modal-content">
 			<div class="modal-header flex-column">
 				<div class="icon-box">
 					<i class="material-icons">&#xE5CD;</i>
 				</div>						
-				<h4 class="modal-title w-100">로그인 오류</h4>	
+				<h4 class="modal-title w-100">오류</h4>	
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 			</div>
 			<div class="modal-body">
-				<p>알 수 없는 이유로 인해 로그인에 실패하였습니다.</p>
+				<div id="ErrorMessage"><p>아이디나 비밀번호를 확인해주세요.</p></div>
 				<p>관리자에게 연락바랍니다.</p>
 			</div>
 			<div class="modal-footer justify-content-center">
@@ -108,8 +108,6 @@
 				<ul class="navbar-nav ml-auto">
 					<li class="nav-item active"><a href="index.jsp" class="nav-link">Home</a></li>
 					<li class="nav-item"><a href="deliciousRestaurant.jsp" class="nav-link">Delicious</a></li>
-					<li class="nav-item"><a href="services.html" class="nav-link">Best</a></li>
-					<li class="nav-item"><a href="blog.html" class="nav-link">Board</a></li>
 					<li class="nav-item"><a href="review.jsp" class="nav-link">Review</a></li>
 				</ul>
 			</div>
@@ -146,6 +144,11 @@
 									<p>사용자 아이디 : <% out.print(session.getAttribute("userId").toString()); %></p>
 								</div>
 							</div> 
+							<div class="col-md-12">
+								<div class="form-group">
+									<input type="submit" id="doLogout" value="로그아웃" class="btn btn-primary py-3 px-4">
+								</div>
+							</div>
 					<%}else{%>
 						<h3 class="mb-3">로그인</h3>
 						<div class="row">
@@ -166,7 +169,7 @@
 							</div>
 							<div class="col-md-12">
 								<div class="form-group">
-									<input type="button" value="회원가입" onclick="location.href='./member_signup.jsp'" class="btn btn-primary py-3 px-4">
+									<input type="button" value="회원가입" onclick="location.href='./signup.jsp'" class="btn btn-primary py-3 px-4">
 								</div>
 							</div>
 						</div>
@@ -521,10 +524,8 @@
 					<h2 class="footer-heading">Sitemap</h2>
 					<ul class="list-unstyled">
 						<li><a href="./index.jsp" class="py-1 d-block">Home</a></li>
-						<li><a href="#" class="py-1 d-block">Delicious</a></li>
-						<li><a href="#" class="py-1 d-block">Best</a></li>
-						<li><a href="#" class="py-1 d-block">Board</a></li>
-						<li><a href="#" class="py-1 d-block">Review</a></li>
+						<li><a href="./deliciousRestaurant.jsp" class="py-1 d-block">Delicious</a></li>
+						<li><a href="./review.jsp" class="py-1 d-block">Review</a></li>
 					</ul>
 				</div>
 				<div class="col-md-6 col-lg-3 mb-md-0 mb-4">
@@ -592,10 +593,9 @@
 $(document).ready(function(){
 		
 	  $("#doLogin").click(function(){
-		  
+		  event.preventDefault();
 		  var postData = 'userId=' + $("#userId").val() +
 		  '&userPw=' + $("#userPw").val();
-		  event.preventDefault();
 		  $.ajax({
 			  type: "post",
 			  url: "./_member/doLogin.jsp", 
@@ -608,17 +608,33 @@ $(document).ready(function(){
 		        		}
 		        	else
 		        		{
-		        			$("#popupLoginSuccess").modal();
+		        	    location.href = location.href;//$("#popupLoginSuccess").modal();
 		        		}
 		    	},
 		  		error: function(xhr, status, error)
 		  		{
-		  			$("#popupLoginError").modal();
+		  			$("#ErrorMessage p").html("알 수 없는 이유로 로그인에 실패하였습니다.");
+		  			$("#popupError").modal();
 		  		}
 		  });
 		  
-		  event.preventDefault();
 	  });
+$("#doLogout").click(function(){
+	event.preventDefault();
+		  $.ajax({
+			  type: "post",
+			  url: "./_member/doLogout.jsp", 
+		        success: function(result){
+		        	location.href = location.href;
+		       	},
+		  		error: function(xhr, status, error)
+		  		{
+		  			$("#ErrorMessage p").html("알 수 없는 이유로 로그아웃에 실패하였습니다.");
+		  			$("#popupError").modal();
+		  		}
+		  });
+		  
+  });
 });
 </script>
 
