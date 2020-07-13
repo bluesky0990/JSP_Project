@@ -17,7 +17,6 @@ try
 {
 	MultipartRequest multi = new MultipartRequest(request, realFolder, 1024 * 1024 * 1024, encType,
 	new DefaultFileRenamePolicy());
-
 	String userId = session.getAttribute("userId").toString();
 	String Content = multi.getParameter("content");
 	String title = multi.getParameter("title");
@@ -36,9 +35,23 @@ try
 	{
 		articleNo = SQL.rs.getString("CURRVAL");
 	}
+	Enumeration files = multi.getFileNames();
 
+	if (files.hasMoreElements())
+	{
+		String uploadedFileName = (String)files.nextElement();
+		File uploadedFile = multi.getFile(uploadedFileName);
+		String originalFileName = multi.getOriginalFileName(uploadedFileName);
+		String fileExtension = originalFileName.substring(originalFileName.lastIndexOf("."));
+		File fChangedFile = new File(realFolder+"\\"+articleNo+fileExtension);
+		out.print(realFolder+"\\"+articleNo+fileExtension);
+		uploadedFile.renameTo(fChangedFile);
+		SQL.sqlExecute("UPDATE", "UPDATE ARTICLE SET PICTUREURL='filestorage/?' WHERE NO='?'", 
+				new String[] {articleNo+fileExtension, articleNo});
+	}
+	
 	SQL.closeSQL();
-	response.sendRedirect("../readArticle.jsp?articleNo=" + articleNo);
+	//response.sendRedirect("../readArticle.jsp?articleNo=" + articleNo);
 } catch (Exception e)
 {
 	out.print(e);

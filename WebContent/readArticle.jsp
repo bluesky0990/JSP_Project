@@ -90,12 +90,15 @@
 							sql.sqlExecute("SELECT", "SELECT * FROM ARTICLE WHERE NO=" + articleNo, new String[] {});
 							if (sql.rs.next())
 							{
+								int iHit = sql.rs.getInt("HITS");
 								%>
 								<h1><%=sql.rs.getString("TITLE") %></h1>	
 								<p style="text-align: right">작성자 : <%=sql.rs.getString("WRITER") %> &nbsp;&nbsp;&nbsp;&nbsp; <%=sql.rs.getString("POSTDATE") %></p>
 								<hr>
 								<%
 								out.print(sql.rs.getString("CONTENT"));
+								sql.sqlExecute("UPDATE", "UPDATE ARTICLE SET HITS='?' WHERE NO='?'", 
+										new String[] {Integer.toString(++iHit), articleNo});
 							}
 							sql.closeSQL();
 						%>

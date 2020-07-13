@@ -23,6 +23,7 @@
 		if (SQL.rs.getString("PWD").compareTo(Pw) == 0)
 		{ //Login Success
 	session.setAttribute("userId", Id);
+	session.setAttribute("userNick", SQL.rs.getString("NICKNAME"));	
 	session.setAttribute("isAdmin", SQL.rs.getInt("ADMIN"));
 	out.print("LoginSuccess");
 	return;
