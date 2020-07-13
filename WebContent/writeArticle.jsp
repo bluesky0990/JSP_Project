@@ -83,7 +83,7 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-lg-8 col-md-10 mx-auto">
-						<form method="post" enctype="multipart/form-data" action="sendArticle.jsp">
+						<form method="post" enctype="multipart/form-data" action="./_board/sendArticle.jsp">
 							<div class="input-group-prepend">
 								<div class="input-group mb-3">
 									<input type="text" class="form-control" id="title" name="title" aria-label="제목" aria-describedby="inputGroup-sizing-default">
