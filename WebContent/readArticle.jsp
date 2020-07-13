@@ -49,7 +49,7 @@
 	</div>
 	<nav class="navbar sticky-top navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
 		<div class="container">
-			<a class="navbar-brand" href="./index.jsp"><font size="7em"> Osaka </font><span> グルメ</span></a>
+			<a class="navbar-brand" href="index.jsp"><font size="7em"> Osaka </font><span> グルメ</span></a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="fa fa-bars"></span> Menu
 			</button>
