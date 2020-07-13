@@ -104,8 +104,42 @@
 				</div>
 			</div>
 
-			<hr>
+		<div class="container">
+		    <div class="d-flex justify-content-center">
+    <form id="commentForm" name="commentForm" method="post">
+    <br><br>
+    		
+		<span><strong>작성자 아이디</strong></span>
+		<p>댓글내용</p>
+		<hr>
+		
+		<span><strong>작성자 아이디</strong></span>
+		<p>댓글내용</p>
+		<hr>
+		
+        <div>
+            <div>
+                <span><strong>Comments</strong></span>
+            </div>
+            <div>
+                <table class="">                    
+                    <tr>
+                        <td>
+                            <textarea style="width: 800px; resize:none;" rows="2" cols="15" id="comment" name="comment" placeholder="댓글을 입력하세요"></textarea>     
+                            <br>
+                            <div>
+                                <a href="#" class="btn pull-right btn-success">등록</a>
+                            </div>
+                       		 </td>
+		                    </tr>
+		                </table>
+		            </div>
+		        </div>
+		    </form>
 		</div>
+		 </div>	
+		 </div> 
+		    	<br><br>
 	</section>
 
 	<footer class="footer">
@@ -198,7 +232,7 @@
 		height: 600,
 		lang : 'ko-KR'
 	    });
-
+	    
     </script>
 
 </body>

@@ -88,7 +88,9 @@
     </div>
   </form>
 </div>
-<br><input type="submit" id="white" value="글쓰기" class="btn btn-primary py-3 px-4""><br>
+<br>
+	<input type="submit" id="white" value="글쓰기" class="btn btn-primary py-3 px-4"">
+	<br>
 		<div>
 			<div class="container">
 				<div class="row">
