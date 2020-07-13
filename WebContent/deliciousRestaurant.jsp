@@ -68,8 +68,8 @@
 	</section>
 	<div class="container">
 	<div class="col-md-12">
-		<div class="form-group">
-			<input type="submit" id="doLogout" value="로그아웃" class="btn btn-primary py-3 px-4">
+		<div class="pagination justify-content-end py-5">
+			<input type="submit" id="doLogout" value="글쓰기" class="btn btn-primary py-3 px-4">
 		</div>
 	</div>
 	</div>

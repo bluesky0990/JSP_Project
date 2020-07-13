@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@include file="./_query/SQLHelper.jsp"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -440,72 +441,36 @@
 				</div>
 			</div>
 			<div class="row d-flex">
+			<%
+			SQLHelper sql = new SQLHelper();
+			sql.sqlExecute("SELECT", "SELECT * FROM ARTICLE ORDER BY HITS DESC 3", new String[]{});
+			while (sql.rs.next())
+			{
+			%>
 				<div class="col-md-4 d-flex ftco-animate">
 					<div class="blog-entry align-self-stretch">
-						<a href="blog-single.html" class="block-20 rounded" style="background-image: url('images/image_1.jpg');"> </a>
+						<a href="blog-single.html" class="block-20 rounded" style="background-image: url('<%= sql.rs.getString("PICTUREURL") %>');"> </a>
 						<div class="text p-4 text-center">
 							<h3 class="heading">
-								<a href="#">Work Hard, Party Hard in a Luxury Chalet in the Alps</a>
+								<a href="#"><%= sql.rs.getString("TITLE") %></a>
 							</h3>
 							<div class="meta mb-2">
 								<div>
-									<a href="#">January 30, 2020</a>
+									<a href="#"><%= sql.rs.getString("POSTDATE") %></a>
 								</div>
 								<div>
-									<a href="#">Admin</a>
+									<a href="#"><%= sql.rs.getString("WRITER") %></a>
 								</div>
 								<div>
 									<a href="#" class="meta-chat"><span class="fa fa-comment"></span> 3</a>
 								</div>
 							</div>
-							<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia</p>
 						</div>
 					</div>
 				</div>
-				<div class="col-md-4 d-flex ftco-animate">
-					<div class="blog-entry align-self-stretch">
-						<a href="blog-single.html" class="block-20 rounded" style="background-image: url('images/image_2.jpg');"> </a>
-						<div class="text p-4 text-center">
-							<h3 class="heading">
-								<a href="#">Work Hard, Party Hard in a Luxury Chalet in the Alps</a>
-							</h3>
-							<div class="meta mb-2">
-								<div>
-									<a href="#">January 30, 2020</a>
-								</div>
-								<div>
-									<a href="#">Admin</a>
-								</div>
-								<div>
-									<a href="#" class="meta-chat"><span class="fa fa-comment"></span> 3</a>
-								</div>
-							</div>
-							<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4 d-flex ftco-animate">
-					<div class="blog-entry align-self-stretch">
-						<a href="blog-single.html" class="block-20 rounded" style="background-image: url('images/image_3.jpg');"> </a>
-						<div class="text p-4 text-center">
-							<h3 class="heading">
-								<a href="#">Work Hard, Party Hard in a Luxury Chalet in the Alps</a>
-							</h3>
-							<div class="meta mb-2">
-								<div>
-									<a href="#">January 30, 2020</a>
-								</div>
-								<div>
-									<a href="#">Admin</a>
-								</div>
-								<div>
-									<a href="#" class="meta-chat"><span class="fa fa-comment"></span> 3</a>
-								</div>
-							</div>
-							<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia</p>
-						</div>
-					</div>
-				</div>
+				<%
+			}
+				%>
 			</div>
 		</div>
 	</section>

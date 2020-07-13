@@ -88,13 +88,13 @@
     </div>
   </form>
 </div>
-<br>
-	<input type="submit" id="white" value="글쓰기" class="btn btn-primary py-3 px-4"">
-	<br>
 		<div>
 			<div class="container">
 				<div class="row">
 					<div class="col-lg-8 col-md-10 mx-auto">
+						<div class="pagination justify-content-end py-5">
+						<br><input type="submit" id="white" value="글쓰기" class="btn btn-primary py-3 px-4"><br>
+						</div>
 
 						<%
 						SQLHelper sql = new SQLHelper();
