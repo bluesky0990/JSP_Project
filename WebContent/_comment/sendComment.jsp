@@ -5,14 +5,15 @@
 <%@include file="../_query/SQLHelper.jsp"%>
 
 <%
+
 	SQLHelper SQL = new SQLHelper();
 
 	request.setCharacterEncoding("utf-8");
 
 	String userId = session.getAttribute("userId").toString();
-	String Content = request.getParameter("content");
-	String articleNo =request.getParameter("articleNo");
-
+	String Content = request.getParameter("comment");
+	String articleNo = request.getParameter("articleNo");
+	
 	SQL.sqlExecute("INSERT",
 	"INSERT INTO REPLY(NO,CONTENT,POSTDATE,WRITER,ARTICLENO) values(REPLY_SEQ.NEXTVAL,?,SYSDATE,?,?)",
 	new String[]
@@ -21,11 +22,8 @@
 	SQL.sqlExecute("SELECT", "SELECT REPLY_SEQ.CURRVAL from DUAL", null);
 
 	SQL.closeSQL();
-	//response.sendRedirect("../readArticle.jsp?articleNo=" + articleNo);
-} catch (Exception e)
-{
-	out.print(e);
-}
+	response.sendRedirect("../readArticle.jsp?articleNo=" + articleNo);
+
 %>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>

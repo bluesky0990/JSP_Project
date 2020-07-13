@@ -443,13 +443,13 @@
 			<div class="row d-flex">
 			<%
 			SQLHelper sql = new SQLHelper();
-			sql.sqlExecute("SELECT", "SELECT * FROM ARTICLE ORDER BY HITS DESC 3", new String[]{});
+			sql.sqlExecute("SELECT", "SELECT * FROM ( SELECT * FROM ARTICLE ORDER BY HITS DESC) WHERE ROWNUM<=3", new String[]{});
 			while (sql.rs.next())
 			{
 			%>
 				<div class="col-md-4 d-flex ftco-animate">
 					<div class="blog-entry align-self-stretch">
-						<a href="blog-single.html" class="block-20 rounded" style="background-image: url('<%= sql.rs.getString("PICTUREURL") %>');"> </a>
+						<a href="./readArticle.jsp?articleNo=<%=sql.rs.getString("NO")%>" class="block-20 rounded" style="background-image: url('<%= sql.rs.getString("PICTUREURL") %>');"> </a>
 						<div class="text p-4 text-center">
 							<h3 class="heading">
 								<a href="#"><%= sql.rs.getString("TITLE") %></a>

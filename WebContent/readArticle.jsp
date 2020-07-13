@@ -109,36 +109,57 @@
 
 		<div class="container">
 		    <div class="d-flex justify-content-center">
-    <form id="commentForm" name="commentForm" method="post">
+    <!--  <form id="commentForm" name="commentForm" method="post">-->
     <br><br>
-    		
-		<span><strong>작성자 아이디</strong></span>
-		<p>댓글내용</p>
+    <div class="form-group">
+    <div class="container">
+    	<div>
+    	<from>
+    	<%
+    	SQLHelper sql2 = new SQLHelper();
+    	
+    	sql2.sqlExecute("SELECT", "SELECT * FROM REPLY WHERE ARTICLENO='" + articleNo + "'", new String[]{});
+    	while(sql2.rs != null && sql2.rs.next())
+    	{
+    		%>
+    		<div class="form-group"><span><strong><%= sql2.rs.getString("WRITER") %></strong></span>
+		<p><%=sql2.rs.getString("CONTENT") %></p></div>
 		<hr>
+		<!--<p><%=sql2.rs.getString("POSTDATE") %></p>  날짜 -->
+    		<%
+    	}
+    	%>
+    	</from>
+    	</div>
+    	</div>
 		
-		<span><strong>작성자 아이디</strong></span>
-		<p>댓글내용</p>
-		<hr>
 		
-        <div>
+        <div class="form-group">
             <div>
                 <span><strong>Comments</strong></span>
             </div>
             <div>
-                <table class="">                    
+            	<form method="post" action="./_comment/sendComment.jsp">
+                <table> 
+                	                   
                     <tr>
                         <td>
-                            <textarea style="width: 800px; resize:none;" rows="2" cols="15" id="comment" name="comment" placeholder="댓글을 입력하세요"></textarea>     
-                            <br>
-                            <div>
-                                <a href="#" class="btn pull-right btn-success">등록</a>
-                            </div>
+                        		<input type="hidden" id="articleNo" name="articleNo" value="<%=articleNo %>">
+                            	<textarea style="width: 800px; resize:none;" rows="2" cols="15" id="comment" name="comment" placeholder="댓글을 입력하세요"></textarea>     
+                            	<br>
+                            	<div>
+                                	<button type="submit" class="btn pull-right btn-success">등록</button>
+                            	</div>
+                            
                        		 </td>
 		                    </tr>
+		                   
 		                </table>
+		                </form>
 		            </div>
 		        </div>
-		    </form>
+		        </div>
+		   <!-- </form>-->
 		</div>
 		 </div>	
 		 </div> 
