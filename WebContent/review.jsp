@@ -21,6 +21,7 @@
 <link rel="stylesheet" href="css/jquery.timepicker.css">
 <link rel="stylesheet" href="css/flaticon.css">
 <link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/SeachBar.css">
 
 </head>
 <body>
@@ -74,7 +75,20 @@
 	</section>
 
 	<section>
-		<br> <br>
+	<div id="cover">
+  <form method="get" action="">
+    <div class="tb">
+       <div class="td"><input type="text" placeholder="Search" required></div>
+      <div class="td" id="s-cover">
+        <button type="submit">
+          <div id="s-circle"></div>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
+<br><input type="submit" id="white" value="글쓰기" class="btn btn-primary py-3 px-4""><br>
 		<div>
 			<div class="container">
 				<div class="row">
@@ -86,7 +100,6 @@
 								new String[] {});
 						while (sql.rs.next())
 						{
-							try
 							{
 
 								String articleNo = sql.rs.getString(1);

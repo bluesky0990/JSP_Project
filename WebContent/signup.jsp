@@ -52,7 +52,7 @@
 	</nav>
 	<!-- END nav -->
 
-	<section class="py-5">
+<!--  -->	<section class="py-5">
 		<div class="container">
 			<div class="row justify-content-center">
 				<div class="py-5 col-lg-4">
@@ -87,7 +87,8 @@
 							</div>
 							<div class="py-1 col-md-12 d-flex justify-content-center">
 								<div class="form-group">
-									<input type="submit" id="signUp" value="회원가입" class="btn btn-primary py-3 px-4">
+									<input type="submit" id="signUp" value="회원가입" class="btn btn-primary py-3 px-4"> &nbsp;&nbsp;&nbsp;
+									<input type="button" id="signUp" value="뒤로가기" class="btn btn-primary py-3 px-4">
 								</div>
 							</div>
 						</div>

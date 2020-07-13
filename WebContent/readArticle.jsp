@@ -23,6 +23,10 @@
 <link rel="stylesheet" href="css/style.css">
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
 
+<style type="text/css">\
+.title h1, p{display:inline;}
+</style>
+
 </head>
 <body>
 	<div class="wrap">
@@ -87,9 +91,8 @@
 							if (sql.rs.next())
 							{
 								%>
-								<h1><%=sql.rs.getString("TITLE") %></h1>
-								<h2>작성자 : <%=sql.rs.getString("WRITER") %></h2>
-								<p style="text-align:right"><%=sql.rs.getString("POSTDATE") %></p>
+								<h1><%=sql.rs.getString("TITLE") %></h1>	
+								<p style="text-align: right">작성자 : <%=sql.rs.getString("WRITER") %> &nbsp;&nbsp;&nbsp;&nbsp; <%=sql.rs.getString("POSTDATE") %></p>
 								<hr>
 								<%
 								out.print(sql.rs.getString("CONTENT"));
