@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@include file="./_query/SQLHelper.jsp"%>
+
+<%@include file="./_comment/getCommentCount.jsp"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -443,6 +444,7 @@
 			<div class="row d-flex">
 			<%
 			SQLHelper sql = new SQLHelper();
+			SQLHelper replysql = new SQLHelper();
 			sql.sqlExecute("SELECT", "SELECT * FROM ( SELECT * FROM ARTICLE WHERE BOARDID=1 ORDER BY HITS DESC) WHERE ROWNUM<=3", new String[]{});
 			while (sql.rs != null && sql.rs.next())
 			{
@@ -462,7 +464,7 @@
 									<a href="#"><%= sql.rs.getString("WRITER") %></a>
 								</div>
 								<div>
-									<a href="#" class="meta-chat"><span class="fa fa-comment"></span> 3</a>
+									<a href="#" class="meta-chat"><span class="fa fa-comment"></span> <%=getCommentCount(replysql, sql.rs.getString("NO"))%></a>
 								</div>
 							</div>
 						</div>
@@ -470,6 +472,7 @@
 				</div>
 				<%
 			}
+			replysql.closeSQL();
 			sql.closeSQL();
 				%>
 			</div>
