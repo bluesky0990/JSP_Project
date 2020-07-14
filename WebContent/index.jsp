@@ -194,7 +194,7 @@
 							<br>
 							<br>
 							<p>
-								<a href="#" class="btn btn-primary">바로가기</a>
+								<a href="./deliciousRestaurant.jsp?search_mode=station&search=난바" class="btn btn-primary">바로가기</a>
 							</p>
 						</div>
 					</div>
@@ -209,7 +209,7 @@
 							<br>
 							<br>
 							<p>
-								<a href="#" class="btn btn-primary">바로가기</a>
+								<a href="./deliciousRestaurant.jsp?search_mode=station&search=신사이바시" class="btn btn-primary">바로가기</a>
 							</p>
 						</div>
 					</div>
@@ -224,7 +224,7 @@
 							<br>
 							<br>
 							<p>
-								<a href="#" class="btn btn-primary">바로가기</a>
+								<a href="./deliciousRestaurant.jsp?search_mode=station&search=우메다" class="btn btn-primary">바로가기</a>
 							</p>
 						</div>
 					</div>
@@ -342,7 +342,7 @@
 	</section>
 
 
-	<section class="ftco-section testimony-section bg-light">
+	<!-- <section class="ftco-section testimony-section bg-light">
 		<div class="container">
 			<div class="row justify-content-center pb-5 mb-3">
 				<div class="col-md-7 heading-section text-center ftco-animate">
@@ -419,7 +419,7 @@
 	</section>
 
 
-
+-->
 	<section class="ftco-intro" style="background-image: url(images/neko.png);" data-stellar-background-ratio="0.5">
 		<div class="overlay"></div>
 		<div class="container">
@@ -470,6 +470,7 @@
 				</div>
 				<%
 			}
+			sql.closeSQL();
 				%>
 			</div>
 		</div>

@@ -265,7 +265,9 @@
 									}
 								}
 								break;
+								
 						}
+						sql.closeSQL();
 						%>
 						<!-- Pager -->
 

@@ -47,6 +47,21 @@
 			</div>
 		</div>
 	</div>
+	<%
+							request.setCharacterEncoding("utf-8");
+							SQLHelper sql = new SQLHelper();
+							String articleNo = request.getParameter("articleNo");
+							boolean bIsReview;
+							sql.sqlExecute("SELECT", "SELECT * FROM ARTICLE WHERE NO=" + articleNo, new String[] {});
+							if (sql.rs.next())
+							{
+								int iHit = sql.rs.getInt("HITS");
+								sql.sqlExecute("UPDATE", "UPDATE ARTICLE SET HITS='?' WHERE NO='?'", 
+										new String[] {Integer.toString(++iHit), articleNo});
+								bIsReview = (sql.rs.getInt("BOARDID") == 1);
+							}
+							sql.closeSQL();
+						%>
 	<nav class="navbar sticky-top navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
 		<div class="container">
 			<a class="navbar-brand" href="index.jsp"><font size="7em"> Osaka </font><span> グルメ</span></a>
@@ -83,9 +98,6 @@
 					<div class="col-lg-8 col-md-10 mx-auto">
 						<%
 							request.setCharacterEncoding("utf-8");
-							SQLHelper sql = new SQLHelper();
-							String articleNo = request.getParameter("articleNo");
-
 
 							sql.sqlExecute("SELECT", "SELECT * FROM ARTICLE WHERE NO=" + articleNo, new String[] {});
 							if (sql.rs.next())
@@ -97,8 +109,6 @@
 								<hr>
 								<%
 								out.print(sql.rs.getString("CONTENT"));
-								sql.sqlExecute("UPDATE", "UPDATE ARTICLE SET HITS='?' WHERE NO='?'", 
-										new String[] {Integer.toString(++iHit), articleNo});
 							}
 							sql.closeSQL();
 						%>
@@ -128,6 +138,7 @@
 		<!--<p><%=sql2.rs.getString("POSTDATE") %></p>  날짜 -->
     		<%
     	}
+    	sql2.closeSQL();
     	%>
     	</from>
     	</div>
