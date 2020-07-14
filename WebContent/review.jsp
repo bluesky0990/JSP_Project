@@ -144,12 +144,12 @@
 						
 						String strSearchSQL = null;
 						final int iShowMax = 5;
-						
+						String StationArray = "";
 						switch(strSearchMode)
 						{
 						case "lane":
 							sql.sqlExecute("SELECT", "SELECT * FROM STATION WHERE LANE LIKE '%" + strSearch + "%'", null);
-							String StationArray = "";
+							
 							if (sql.rs != null && sql.rs.next())
 							{
 								StationArray = sql.rs.getString("ID");
@@ -189,6 +189,82 @@
 									System.out.println(e.toString());
 								}
 							}
+							break;
+						case "station":
+							sql.sqlExecute("SELECT", "SELECT * FROM STATION WHERE STATION LIKE '%" + strSearch + "%'", null);
+							if (sql.rs != null && sql.rs.next())
+							{
+								StationArray = sql.rs.getString("ID");
+							}
+							while (sql.rs != null && sql.rs.next())
+							{
+								StationArray = StationArray + ", " + sql.rs.getString("ID");
+							}
+							strSearchSQL = "SELECT * FROM ARTICLE WHERE STATIONID IN (" + StationArray + ") ORDER BY POSTDATE DESC";
+							sql.sqlExecute("SELECT", "SELECT COUNT(*) AS CNT FROM ARTICLE WHERE STATIONID IN (" + StationArray + ")", null);
+							if (sql.rs != null && sql.rs.next()) iArticleCount = sql.rs.getInt("CNT");
+							System.out.println("SELECT * FROM (SELECT ROWNUM NUM,L.* FROM (" + strSearchSQL + ")L) WHERE NUM BETWEEN " + Integer.toString(((iPage-1)*5)+1) + " AND " + Integer.toString(iPage*5));
+							sql.sqlExecute("SELECT", "SELECT * FROM (SELECT ROWNUM NUM,L.* FROM (" + strSearchSQL + ")L) WHERE NUM BETWEEN " + Integer.toString(((iPage-1)*5)+1) + " AND " + Integer.toString(iPage*5), null);
+							while (sql.rs != null && sql.rs.next())
+							{
+								try {
+									String articleNo = sql.rs.getString(2);
+									String title = sql.rs.getString(3);
+									String writer = sql.rs.getString(7);
+									String postDate = sql.rs.getString(5);
+								%>
+						<div class="post-preview">
+							<a href="./readArticle.jsp?articleNo=<%=articleNo%>">
+								<h2 class="post-title">
+									<%=title%>
+								</h2>
+								<h3 class="post-subtitle"></h3>
+							</a>
+							<p class="post-meta">
+								작성자
+								<%=postDate%></p>
+						</div>
+						<%
+								}
+								catch (Exception e)
+								{
+									System.out.println(e.toString());
+								}
+							}
+							break;
+						default:
+								strSearchSQL = "SELECT * FROM ARTICLE ORDER BY POSTDATE DESC";
+								sql.sqlExecute("SELECT", "SELECT COUNT(*) AS CNT FROM ARTICLE", null);
+								if (sql.rs != null && sql.rs.next()) iArticleCount = sql.rs.getInt("CNT");
+								System.out.println("SELECT * FROM (SELECT ROWNUM NUM,L.* FROM (" + strSearchSQL + ")L) WHERE NUM BETWEEN " + Integer.toString(((iPage-1)*5)+1) + " AND " + Integer.toString(iPage*5));
+								sql.sqlExecute("SELECT", "SELECT * FROM (SELECT ROWNUM NUM,L.* FROM (" + strSearchSQL + ")L) WHERE NUM BETWEEN " + Integer.toString(((iPage-1)*5)+1) + " AND " + Integer.toString(iPage*5), null);
+								while (sql.rs != null && sql.rs.next())
+								{
+									try {
+										String articleNo = sql.rs.getString(2);
+										String title = sql.rs.getString(3);
+										String writer = sql.rs.getString(7);
+										String postDate = sql.rs.getString(5);
+									%>
+							<div class="post-preview">
+								<a href="./readArticle.jsp?articleNo=<%=articleNo%>">
+									<h2 class="post-title">
+										<%=title%>
+									</h2>
+									<h3 class="post-subtitle"></h3>
+								</a>
+								<p class="post-meta">
+									작성자
+									<%=postDate%></p>
+							</div>
+							<%
+									}
+									catch (Exception e)
+									{
+										System.out.println(e.toString());
+									}
+								}
+								break;
 						}
 						%>
 						<!-- Pager -->
