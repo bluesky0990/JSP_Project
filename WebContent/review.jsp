@@ -74,20 +74,52 @@
 		</div>
 	</section>
 	<section>
-		<div id="cover">
-			<form method="get" action="">
-				<div class="tb">
-					<div class="td">
-						<input type="text" placeholder="Search" required>
-					</div>
-					<div class="td" id="s-cover">
-						<button type="submit">
-							<div id="s-circle"></div>
-							<span></span>
-						</button>
+		<div class="container">
+			<div class="d-flex justify-content-around mb-3">
+				<div class=" p-2 btn-group px-5 py-5">
+					<button type="button" class="btn sencondary">선택</button>
+					
+					<button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown"></button>
+					<div class="dropdown-menu">
+						<p onclick="$('#search_mode').val('lane');" class="dropdown-item">노선</p>
+						<p onclick="$('#search_mode').val('station');" class="dropdown-item">역</p>
+						<p onclick="$('#search_mode').val('title');" class="dropdown-item">제목</p>
 					</div>
 				</div>
-			</form>
+				<div id="cover" class="p-2">
+					<div class="container">
+			<div class="d-flex justify-content-around mb-3">
+				<div class=" p-2 btn-group px-5 py-5">
+					<button type="button" class="btn primary">선택</button>
+					
+					<button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown"></button>
+					<div class="dropdown-menu">
+						<p onclick="$('#search_mode').val('lane');" class="dropdown-item">노선</p>
+						<p onclick="$('#search_mode').val('station');" class="dropdown-item">역</p>
+						<p onclick="$('#search_mode').val('title');" class="dropdown-item">제목</p>
+							</div>
+						</div>
+<div id="cover" class="p-2">
+					<form method="get" action="">
+						<div class="tb">
+						<input class="span2" id="search_mode" name="search_mode" type="hidden">
+							<div class="td">
+								<input type="text" id="search" value="search" placeholder="Search" required>
+							</div>
+							<div class="td" id="s-cover">
+								<button type="submit">
+									<div id="s-circle"></div>
+									<span></span>
+								</button>
+							</div>
+						</div>
+					</form>
+				</div>
+				<div class="p-2"></div>
+			</div>
+				</div>
+				<div class="p-2"></div>
+			</div>
 		</div>
 		<hr>
 		<div>
@@ -235,9 +267,7 @@
 									}
 								}
 								break;
-								
 						}
-						sql.closeSQL();
 						%>
 						<!-- Pager -->
 						
