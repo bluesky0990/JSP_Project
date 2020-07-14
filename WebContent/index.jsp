@@ -252,7 +252,7 @@
 								</p>
 								<!-- <p class="mb-0"><span class="price mr-1">$120.00</span> <span class="per">per night</span></p> -->
 								<h3 class="mb-3">
-									<a href="rooms.html">초 밥</a>
+									<a href="./deliciousRestaurant.jsp?search_mode=title&search=초밥">초 밥</a>
 								</h3>
 								<ul class="list-accomodation">
 									<li><span>많은 사람들이 일본하면 떠오르는 음식!</span></li>
@@ -262,7 +262,7 @@
 	    							<li><span>Bed:</span> 1</li> -->
 								</ul>
 								<p class="pt-1">
-									<a href="room-single.html" class="btn-custom px-3 py-2">맛집 보러가기 <span class="icon-long-arrow-right"></span></a>
+									<a href="./deliciousRestaurant.jsp?search_mode=title&search=초밥" class="btn-custom px-3 py-2">맛집 보러가기 <span class="icon-long-arrow-right"></span></a>
 								</p>
 							</div>
 						</div>
@@ -278,14 +278,14 @@
 								</p>
 								<!-- <p class="mb-0"><span class="price mr-1">$120.00</span> <span class="per">per night</span></p> -->
 								<h3 class="mb-3">
-									<a href="rooms.html">라 멘</a>
+									<a href="./deliciousRestaurant.jsp?search_mode=title&search=라멘">라 멘</a>
 								</h3>
 								<ul class="list-accomodation">
 									<li><span>다양한 육수로 맛을 낸 일본 전통 음식!</span></li>
 									<li><span>라멘 적극 추천!</span></li>
 								</ul>
 								<p class="pt-1">
-									<a href="room-single.html" class="btn-custom px-3 py-2">맛집 보러가기 <span class="icon-long-arrow-right"></span></a>
+									<a href="./deliciousRestaurant.jsp?search_mode=title&search=라멘" class="btn-custom px-3 py-2">맛집 보러가기 <span class="icon-long-arrow-right"></span></a>
 								</p>
 							</div>
 						</div>
@@ -302,14 +302,14 @@
 								</p>
 								<!-- <p class="mb-0"><span class="price mr-1">$120.00</span> <span class="per">per night</span></p> -->
 								<h3 class="mb-3">
-									<a href="rooms.html">규카츠</a>
+									<a href="./deliciousRestaurant.jsp?search_mode=title&search=규카츠">규카츠</a>
 								</h3>
 								<ul class="list-accomodation">
 	    							<li><span>겉은 바삭! 속은 촉촉! 규카츠</span></li>
 	    							<li><span>화로에 구워드셔보세요!</span></li>
 								</ul>
 								<p class="pt-1">
-									<a href="room-single.html" class="btn-custom px-3 py-2">맛집 보러가기 <span class="icon-long-arrow-right"></span></a>
+									<a href="./deliciousRestaurant.jsp?search_mode=title&search=규카츠" class="btn-custom px-3 py-2">맛집 보러가기 <span class="icon-long-arrow-right"></span></a>
 								</p>
 							</div>
 						</div>
@@ -325,14 +325,14 @@
 								</p>
 								<!-- <p class="mb-0"><span class="price mr-1">$120.00</span> <span class="per">per night</span></p> -->
 								<h3 class="mb-3">
-									<a href="rooms.html">오코노미야키</a>
+									<a href="./deliciousRestaurant.jsp?search_mode=title&search=오코노미야키">오코노미야키</a>
 								</h3>
 								<ul class="list-accomodation">
 	    							<li><span>더운 날씨에 시원한 생맥과 어울리는 철판요리</span></li>
 	    							<li><span>오코노미야키 맛있을 것 같지 않나요?</span></li>
 								</ul>
 								<p class="pt-1">
-									<a href="room-single.html" class="btn-custom px-3 py-2">맛집 보러가기 <span class="icon-long-arrow-right"></span></a>
+									<a href="./deliciousRestaurant.jsp?search_mode=title&search=오코노미야키" class="btn-custom px-3 py-2">맛집 보러가기 <span class="icon-long-arrow-right"></span></a>
 								</p>
 							</div>
 						</div>
@@ -449,7 +449,7 @@
 			while (sql.rs != null && sql.rs.next())
 			{
 			%>
-				<div class="col-md-4 d-flex ftco-animate">
+				<div class="col-md-4 d-flex flex-column ftco-animate">
 					<div class="blog-entry align-self-stretch">
 						<a href="./readArticle.jsp?articleNo=<%=sql.rs.getString("NO")%>" class="block-20 rounded" style="background-image: url('<%= sql.rs.getString("PICTUREURL") %>');"> </a>
 						<div class="text p-4 text-center">

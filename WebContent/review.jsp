@@ -21,7 +21,6 @@
 <link rel="stylesheet" href="css/jquery.timepicker.css">
 <link rel="stylesheet" href="css/flaticon.css">
 <link rel="stylesheet" href="css/style.css">
-<link rel="stylesheet" href="css/searchbar.css">
 
 </head>
 <body>
@@ -74,7 +73,7 @@
 		</div>
 	</section>
 	<script>
-		$('#search_moode').val('title');
+		//$('#search_moode').val('title');
 
 		function selectTitle() {
 			$('#search_mode').val('title');
@@ -91,22 +90,51 @@
 			$("#btn_select").text("노선");
 		}
 	</script>
-	<section class="container">
+	<section class="ftco-loader">
 		<div class="row row-cols">
 			<div class="col"></div>
 			<div class="col-4 input-group mt-3 mb-3">
 				<div class="input-group-prepend">
-					<button type="button" id="btn_select" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">제목</button>
+					<button type="button" id="btn_select" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><%
+					String strSearch = request.getParameter("search");
+					String strSearchMode = request.getParameter("search_mode");
+					if (strSearch == null)
+						strSearch = "";
+					if (strSearchMode == null)
+						strSearchMode = "";
+					
+					switch (strSearchMode)
+					{
+					case "lane":
+							out.print("역");
+					break;
+					case "station":
+							out.print("노선");
+					break;
+					case "title":
+						out.print("제목");
+						break;
+					default:
+						out.print("검색할 방식을 선택해주세요.");
+						break;
+					}
+					
+					%></button>
 					<div class="dropdown-menu">
 						<p onclick="selectTitle()" class="dropdown-item">제목</p>
 						<p onclick="selectStation()" class="dropdown-item">역</p>
 						<p onclick="selectLane()" class="dropdown-item">노선</p>
 					</div>
 				</div>
-				<div class="input-group-append">
-					<input type="text" class="form-control" style="font-size: 1vw;" placeholder="Search">
-					<input type="button" class="btn btn-primary" value="Go!">
-				</div>
+				<form method="get" action="./review.jsp">
+					<div class="input-group-append">
+						<input type="hidden" id="search_mode" name="search_mode" value="<%= strSearchMode %>">
+						<input type="text" class="form-control" style="font-size: 1vw;" id="search" name="search" <%
+						if (strSearch != "") out.print("value=\"" + strSearch + "\"");
+						%> placeholder="Search">
+						<input type="submit" class="btn btn-primary" value="Go!">
+					</div>
+				</form>
 			</div>
 			<div class="col"></div>
 		</div>
@@ -129,12 +157,6 @@
 
 						int iPage = Integer.parseInt(strPage);
 
-						String strSearch = request.getParameter("search");
-						String strSearchMode = request.getParameter("search_mode");
-						if (strSearch == null)
-							strSearch = "";
-						if (strSearchMode == null)
-							strSearchMode = "";
 
 						String strSearchSQL = null;
 						final int iShowMax = 5;
@@ -224,6 +246,39 @@
 						}
 						}
 						break;
+						case "title":
+							strSearchSQL = "SELECT * FROM ARTICLE WHERE BOARDID=0 AND TITLE LIKE '%" + strSearch + "%' ORDER BY POSTDATE DESC";
+							sql.sqlExecute("SELECT", "SELECT COUNT(*) AS CNT FROM ARTICLE WHERE BOARDID=0 AND TITLE LIKE '%" + strSearch + "%'", null);
+							if (sql.rs != null && sql.rs.next())
+							iArticleCount = sql.rs.getInt("CNT");
+							System.out.println("SELECT * FROM (SELECT ROWNUM NUM,L.* FROM (" + strSearchSQL + ")L) WHERE NUM BETWEEN "
+									+ Integer.toString(((iPage - 1) * 5) + 1) + " AND " + Integer.toString(iPage * 5));
+							sql.sqlExecute("SELECT", "SELECT * FROM (SELECT ROWNUM NUM,L.* FROM (" + strSearchSQL + ")L) WHERE NUM BETWEEN "
+									+ Integer.toString(((iPage - 1) * 5) + 1) + " AND " + Integer.toString(iPage * 5), null);
+							while (sql.rs != null && sql.rs.next()) {
+							try {
+							String articleNo = sql.rs.getString(2);
+							String title = sql.rs.getString(3);
+							String writer = sql.rs.getString(7);
+							String postDate = sql.rs.getString(5);
+							%>
+							<div class="post-preview">
+								<a href="./readArticle.jsp?articleNo=<%=articleNo%>">
+									<h2 class="post-title">
+										<%=title%>
+									</h2>
+									<h3 class="post-subtitle"></h3>
+								</a>
+								<p class="post-meta">
+									작성자
+									<%=postDate%></p>
+							</div>
+							<%
+								} catch (Exception e) {
+							System.out.println(e.toString());
+							}
+							}
+							break;
 						default :
 						strSearchSQL = "SELECT * FROM ARTICLE WHERE BOARDID=0 ORDER BY POSTDATE DESC";
 						sql.sqlExecute("SELECT", "SELECT COUNT(*) AS CNT FROM ARTICLE WHERE BOARDID=0", null);
