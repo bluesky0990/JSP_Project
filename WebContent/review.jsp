@@ -74,51 +74,32 @@
 		</div>
 	</section>
 	<section>
-		<div class="container">
-			<div class="d-flex justify-content-around mb-3">
-				<div class=" p-2 btn-group px-5 py-5">
-					<button type="button" class="btn sencondary">선택</button>
-					
-					<button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown"></button>
+		<div class="form-group">
+			<div class="px-5 py-5">
+				<div class="dropdown btn-group position-relative" id="m_list">
+					<button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split form-control" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-boundary="m_list">선택</button>
 					<div class="dropdown-menu">
 						<p onclick="$('#search_mode').val('lane');" class="dropdown-item">노선</p>
 						<p onclick="$('#search_mode').val('station');" class="dropdown-item">역</p>
 						<p onclick="$('#search_mode').val('title');" class="dropdown-item">제목</p>
 					</div>
 				</div>
-				<div id="cover" class="p-2">
-					<div class="container">
-			<div class="d-flex justify-content-around mb-3">
-				<div class=" p-2 btn-group px-5 py-5">
-					<button type="button" class="btn primary">선택</button>
-					
-					<button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown"></button>
-					<div class="dropdown-menu">
-						<p onclick="$('#search_mode').val('lane');" class="dropdown-item">노선</p>
-						<p onclick="$('#search_mode').val('station');" class="dropdown-item">역</p>
-						<p onclick="$('#search_mode').val('title');" class="dropdown-item">제목</p>
-							</div>
-						</div>
-<div id="cover" class="p-2">
-					<form method="get" action="">
-						<div class="tb">
-						<input class="span2" id="search_mode" name="search_mode" type="hidden">
-							<div class="td">
-								<input type="text" id="search" value="search" placeholder="Search" required>
-							</div>
-							<div class="td" id="s-cover">
-								<button type="submit">
-									<div id="s-circle"></div>
-									<span></span>
-								</button>
-							</div>
-						</div>
-					</form>
-				</div>
-				<div class="p-2"></div>
 			</div>
-				</div>
-				<div class="p-2"></div>
+			<div id="cover">
+				<form method="get" action="">
+					<div class="tb">
+						<input class="span2" id="search_mode" name="search_mode" type="hidden">
+						<div class="td">
+							<input type="text" class="form-control" id="search" placeholder="Search" required>
+						</div>
+						<div class="td" id="s-cover">
+							<button type="submit">
+								<div id="s-circle"></div>
+								<span></span>
+							</button>
+						</div>
+					</div>
+				</form>
 			</div>
 		</div>
 		<hr>
@@ -131,48 +112,50 @@
 						</div> -->
 
 						<%
-						int iArticleCount = 0;
+							int iArticleCount = 0;
 						SQLHelper sql = new SQLHelper();
-						
+
 						String strPage = request.getParameter("page");
-						if (strPage == null) strPage = Integer.toString(1);
-						
+						if (strPage == null)
+							strPage = Integer.toString(1);
+
 						int iPage = Integer.parseInt(strPage);
-						
+
 						String strSearch = request.getParameter("search");
 						String strSearchMode = request.getParameter("search_mode");
-						if (strSearch == null) strSearch = "";
-						if (strSearchMode == null) strSearchMode = "";
-						
+						if (strSearch == null)
+							strSearch = "";
+						if (strSearchMode == null)
+							strSearchMode = "";
+
 						String strSearchSQL = null;
 						final int iShowMax = 5;
 						String StationArray = "";
-						switch(strSearchMode)
-						{
-						case "lane":
-							sql.sqlExecute("SELECT", "SELECT * FROM STATION WHERE LANE LIKE '%" + strSearch + "%'", null);
-							
-							if (sql.rs != null && sql.rs.next())
-							{
-								StationArray = sql.rs.getString("ID");
-							}
-							while (sql.rs != null && sql.rs.next())
-							{
-								StationArray = StationArray + ", " + sql.rs.getString("ID");
-							}
-							strSearchSQL = "SELECT * FROM ARTICLE WHERE STATIONID IN (" + StationArray + ") ORDER BY POSTDATE DESC";
-							sql.sqlExecute("SELECT", "SELECT COUNT(*) AS CNT FROM ARTICLE WHERE STATIONID IN (" + StationArray + ")", null);
-							if (sql.rs != null && sql.rs.next()) iArticleCount = sql.rs.getInt("CNT");
-							System.out.println("SELECT * FROM (SELECT ROWNUM NUM,L.* FROM (" + strSearchSQL + ")L) WHERE NUM BETWEEN " + Integer.toString(((iPage-1)*5)+1) + " AND " + Integer.toString(iPage*5));
-							sql.sqlExecute("SELECT", "SELECT * FROM (SELECT ROWNUM NUM,L.* FROM (" + strSearchSQL + ")L) WHERE NUM BETWEEN " + Integer.toString(((iPage-1)*5)+1) + " AND " + Integer.toString(iPage*5), null);
-							while (sql.rs != null && sql.rs.next())
-							{
-								try {
-									String articleNo = sql.rs.getString(2);
-									String title = sql.rs.getString(3);
-									String writer = sql.rs.getString(7);
-									String postDate = sql.rs.getString(5);
-								%>
+						switch (strSearchMode) {
+							case "lane" :
+								sql.sqlExecute("SELECT", "SELECT * FROM STATION WHERE LANE LIKE '%" + strSearch + "%'", null);
+
+								if (sql.rs != null && sql.rs.next()) {
+							StationArray = sql.rs.getString("ID");
+								}
+								while (sql.rs != null && sql.rs.next()) {
+							StationArray = StationArray + ", " + sql.rs.getString("ID");
+								}
+								strSearchSQL = "SELECT * FROM ARTICLE WHERE STATIONID IN (" + StationArray + ") ORDER BY POSTDATE DESC";
+								sql.sqlExecute("SELECT", "SELECT COUNT(*) AS CNT FROM ARTICLE WHERE STATIONID IN (" + StationArray + ")", null);
+								if (sql.rs != null && sql.rs.next())
+							iArticleCount = sql.rs.getInt("CNT");
+								System.out.println("SELECT * FROM (SELECT ROWNUM NUM,L.* FROM (" + strSearchSQL + ")L) WHERE NUM BETWEEN "
+								+ Integer.toString(((iPage - 1) * 5) + 1) + " AND " + Integer.toString(iPage * 5));
+								sql.sqlExecute("SELECT", "SELECT * FROM (SELECT ROWNUM NUM,L.* FROM (" + strSearchSQL + ")L) WHERE NUM BETWEEN "
+								+ Integer.toString(((iPage - 1) * 5) + 1) + " AND " + Integer.toString(iPage * 5), null);
+								while (sql.rs != null && sql.rs.next()) {
+							try {
+								String articleNo = sql.rs.getString(2);
+								String title = sql.rs.getString(3);
+								String writer = sql.rs.getString(7);
+								String postDate = sql.rs.getString(5);
+						%>
 						<div class="post-preview">
 							<a href="./readArticle.jsp?articleNo=<%=articleNo%>">
 								<h2 class="post-title">
@@ -185,92 +168,89 @@
 								<%=postDate%></p>
 						</div>
 						<%
-								}
-								catch (Exception e)
-								{
-									System.out.println(e.toString());
-								}
-							}
-							break;
-						case "station":
-							sql.sqlExecute("SELECT", "SELECT * FROM STATION WHERE STATION LIKE '%" + strSearch + "%'", null);
-							if (sql.rs != null && sql.rs.next())
-							{
-								StationArray = sql.rs.getString("ID");
-							}
-							while (sql.rs != null && sql.rs.next())
-							{
-								StationArray = StationArray + ", " + sql.rs.getString("ID");
-							}
-							strSearchSQL = "SELECT * FROM ARTICLE WHERE STATIONID IN (" + StationArray + ") ORDER BY POSTDATE DESC";
-							sql.sqlExecute("SELECT", "SELECT COUNT(*) AS CNT FROM ARTICLE WHERE STATIONID IN (" + StationArray + ")", null);
-							if (sql.rs != null && sql.rs.next()) iArticleCount = sql.rs.getInt("CNT");
-							System.out.println("SELECT * FROM (SELECT ROWNUM NUM,L.* FROM (" + strSearchSQL + ")L) WHERE NUM BETWEEN " + Integer.toString(((iPage-1)*5)+1) + " AND " + Integer.toString(iPage*5));
-							sql.sqlExecute("SELECT", "SELECT * FROM (SELECT ROWNUM NUM,L.* FROM (" + strSearchSQL + ")L) WHERE NUM BETWEEN " + Integer.toString(((iPage-1)*5)+1) + " AND " + Integer.toString(iPage*5), null);
-							while (sql.rs != null && sql.rs.next())
-							{
-								try {
-									String articleNo = sql.rs.getString(2);
-									String title = sql.rs.getString(3);
-									String writer = sql.rs.getString(7);
-									String postDate = sql.rs.getString(5);
-								%>
-						<div class="post-preview">
-							<a href="./readArticle.jsp?articleNo=<%=articleNo%>">
-								<h2 class="post-title">
-									<%=title%>
-								</h2>
-								<h3 class="post-subtitle"></h3>
-							</a>
-							<p class="post-meta">
-								작성자
-								<%=postDate%></p>
-						</div>
-						<%
-								}
-								catch (Exception e)
-								{
-									System.out.println(e.toString());
-								}
-							}
-							break;
-						default:
-								strSearchSQL = "SELECT * FROM ARTICLE ORDER BY POSTDATE DESC";
-								sql.sqlExecute("SELECT", "SELECT COUNT(*) AS CNT FROM ARTICLE", null);
-								if (sql.rs != null && sql.rs.next()) iArticleCount = sql.rs.getInt("CNT");
-								System.out.println("SELECT * FROM (SELECT ROWNUM NUM,L.* FROM (" + strSearchSQL + ")L) WHERE NUM BETWEEN " + Integer.toString(((iPage-1)*5)+1) + " AND " + Integer.toString(iPage*5));
-								sql.sqlExecute("SELECT", "SELECT * FROM (SELECT ROWNUM NUM,L.* FROM (" + strSearchSQL + ")L) WHERE NUM BETWEEN " + Integer.toString(((iPage-1)*5)+1) + " AND " + Integer.toString(iPage*5), null);
-								while (sql.rs != null && sql.rs.next())
-								{
-									try {
-										String articleNo = sql.rs.getString(2);
-										String title = sql.rs.getString(3);
-										String writer = sql.rs.getString(7);
-										String postDate = sql.rs.getString(5);
-									%>
-						<div class="post-preview">
-							<a href="./readArticle.jsp?articleNo=<%=articleNo%>">
-								<h2 class="post-title">
-									<%=title%>
-								</h2>
-								<h3 class="post-subtitle"></h3>
-							</a>
-							<p class="post-meta">
-								작성자
-								<%=postDate%></p>
-						</div>
-						<%
-									}
-									catch (Exception e)
-									{
-										System.out.println(e.toString());
-									}
-								}
-								break;
+							} catch (Exception e) {
+						System.out.println(e.toString());
 						}
+						}
+						break;
+						case "station" :
+						sql.sqlExecute("SELECT", "SELECT * FROM STATION WHERE STATION LIKE '%" + strSearch + "%'", null);
+						if (sql.rs != null && sql.rs.next()) {
+						StationArray = sql.rs.getString("ID");
+						}
+						while (sql.rs != null && sql.rs.next()) {
+						StationArray = StationArray + ", " + sql.rs.getString("ID");
+						}
+						strSearchSQL = "SELECT * FROM ARTICLE WHERE STATIONID IN (" + StationArray + ") ORDER BY POSTDATE DESC";
+						sql.sqlExecute("SELECT", "SELECT COUNT(*) AS CNT FROM ARTICLE WHERE STATIONID IN (" + StationArray + ")", null);
+						if (sql.rs != null && sql.rs.next())
+						iArticleCount = sql.rs.getInt("CNT");
+						System.out.println("SELECT * FROM (SELECT ROWNUM NUM,L.* FROM (" + strSearchSQL + ")L) WHERE NUM BETWEEN "
+								+ Integer.toString(((iPage - 1) * 5) + 1) + " AND " + Integer.toString(iPage * 5));
+						sql.sqlExecute("SELECT", "SELECT * FROM (SELECT ROWNUM NUM,L.* FROM (" + strSearchSQL + ")L) WHERE NUM BETWEEN "
+								+ Integer.toString(((iPage - 1) * 5) + 1) + " AND " + Integer.toString(iPage * 5), null);
+						while (sql.rs != null && sql.rs.next()) {
+						try {
+						String articleNo = sql.rs.getString(2);
+						String title = sql.rs.getString(3);
+						String writer = sql.rs.getString(7);
+						String postDate = sql.rs.getString(5);
+						%>
+						<div class="post-preview">
+							<a href="./readArticle.jsp?articleNo=<%=articleNo%>">
+								<h2 class="post-title">
+									<%=title%>
+								</h2>
+								<h3 class="post-subtitle"></h3>
+							</a>
+							<p class="post-meta">
+								작성자
+								<%=postDate%></p>
+						</div>
+						<%
+							} catch (Exception e) {
+						System.out.println(e.toString());
+						}
+						}
+						break;
+						default :
+						strSearchSQL = "SELECT * FROM ARTICLE ORDER BY POSTDATE DESC";
+						sql.sqlExecute("SELECT", "SELECT COUNT(*) AS CNT FROM ARTICLE", null);
+						if (sql.rs != null && sql.rs.next())
+						iArticleCount = sql.rs.getInt("CNT");
+						System.out.println("SELECT * FROM (SELECT ROWNUM NUM,L.* FROM (" + strSearchSQL + ")L) WHERE NUM BETWEEN "
+								+ Integer.toString(((iPage - 1) * 5) + 1) + " AND " + Integer.toString(iPage * 5));
+						sql.sqlExecute("SELECT", "SELECT * FROM (SELECT ROWNUM NUM,L.* FROM (" + strSearchSQL + ")L) WHERE NUM BETWEEN "
+								+ Integer.toString(((iPage - 1) * 5) + 1) + " AND " + Integer.toString(iPage * 5), null);
+						while (sql.rs != null && sql.rs.next()) {
+						try {
+						String articleNo = sql.rs.getString(2);
+						String title = sql.rs.getString(3);
+						String writer = sql.rs.getString(7);
+						String postDate = sql.rs.getString(5);
+						%>
+						<div class="post-preview">
+							<a href="./readArticle.jsp?articleNo=<%=articleNo%>">
+								<h2 class="post-title">
+									<%=title%>
+								</h2>
+								<h3 class="post-subtitle"></h3>
+							</a>
+							<p class="post-meta">
+								작성자
+								<%=postDate%></p>
+						</div>
+						<%
+							} catch (Exception e) {
+						System.out.println(e.toString());
+						}
+						}
+						break;
+						}
+						sql.closeSQL();
 						%>
 						<!-- Pager -->
-						
+
 					</div>
 				</div>
 			</div>
@@ -285,13 +265,13 @@
 							<ul>
 								<%
 									int iPageCount = (int) Math.ceil((double) iArticleCount / (double) iShowMax);
-									for (int k = 0; k < iPageCount; k++) {
+								for (int k = 0; k < iPageCount; k++) {
 									if (iPage == k + 1)
 										out.println("<li class=\"active\"><span>" + Integer.toString(k + 1) + "</span></li>");
 									else
 										out.println("<li><a href=\"javascript:updateParameterAndRefresh('page','" + Integer.toString(k + 1) + "');\">"
 										+ Integer.toString(k + 1) + "</a></li>");
-									}
+								}
 								%>
 							</ul>
 						</div>
@@ -302,7 +282,6 @@
 				<br> <input type="submit" id="white" value="글쓰기" onclick="window.location.href='./writeArticle.jsp?board=review'" class="btn btn-primary py-3 px-4"><br>
 			</div>
 		</div>
-
 	</section>
 
 	<footer class="footer">
@@ -386,12 +365,12 @@
 	<script src="js/google-map.js"></script>
 	<script src="js/main.js"></script>
 	<script>
-	//참조 : https://stackoverflow.com/questions/5999118/how-can-i-add-or-update-a-query-string-parameter
-	function updateParameterAndRefresh(key, value) {
-		var currentUrl = location.href;
-		var url = new URL(currentUrl);
-		url.searchParams.set(key, value); // setting your param
-		location.href = url.href; 
+		//참조 : https://stackoverflow.com/questions/5999118/how-can-i-add-or-update-a-query-string-parameter
+		function updateParameterAndRefresh(key, value) {
+			var currentUrl = location.href;
+			var url = new URL(currentUrl);
+			url.searchParams.set(key, value); // setting your param
+			location.href = url.href;
 		}
 	</script>
 </body>
