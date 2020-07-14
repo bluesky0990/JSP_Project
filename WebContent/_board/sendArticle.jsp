@@ -37,7 +37,7 @@ try
 	}
 	Enumeration files = multi.getFileNames();
 
-	if (files.hasMoreElements())
+	if (files != null && files.hasMoreElements())
 	{
 		String uploadedFileName = (String)files.nextElement();
 		File uploadedFile = multi.getFile(uploadedFileName);
