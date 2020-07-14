@@ -13,8 +13,8 @@ String saveFolder = "filestorage"; //파일저장 폴더명을 설정한 뒤에.
 String encType = "utf-8"; //인코딩방식도 함께 설정한 뒤,
 ServletContext context = getServletContext();
 realFolder = context.getRealPath(saveFolder);
-try
-{
+//try
+//{
 	MultipartRequest multi = new MultipartRequest(request, realFolder, 1024 * 1024 * 1024, encType,
 	new DefaultFileRenamePolicy());
 	String userId = session.getAttribute("userId").toString();
@@ -37,6 +37,8 @@ try
 	}
 	Enumeration files = multi.getFileNames();
 
+	try
+	{
 	if (files != null && files.hasMoreElements())
 	{
 		String uploadedFileName = (String)files.nextElement();
@@ -49,14 +51,14 @@ try
 		SQL.sqlExecute("UPDATE", "UPDATE ARTICLE SET PICTUREURL='filestorage/?' WHERE NO='?'", 
 				new String[] {articleNo+fileExtension, articleNo});
 	}
-	
+	} catch (Exception e)
+	{
+	e.printStackTrace();
+		//out.print(e);
+	}
 	SQL.closeSQL();
 	response.sendRedirect("../readArticle.jsp?articleNo=" + articleNo);
-} catch (Exception e)
-{
-	e.printStackTrace();
-	out.print(e);
-}
+//
 %>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
