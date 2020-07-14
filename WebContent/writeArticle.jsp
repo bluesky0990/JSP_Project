@@ -28,6 +28,8 @@
 	out.print("<script>alert('로그인을 해주세요. 게시글 작성이 불가능합니다.');");
 	out.print("window.location.href = \"./index.jsp\"</script>");
 }
+boolean isAdmin = Integer.parseInt(session.getAttribute("isAdmin").toString()) == 1;
+
 %>
 </head>
 <body>
@@ -98,7 +100,11 @@
 									<%
 										try {
 										SQLHelper sql = new SQLHelper();
-										sql.sqlExecute("SELECT", "SELECT * FROM BOARD", new String[]{});
+										
+										if (isAdmin)
+											sql.sqlExecute("SELECT", "SELECT * FROM BOARD", new String[]{});
+										else
+											sql.sqlExecute("SELECT", "SELECT * FROM BOARD WHERE ISADMIN=0", new String[]{});
 										if (sql.rs.next())
 											out.print("<option selected value=\"" + sql.rs.getInt("ID") + "\">" + sql.rs.getString("NAME") + "</option>");
 										while (sql.rs.next()) {

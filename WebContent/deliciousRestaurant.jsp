@@ -98,7 +98,7 @@
 	<div class="container">
 		<div class="col-md-12">
 			<div class="pagination justify-content-end py-5">
-				<input type="submit" id="doLogout" value="글쓰기"
+				<input type="submit" id="doLogout" value="글쓰기" onclick="window.location.href='./writeArticle.jsp?board=review'" 
 					class="btn btn-primary py-3 px-4">
 			</div>
 		</div>
@@ -137,8 +137,8 @@
 						if (sql.rs != null && sql.rs.next()) StationArray = sql.rs.getString("ID");
 						while (sql.rs != null && sql.rs.next()) StationArray = StationArray + ", " + sql.rs.getString("ID");
 						
-						strSearchSQL = "SELECT * FROM ARTICLE WHERE STATIONID IN (" + StationArray + ") ORDER BY POSTDATE DESC";
-						sql.sqlExecute("SELECT", "SELECT COUNT(*) AS CNT FROM ARTICLE WHERE STATIONID IN (" + StationArray + ")", null);
+						strSearchSQL = "SELECT * FROM ARTICLE WHERE BOARDID=1 AND STATIONID IN (" + StationArray + ") ORDER BY POSTDATE DESC";
+						sql.sqlExecute("SELECT", "SELECT COUNT(*) AS CNT FROM ARTICLE WHERE BOARDID=1 AND STATIONID IN (" + StationArray + ")", null);
 						if (sql.rs != null && sql.rs.next()) iArticleCount = sql.rs.getInt("CNT");
 						System.out.println("SELECT * FROM (SELECT ROWNUM NUM,L.* FROM (" + strSearchSQL + ")L) WHERE NUM BETWEEN " + Integer.toString(((iPage - 1) * iShowMax) + 1) + " AND " + Integer.toString(iPage * iShowMax));
 						sql.sqlExecute("SELECT", "SELECT * FROM (SELECT ROWNUM NUM,L.* FROM (" + strSearchSQL + ")L) WHERE NUM BETWEEN " + Integer.toString(((iPage - 1) * iShowMax) + 1) + " AND " + Integer.toString(iPage * iShowMax), null);
@@ -204,8 +204,8 @@
 				while (sql.rs != null && sql.rs.next()) {
 				StationArray = StationArray + ", " + sql.rs.getString("ID");
 				}
-				strSearchSQL = "SELECT * FROM ARTICLE WHERE STATIONID IN (" + StationArray + ") ORDER BY POSTDATE DESC";
-				sql.sqlExecute("SELECT", "SELECT COUNT(*) AS CNT FROM ARTICLE WHERE STATIONID IN (" + StationArray + ")", null);
+				strSearchSQL = "SELECT * FROM ARTICLE WHERE BOARDID=1 AND STATIONID IN (" + StationArray + ") ORDER BY POSTDATE DESC";
+				sql.sqlExecute("SELECT", "SELECT COUNT(*) AS CNT FROM ARTICLE WHERE BOARDID=1 AND STATIONID IN (" + StationArray + ")", null);
 				if (sql.rs != null && sql.rs.next())
 				iArticleCount = sql.rs.getInt("CNT");
 				System.out.println("SELECT * FROM (SELECT ROWNUM NUM,L.* FROM (" + strSearchSQL + ")L) WHERE NUM BETWEEN "
@@ -267,8 +267,8 @@
 				break;
 				default:
 				{
-				strSearchSQL = "SELECT * FROM ARTICLE ORDER BY POSTDATE DESC";
-				sql.sqlExecute("SELECT", "SELECT COUNT(*) AS CNT FROM ARTICLE", null);
+				strSearchSQL = "SELECT * FROM ARTICLE WHERE BOARDID=1 ORDER BY POSTDATE DESC";
+				sql.sqlExecute("SELECT", "SELECT COUNT(*) AS CNT FROM ARTICLE WHERE BOARDID=1", null);
 				if (sql.rs != null && sql.rs.next())
 				iArticleCount = sql.rs.getInt("CNT");
 				System.out.println("SELECT * FROM (SELECT ROWNUM NUM,L.* FROM (" + strSearchSQL + ")L) WHERE NUM BETWEEN "

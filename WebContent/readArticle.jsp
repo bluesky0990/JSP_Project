@@ -51,15 +51,14 @@
 							request.setCharacterEncoding("utf-8");
 							SQLHelper sql = new SQLHelper();
 							String articleNo = request.getParameter("articleNo");
-							boolean bIsReview;
+							int iBoardId = 0;
 							System.out.println("Error : " + sql.sError);
 							sql.sqlExecute("SELECT", "SELECT * FROM ARTICLE WHERE NO='" + articleNo + "'", new String[] {});
 							if (sql.rs != null && sql.rs.next())
 							{
 								int iHit = sql.rs.getInt("HITS");
-								sql.sqlExecute("UPDATE", "UPDATE ARTICLE SET HITS='?' WHERE NO='?'", 
-										new String[] {Integer.toString(++iHit), articleNo});
-								bIsReview = (sql.rs.getInt("BOARDID") == 1);
+								sql.sqlExecute("UPDATE", "UPDATE ARTICLE SET HITS='" + Integer.toString(++iHit) + "' WHERE NO='" + articleNo + "'", new String[] { });
+								iBoardId = sql.rs.getInt("BOARDID");
 							}
 							sql.closeSQL();
 						%>
@@ -72,8 +71,8 @@
 			<div class="collapse navbar-collapse" id="ftco-nav">
 				<ul class="navbar-nav ml-auto">
 					<li class="nav-item"><a href="index.jsp" class="nav-link">Home</a></li>
-					<li class="nav-item"><a href="deliciousRestaurant.jsp" class="nav-link">Delicious</a></li>
-					<li class="nav-item active"><a href="review.jsp" class="nav-link">Review</a></li>
+					<li class="nav-item<% if(iBoardId == 1) out.print(" active"); %>"><a href="deliciousRestaurant.jsp" class="nav-link">Delicious</a></li>
+					<li class="nav-item<% if(iBoardId == 0) out.print(" active"); %>"><a href="review.jsp" class="nav-link">Review</a></li>
 				</ul>
 			</div>
 		</div>
@@ -85,7 +84,7 @@
 		<div class="container">
 			<div class="row no-gutters slider-text align-items-center justify-content-center">
 				<div class="col-md-9 ftco-animate text-center">
-					<h1 class="mb-0 bread">리뷰 게시글 보기</h1>
+					<h1 class="mb-0 bread"><% if(iBoardId == 0) out.print("리뷰"); else if(iBoardId == 1) out.print("소개"); %> 게시글 보기</h1>
 				</div>
 			</div>
 		</div>

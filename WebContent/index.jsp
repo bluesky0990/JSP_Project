@@ -443,7 +443,7 @@
 			<div class="row d-flex">
 			<%
 			SQLHelper sql = new SQLHelper();
-			sql.sqlExecute("SELECT", "SELECT * FROM ( SELECT * FROM ARTICLE ORDER BY HITS DESC) WHERE ROWNUM<=3", new String[]{});
+			sql.sqlExecute("SELECT", "SELECT * FROM ( SELECT * FROM ARTICLE WHERE BOARDID=1 ORDER BY HITS DESC) WHERE ROWNUM<=3", new String[]{});
 			while (sql.rs != null && sql.rs.next())
 			{
 			%>

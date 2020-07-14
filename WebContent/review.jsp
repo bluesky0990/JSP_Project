@@ -141,8 +141,8 @@
 								while (sql.rs != null && sql.rs.next()) {
 							StationArray = StationArray + ", " + sql.rs.getString("ID");
 								}
-								strSearchSQL = "SELECT * FROM ARTICLE WHERE STATIONID IN (" + StationArray + ") ORDER BY POSTDATE DESC";
-								sql.sqlExecute("SELECT", "SELECT COUNT(*) AS CNT FROM ARTICLE WHERE STATIONID IN (" + StationArray + ")", null);
+								strSearchSQL = "SELECT * FROM ARTICLE WHERE BOARDID=0 AND STATIONID IN (" + StationArray + ") ORDER BY POSTDATE DESC";
+								sql.sqlExecute("SELECT", "SELECT COUNT(*) AS CNT FROM ARTICLE WHERE BOARDID=0 AND STATIONID IN (" + StationArray + ")", null);
 								if (sql.rs != null && sql.rs.next())
 							iArticleCount = sql.rs.getInt("CNT");
 								System.out.println("SELECT * FROM (SELECT ROWNUM NUM,L.* FROM (" + strSearchSQL + ")L) WHERE NUM BETWEEN "
@@ -181,8 +181,8 @@
 						while (sql.rs != null && sql.rs.next()) {
 						StationArray = StationArray + ", " + sql.rs.getString("ID");
 						}
-						strSearchSQL = "SELECT * FROM ARTICLE WHERE STATIONID IN (" + StationArray + ") ORDER BY POSTDATE DESC";
-						sql.sqlExecute("SELECT", "SELECT COUNT(*) AS CNT FROM ARTICLE WHERE STATIONID IN (" + StationArray + ")", null);
+						strSearchSQL = "SELECT * FROM ARTICLE WHERE BOARDID=0 AND STATIONID IN (" + StationArray + ") ORDER BY POSTDATE DESC";
+						sql.sqlExecute("SELECT", "SELECT COUNT(*) AS CNT FROM ARTICLE WHERE BOARDID=0 AND STATIONID IN (" + StationArray + ")", null);
 						if (sql.rs != null && sql.rs.next())
 						iArticleCount = sql.rs.getInt("CNT");
 						System.out.println("SELECT * FROM (SELECT ROWNUM NUM,L.* FROM (" + strSearchSQL + ")L) WHERE NUM BETWEEN "
@@ -214,8 +214,8 @@
 						}
 						break;
 						default :
-						strSearchSQL = "SELECT * FROM ARTICLE ORDER BY POSTDATE DESC";
-						sql.sqlExecute("SELECT", "SELECT COUNT(*) AS CNT FROM ARTICLE", null);
+						strSearchSQL = "SELECT * FROM ARTICLE WHERE BOARDID=0 ORDER BY POSTDATE DESC";
+						sql.sqlExecute("SELECT", "SELECT COUNT(*) AS CNT FROM ARTICLE WHERE BOARDID=0", null);
 						if (sql.rs != null && sql.rs.next())
 						iArticleCount = sql.rs.getInt("CNT");
 						System.out.println("SELECT * FROM (SELECT ROWNUM NUM,L.* FROM (" + strSearchSQL + ")L) WHERE NUM BETWEEN "
