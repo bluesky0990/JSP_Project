@@ -51,9 +51,10 @@ try
 	}
 	
 	SQL.closeSQL();
-	//response.sendRedirect("../readArticle.jsp?articleNo=" + articleNo);
+	response.sendRedirect("../readArticle.jsp?articleNo=" + articleNo);
 } catch (Exception e)
 {
+	e.printStackTrace();
 	out.print(e);
 }
 %>

@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@include file="./_board/getArticleList.jsp"%>
+<%@include file="./_query/SQLHelper.jsp"%>
 <%
 	request.setCharacterEncoding("utf-8");
 %>
@@ -52,8 +52,9 @@
 							SQLHelper sql = new SQLHelper();
 							String articleNo = request.getParameter("articleNo");
 							boolean bIsReview;
-							sql.sqlExecute("SELECT", "SELECT * FROM ARTICLE WHERE NO=" + articleNo, new String[] {});
-							if (sql.rs.next())
+							System.out.println("Error : " + sql.sError);
+							sql.sqlExecute("SELECT", "SELECT * FROM ARTICLE WHERE NO='" + articleNo + "'", new String[] {});
+							if (sql.rs != null && sql.rs.next())
 							{
 								int iHit = sql.rs.getInt("HITS");
 								sql.sqlExecute("UPDATE", "UPDATE ARTICLE SET HITS='?' WHERE NO='?'", 
@@ -98,7 +99,7 @@
 					<div class="col-lg-8 col-md-10 mx-auto">
 						<%
 							request.setCharacterEncoding("utf-8");
-
+							sql = new SQLHelper();
 							sql.sqlExecute("SELECT", "SELECT * FROM ARTICLE WHERE NO=" + articleNo, new String[] {});
 							if (sql.rs.next())
 							{
