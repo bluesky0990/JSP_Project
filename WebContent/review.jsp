@@ -73,34 +73,42 @@
 			</div>
 		</div>
 	</section>
-	<section>
-		<div class="form-group">
-			<div class="px-5 py-5">
-				<div class="dropdown btn-group position-relative" id="m_list">
-					<button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split form-control" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-boundary="m_list">선택</button>
+	<script>
+		$('#search_moode').val('title');
+
+		function selectTitle() {
+			$('#search_mode').val('title');
+			$('#btn_select').text('제목');
+		}
+
+		function selectStation() {
+			$('#search_mode').val('station');
+			$('#btn_select').text('역');
+		}
+		
+		function selectLane() {
+			$('#search_mode').val('lane');
+			$("#btn_select").text("노선");
+		}
+	</script>
+	<section class="container">
+		<div class="row row-cols">
+			<div class="col"></div>
+			<div class="col-4 input-group mt-3 mb-3">
+				<div class="input-group-prepend">
+					<button type="button" id="btn_select" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">제목</button>
 					<div class="dropdown-menu">
-						<p onclick="$('#search_mode').val('lane');" class="dropdown-item">노선</p>
-						<p onclick="$('#search_mode').val('station');" class="dropdown-item">역</p>
-						<p onclick="$('#search_mode').val('title');" class="dropdown-item">제목</p>
+						<p onclick="selectTitle()" class="dropdown-item">제목</p>
+						<p onclick="selectStation()" class="dropdown-item">역</p>
+						<p onclick="selectLane()" class="dropdown-item">노선</p>
 					</div>
 				</div>
+				<div class="input-group-append">
+					<input type="text" class="form-control" style="font-size: 1vw;" placeholder="Search">
+					<input type="button" class="btn btn-primary" value="Go!">
+				</div>
 			</div>
-			<div id="cover">
-				<form method="get" action="">
-					<div class="tb">
-						<input class="span2" id="search_mode" name="search_mode" type="hidden">
-						<div class="td">
-							<input type="text" class="form-control" id="search" placeholder="Search" required>
-						</div>
-						<div class="td" id="s-cover">
-							<button type="submit">
-								<div id="s-circle"></div>
-								<span></span>
-							</button>
-						</div>
-					</div>
-				</form>
-			</div>
+			<div class="col"></div>
 		</div>
 		<hr>
 		<div>
@@ -141,8 +149,10 @@
 								while (sql.rs != null && sql.rs.next()) {
 							StationArray = StationArray + ", " + sql.rs.getString("ID");
 								}
-								strSearchSQL = "SELECT * FROM ARTICLE WHERE BOARDID=0 AND STATIONID IN (" + StationArray + ") ORDER BY POSTDATE DESC";
-								sql.sqlExecute("SELECT", "SELECT COUNT(*) AS CNT FROM ARTICLE WHERE BOARDID=0 AND STATIONID IN (" + StationArray + ")", null);
+								strSearchSQL = "SELECT * FROM ARTICLE WHERE BOARDID=0 AND STATIONID IN (" + StationArray
+								+ ") ORDER BY POSTDATE DESC";
+								sql.sqlExecute("SELECT",
+								"SELECT COUNT(*) AS CNT FROM ARTICLE WHERE BOARDID=0 AND STATIONID IN (" + StationArray + ")", null);
 								if (sql.rs != null && sql.rs.next())
 							iArticleCount = sql.rs.getInt("CNT");
 								System.out.println("SELECT * FROM (SELECT ROWNUM NUM,L.* FROM (" + strSearchSQL + ")L) WHERE NUM BETWEEN "
@@ -182,7 +192,8 @@
 						StationArray = StationArray + ", " + sql.rs.getString("ID");
 						}
 						strSearchSQL = "SELECT * FROM ARTICLE WHERE BOARDID=0 AND STATIONID IN (" + StationArray + ") ORDER BY POSTDATE DESC";
-						sql.sqlExecute("SELECT", "SELECT COUNT(*) AS CNT FROM ARTICLE WHERE BOARDID=0 AND STATIONID IN (" + StationArray + ")", null);
+						sql.sqlExecute("SELECT", "SELECT COUNT(*) AS CNT FROM ARTICLE WHERE BOARDID=0 AND STATIONID IN (" + StationArray + ")",
+								null);
 						if (sql.rs != null && sql.rs.next())
 						iArticleCount = sql.rs.getInt("CNT");
 						System.out.println("SELECT * FROM (SELECT ROWNUM NUM,L.* FROM (" + strSearchSQL + ")L) WHERE NUM BETWEEN "
