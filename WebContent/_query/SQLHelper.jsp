@@ -126,10 +126,12 @@ public static class SQLHelper {
 	
 	public void stGetParam(String[] parameter) {
 		try {
-			
+			if (parameter != null)
+			{
 			for(int i = 0; i < parameter.length; i++) {
 				pStmt.setString(i+1, parameter[i]);
-			}			
+			}
+			}
 			pStmt.executeUpdate();
 		} catch (Exception e) {
 			sError = e.toString();
