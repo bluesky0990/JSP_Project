@@ -48,8 +48,7 @@ realFolder = context.getRealPath(saveFolder);
 		File fChangedFile = new File(realFolder+"\\"+articleNo+fileExtension);
 		out.print(realFolder+"\\"+articleNo+fileExtension);
 		uploadedFile.renameTo(fChangedFile);
-		SQL.sqlExecute("UPDATE", "UPDATE ARTICLE SET PICTUREURL='filestorage/?' WHERE NO='?'", 
-				new String[] {articleNo+fileExtension, articleNo});
+		SQL.sqlExecute("UPDATE", "UPDATE ARTICLE SET PICTUREURL='filestorage/" + articleNo+fileExtension + "' WHERE NO='" + articleNo + "'", null);
 	}
 	} catch (Exception e)
 	{
