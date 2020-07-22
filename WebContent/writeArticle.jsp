@@ -33,6 +33,7 @@ boolean isAdmin = Integer.parseInt(session.getAttribute("isAdmin").toString()) =
 %>
 </head>
 <body>
+	<!-- 상단바 영역 -->
 	<div class="wrap">
 		<div class="container">
 			<div class="row justify-content-between">
@@ -66,8 +67,12 @@ boolean isAdmin = Integer.parseInt(session.getAttribute("isAdmin").toString()) =
 			</div>
 		</div>
 	</nav>
-	<!-- END nav -->
+	<!-- 상단바 영역 -->
 
+
+
+
+	<!-- 이미지 표시 영역 -->
 	<section class="hero-wrap hero-wrap-2" style="background-image: url('images/review.jpg');" data-stellar-background-ratio="0.5">
 		<div class="overlay"></div>
 		<div class="container">
@@ -78,9 +83,11 @@ boolean isAdmin = Integer.parseInt(session.getAttribute("isAdmin").toString()) =
 			</div>
 		</div>
 	</section>
-
+	<!-- 이미지 표시 영역 -->
+	
+	
 	<section>
-		<br> <br>
+		<br><br>
 		<div>
 			<div class="container">
 				<div class="row">
@@ -99,20 +106,20 @@ boolean isAdmin = Integer.parseInt(session.getAttribute("isAdmin").toString()) =
 								<select class="custom-select" id="boardId" name="boardId">
 									<%
 										try {
-										SQLHelper sql = new SQLHelper();
-										
-										if (isAdmin)
-											sql.sqlExecute("SELECT", "SELECT * FROM BOARD", new String[]{});
-										else
-											sql.sqlExecute("SELECT", "SELECT * FROM BOARD WHERE ISADMIN=0", new String[]{});
-										if (sql.rs.next())
-											out.print("<option selected value=\"" + sql.rs.getInt("ID") + "\">" + sql.rs.getString("NAME") + "</option>");
-										while (sql.rs.next()) {
-											out.print("<option value=\"" + sql.rs.getInt("ID") + "\">" + sql.rs.getString("NAME") + "</option>");
+											SQLHelper sql = new SQLHelper();
+											
+											if (isAdmin)
+												sql.sqlExecute("SELECT", "SELECT * FROM BOARD", new String[]{});
+											else
+												sql.sqlExecute("SELECT", "SELECT * FROM BOARD WHERE ISADMIN=0", new String[]{});
+											if (sql.rs.next())
+												out.print("<option selected value=\"" + sql.rs.getInt("ID") + "\">" + sql.rs.getString("NAME") + "</option>");
+											while (sql.rs.next()) {
+												out.print("<option value=\"" + sql.rs.getInt("ID") + "\">" + sql.rs.getString("NAME") + "</option>");
 										}
 										sql.closeSQL();
-									} catch (Exception e) {
-									}
+										} catch (Exception e) {
+										}
 									%>
 								</select>
 							</div>
@@ -140,16 +147,16 @@ boolean isAdmin = Integer.parseInt(session.getAttribute("isAdmin").toString()) =
 							<textarea id="content" name="content"></textarea>
 							<button type="submit" class="btn btn-primary">작성</button>
 						</form>
-
-
 					</div>
 				</div>
 			</div>
-
 			<hr>
 		</div>
 	</section>
-
+	
+	
+	
+	<!-- 하단바 영역 -->
 	<footer class="footer">
 		<div class="container">
 			<div class="row">
@@ -203,6 +210,7 @@ boolean isAdmin = Integer.parseInt(session.getAttribute("isAdmin").toString()) =
 			</div>
 		</div>
 	</footer>
+	<!-- 하단바 영역 -->
 
 
 
@@ -233,14 +241,11 @@ boolean isAdmin = Integer.parseInt(session.getAttribute("isAdmin").toString()) =
 	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
 	
 	<script>
-	
-	
-	    $('#content').summernote(
+	    $('#content').summernote(	// SummerNote API에 대한 구성
 	    {
-		height: 600,
-		lang : 'ko-KR'
+			height: 600,
+			lang : 'ko-KR'
 	    });
-
     </script>
 
 </body>

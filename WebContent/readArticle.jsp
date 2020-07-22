@@ -29,6 +29,8 @@
 
 </head>
 <body>
+
+	<!-- 상단바 영역 -->
 	<div class="wrap">
 		<div class="container">
 			<div class="row justify-content-between">
@@ -48,20 +50,19 @@
 		</div>
 	</div>
 	<%
-							request.setCharacterEncoding("utf-8");
-							SQLHelper sql = new SQLHelper();
-							String articleNo = request.getParameter("articleNo");
-							int iBoardId = 0;
-							System.out.println("Error : " + sql.sError);
-							sql.sqlExecute("SELECT", "SELECT * FROM ARTICLE WHERE NO='" + articleNo + "'", new String[] {});
-							if (sql.rs != null && sql.rs.next())
-							{
-								int iHit = sql.rs.getInt("HITS");
-								sql.sqlExecute("UPDATE", "UPDATE ARTICLE SET HITS='" + Integer.toString(++iHit) + "' WHERE NO='" + articleNo + "'", new String[] { });
-								iBoardId = sql.rs.getInt("BOARDID");
-							}
-							sql.closeSQL();
-						%>
+		request.setCharacterEncoding("utf-8");
+		SQLHelper sql = new SQLHelper();
+		String articleNo = request.getParameter("articleNo");
+		int iBoardId = 0;
+		sql.sqlExecute("SELECT", "SELECT * FROM ARTICLE WHERE NO='" + articleNo + "'", new String[] {});
+		if (sql.rs != null && sql.rs.next())
+		{
+			int iHit = sql.rs.getInt("HITS");
+			sql.sqlExecute("UPDATE", "UPDATE ARTICLE SET HITS='" + Integer.toString(++iHit) + "' WHERE NO='" + articleNo + "'", new String[] { });
+			iBoardId = sql.rs.getInt("BOARDID");
+		}
+		sql.closeSQL();
+	%>
 	<nav class="navbar sticky-top navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
 		<div class="container">
 			<a class="navbar-brand" href="index.jsp"><font size="7em"> Osaka </font><span> グルメ</span></a>
@@ -77,7 +78,9 @@
 			</div>
 		</div>
 	</nav>
-	<!-- END nav -->
+	<!-- 상단바 영역 -->
+	
+	
 
 	<section class="hero-wrap hero-wrap-2" style="background-image: url('images/review.jpg');" data-stellar-background-ratio="0.5">
 		<div class="overlay"></div>
@@ -104,10 +107,14 @@
 							{
 								int iHit = sql.rs.getInt("HITS");
 								%>
-								<h1><%=sql.rs.getString("TITLE") %></h1>	
-								<p style="text-align: right">작성자 : <%=sql.rs.getString("WRITER") %> &nbsp;&nbsp;&nbsp;&nbsp; <%=sql.rs.getString("POSTDATE") %></p>
-								<hr>
-								<%
+						<h1><%=sql.rs.getString("TITLE") %></h1>
+						<p style="text-align: right">
+							작성자 :
+							<%=sql.rs.getString("WRITER") %>
+							&nbsp;&nbsp;&nbsp;&nbsp;
+							<%=sql.rs.getString("POSTDATE") %></p>
+						<hr>
+						<%
 								out.print(sql.rs.getString("CONTENT"));
 							}
 							sql.closeSQL();
@@ -117,66 +124,65 @@
 				</div>
 			</div>
 
-		<div class="container">
-		    <div class="d-flex justify-content-center">
-    <!--  <form id="commentForm" name="commentForm" method="post">-->
-    <br><br>
-    <div class="form-group">
-    <div class="container">
-    	<div>
-    	<from>
-    	<%
+			<div class="container">
+				<div class="d-flex justify-content-center">
+					<!--  <form id="commentForm" name="commentForm" method="post">-->
+					<br>
+					<br>
+					<div class="form-group">
+						<div class="container">
+							<div>
+								<from> <%
     	SQLHelper sql2 = new SQLHelper();
     	
-    	sql2.sqlExecute("SELECT", "SELECT * FROM REPLY WHERE ARTICLENO='" + articleNo + "'", new String[]{});
+    	sql2.sqlExecute("SELECT", "SELECT * FROM REPLY WHERE ARTICLENO='" + articleNo + "' ORDER BY POSTDATE", new String[]{});
     	while(sql2.rs != null && sql2.rs.next())
     	{
     		%>
-    		<div class="form-group"><span><strong><%= sql2.rs.getString("WRITER") %></strong></span>
-		<p><%=sql2.rs.getString("CONTENT") %></p></div>
-		<hr>
-		<!--<p><%=sql2.rs.getString("POSTDATE") %></p>  날짜 -->
-    		<%
-    	}
-    	sql2.closeSQL();
-    	%>
-    	</from>
-    	</div>
-    	</div>
-		
-		
-        <div class="form-group">
-            <div>
-                <span><strong>Comments</strong></span>
-            </div>
-            <div>
-            	<form method="post" action="./_comment/sendComment.jsp">
-                <table> 
-                	                   
-                    <tr>
-                        <td>
-                        		<input type="hidden" id="articleNo" name="articleNo" value="<%=articleNo %>">
-                            	<textarea style="width: 800px; resize:none;" rows="2" cols="15" id="comment" name="comment" placeholder="댓글을 입력하세요"></textarea>     
-                            	<br>
-                            	<div>
-                                	<button type="submit" class="btn pull-right btn-success">등록</button>
-                            	</div>
-                            
-                       		 </td>
-		                    </tr>
-		                   
-		                </table>
-		                </form>
-		            </div>
-		        </div>
-		        </div>
-		   <!-- </form>-->
+								<div class="form-group">
+									<span><strong><%= sql2.rs.getString("WRITER") %></strong></span>
+									<p><%=sql2.rs.getString("CONTENT") %></p>
+								</div>
+								<hr>
+								<!--<p><%=sql2.rs.getString("POSTDATE") %></p>  날짜 --> <%
+ 	}
+     	sql2.closeSQL();
+ %> </from>
+							</div>
+						</div>
+
+
+						<div class="form-group">
+							<div>
+								<span><strong>Comments</strong></span>
+							</div>
+							<div>
+								<form method="post" action="./_comment/sendComment.jsp">
+									<table>
+										<tr>
+											<td><input type="hidden" id="articleNo" name="articleNo"
+												value="<%=articleNo%>"> <textarea
+													style="width: 800px; resize: none;" rows="2" cols="15"
+													id="comment" name="comment" placeholder="댓글을 입력하세요"></textarea>
+												<br>
+												<div>
+													<button type="submit" class="btn pull-right btn-success">등록</button>
+												</div></td>
+										</tr>
+									</table>
+								</form>
+							</div>
+						</div>
+					</div>
+					<!-- </form>-->
+				</div>
+			</div>
 		</div>
-		 </div>	
-		 </div> 
-		    	<br><br>
+		<br> <br>
 	</section>
 
+
+	<!-- 하단바 영역 -->
 	<footer class="footer">
 		<div class="container">
 			<div class="row">
@@ -215,13 +221,12 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-md-6 col-lg-8">
-
 						<p class="copyright mb-0">
 							<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 							Copyright &copy;
 							<script>
-				document.write(new Date().getFullYear());
-			    </script>
+								document.write(new Date().getFullYear());
+							</script>
 							All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib.com</a>
 							<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 						</p>
@@ -230,6 +235,7 @@
 			</div>
 		</div>
 	</footer>
+	<!-- 하단바 영역 -->
 
 
 
@@ -260,14 +266,11 @@
 	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
 	
 	<script>
-	
-	
 	    $('#content').summernote(
 	    {
-		height: 600,
-		lang : 'ko-KR'
+			height: 600,
+			lang : 'ko-KR'
 	    });
-	    
     </script>
 
 </body>

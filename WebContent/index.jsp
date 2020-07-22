@@ -24,6 +24,8 @@
 
 </head>
 <body>
+
+<!-- 로그인 실패에 대한 팝업 표시 영역 -->
 <div id="popupLoginFail" class="modal fade">
 	<div class="modal-dialog msgError-confirm">
 		<div class="modal-content">
@@ -44,6 +46,7 @@
 		</div>
 	</div>
 </div>
+<!-- 로그인 실패에 대한 팝업 표시 영역 -->
 <div id="popupError" class="modal fade">
 	<div class="modal-dialog msgError-confirm">
 		<div class="modal-content">
@@ -82,6 +85,8 @@
 		</div>
 	</div>
 </div>  
+
+	<!-- 상단바 영역 -->
 	<div class="wrap">
 		<div class="container">
 			<div class="row justify-content-between">
@@ -115,8 +120,10 @@
 			</div>
 		</div>
 	</nav>
-	<!-- END nav -->
+	<!-- 상단바 영역 -->
+	
 
+	<!-- 홈페이지 메인 이미지 부분 -->
 	<div class="hero-wrap js-fullheight" style="background-image: url('images/osaka.jpg');" data-stellar-background-ratio="0.5">
 		<div class="overlay"></div>
 		<div class="container">
@@ -131,16 +138,21 @@
 			</div>
 		</div>
 	</div>
+	<!-- 홈페이지 메인 이미지 부분 -->
 
+	<!-- 로그인폼 영역 -->
 	<section class="ftco-section ftco-book ftco-no-pt ftco-no-pb">
 		<div class="container">
 			<div class="row justify-content-end">
 				<div class="col-lg-4">
 					<form class="appointment-form">
+					
+					<!-- 세션의 값을 비교하여 로그인폼 내의 표시 항목 -->
 					<%
 					if (session.getAttribute("userId") != null)
 					{
 						%>
+							<!-- 값이 있을 시 표시 -->
 							<div class="col-md-12">
 								<div class="form-group">
 									<p>사용자 아이디 : <% out.print(session.getAttribute("userId").toString()); %></p>
@@ -152,6 +164,7 @@
 								</div>
 							</div>
 					<%}else{%>
+						<!-- 값이 없을 시 표시 -->
 						<h3 class="mb-3">로그인</h3>
 						<div class="row">
 							<div class="col-md-12">
@@ -176,12 +189,15 @@
 							</div>
 						</div>
 						<%} %>
+					<!-- 세션의 값을 비교하여 로그인폼 내의 표시 항목 -->
 					</form>
 				</div>
 			</div>
 		</div>
 	</section>
 
+
+	<!-- 일본의 핫플레이스 표시 영역 -->
 	<section class="ftco-section ftco-services">
 		<div class="container">
 			<div class="row">
@@ -233,7 +249,10 @@
 			</div>
 		</div>
 	</section>
+	<!-- 일본의 핫플레이스 표시 영역 -->
 
+
+	<!-- 메인페이지의 메뉴추천 영역 -->
 	<section class="ftco-section bg-light">
 		<div class="container-fluid px-md-0">
 			<div class="row no-gutters justify-content-center pb-5 mb-3">
@@ -341,6 +360,7 @@
 			</div>
 		</div>
 	</section>
+	<!-- 메인페이지의 메뉴추천 영역 -->
 
 
 	<!-- <section class="ftco-section testimony-section bg-light">
@@ -418,9 +438,10 @@
 			</div>
 		</div>
 	</section>
-
-
 -->
+
+
+	<!-- 인삿말 영역 -->
 	<section class="ftco-intro" style="background-image: url(images/neko.png);" data-stellar-background-ratio="0.5">
 		<div class="overlay"></div>
 		<div class="container">
@@ -432,7 +453,9 @@
 			</div>
 		</div>
 	</section>
+	<!-- 인삿말 영역 -->
 
+	<!-- 베스트게시글 영역 -->
 	<section class="ftco-section bg-light">
 		<div class="container">
 			<div class="row justify-content-center pb-5 mb-3">
@@ -444,9 +467,9 @@
 			<div class="row d-flex">
 			<%
 			SQLHelper sql = new SQLHelper();
-			SQLHelper replysql = new SQLHelper();
-			sql.sqlExecute("SELECT", "SELECT * FROM ( SELECT * FROM ARTICLE WHERE BOARDID=1 ORDER BY HITS DESC) WHERE ROWNUM<=3", new String[]{});
-			while (sql.rs != null && sql.rs.next())
+			SQLHelper replysql = new SQLHelper(); 
+			sql.sqlExecute("SELECT", "SELECT * FROM ( SELECT * FROM ARTICLE WHERE BOARDID=1 ORDER BY HITS DESC) WHERE ROWNUM<=3", new String[]{});	// 게시판 목록중 조회수가 높은 순서대로 3개의 항목 표시
+			while (sql.rs != null && sql.rs.next()) // ResultSet에 값이 있으며, ResultSet에서 다음 레코드에 더 표시할 항목이 있다면
 			{
 			%>
 				<div class="col-md-4 d-flex flex-column ftco-animate">
@@ -478,7 +501,10 @@
 			</div>
 		</div>
 	</section>
-
+	<!-- 베스트게시글 영역 -->
+	
+	
+	<!-- 하단바 영역 -->
 	<footer class="footer">
 		<div class="container">
 			<div class="row">
@@ -530,6 +556,7 @@
 			</div>
 		</div>
 	</footer>
+	<!-- 하단바 영역 -->
 
 
 
@@ -559,52 +586,52 @@
 	<script src="js/main.js"></script>
 
 <script>
-$(document).ready(function(){
-		
-	  $("#doLogin").click(function(){
-		  event.preventDefault();
-		  var postData = 'userId=' + $("#userId").val() +
-		  '&userPw=' + $("#userPw").val();
-		  $.ajax({
-			  type: "post",
-			  url: "./_member/doLogin.jsp", 
-		        data: postData,
-		        success: function(result){
-		        	if(result.includes("LoginFail") == true)
-		        		{
-		        			$("#LoginFailMessage p").html(result.split("@")[1]);
-		        			$("#popupLoginFail").modal();
-		        		}
-		        	else
-		        		{
-		        	    location.href = location.href;//$("#popupLoginSuccess").modal();
-		        		}
-		    	},
-		  		error: function(xhr, status, error)
-		  		{
-		  			$("#ErrorMessage p").html("알 수 없는 이유로 로그인에 실패하였습니다.");
-		  			$("#popupError").modal();
-		  		}
+	// 로그인 버튼을 클릭했을 시 실행 될 함수
+	$(document).ready(function(){
+		  $("#doLogin").click(function(){
+			  event.preventDefault();
+			  var postData = 'userId=' + $("#userId").val() +	// 세션으로 넘겨줄 값을 로그인폼에서 받아놓기
+			  '&userPw=' + $("#userPw").val();
+			  $.ajax({
+				  type: "post",	// POST 방식으로
+				  url: "./_member/doLogin.jsp", 	// 넘겨줄 페이지
+			        data: postData,	// 넘겨줄 값
+			        success: function(result){
+			        	if(result.includes("LoginFail") == true)
+			        		{
+			        			$("#LoginFailMessage p").html(result.split("@")[1]);
+			        			$("#popupLoginFail").modal();
+			        		}
+			        	else
+			        		{
+			        	    location.href = location.href;//$("#popupLoginSuccess").modal();
+			        		}
+			    	},
+			  		error: function(xhr, status, error)
+			  		{
+			  			$("#ErrorMessage p").html("알 수 없는 이유로 로그인에 실패하였습니다.");
+			  			$("#popupError").modal();
+			  		}
+			  });
+			  
 		  });
-		  
+	// 로그아웃 버튼을 클릭했을 시 실행 될 함수
+	$("#doLogout").click(function(){
+		event.preventDefault();
+			  $.ajax({
+				  type: "post",								// POST 방식으로
+				  url: "./_member/doLogout.jsp", 			// 넘겨줄 페이지
+			        success: function(result){
+			        	location.href = location.href;
+			       	},
+			  		error: function(xhr, status, error)
+			  		{
+			  			$("#ErrorMessage p").html("알 수 없는 이유로 로그아웃에 실패하였습니다.");
+			  			$("#popupError").modal();
+			  		}
+			  });
 	  });
-$("#doLogout").click(function(){
-	event.preventDefault();
-		  $.ajax({
-			  type: "post",
-			  url: "./_member/doLogout.jsp", 
-		        success: function(result){
-		        	location.href = location.href;
-		       	},
-		  		error: function(xhr, status, error)
-		  		{
-		  			$("#ErrorMessage p").html("알 수 없는 이유로 로그아웃에 실패하였습니다.");
-		  			$("#popupError").modal();
-		  		}
-		  });
-		  
-  });
-});
+	});
 </script>
 
 </body>
