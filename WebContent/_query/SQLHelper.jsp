@@ -6,15 +6,12 @@ javax.sql.rowset.CachedRowSet,
 data.ConnectionPool"
 %><%!
 public static class SQLHelper {
-	
-	
 	public SQLHelper()
 	{
 		try
 		{
 			if (cp == null) cp = new ConnectionPool();
 			con = cp.getConnection();
-			
 		} catch (Exception e) {
 			sError = "JDBC INIT ERROR\n" + e.toString();
 		}
@@ -30,6 +27,8 @@ public static class SQLHelper {
 	{
 		return rs;
 	}
+	
+	// SQL 실행 메소드
 	public void sqlExecute(String type, String sql, String[] parameter) {
 		try {
 			
@@ -53,6 +52,8 @@ public static class SQLHelper {
 		}
 	}
 
+	
+	// SQL을 사용하고 나서 공간을 다시 확보해주기 위한 작업
 	public void closeSQL() {
 		if (rs != null) {
             try {
@@ -83,7 +84,6 @@ public static class SQLHelper {
             }
         }
 	}
-
 	private void sqlSelect(String sql) {
 		try {
 			st = con.createStatement();

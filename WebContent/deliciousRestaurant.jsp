@@ -6,16 +6,10 @@
 <head>
 <title>Osaka グルメ :: 맛집소개</title>
 <meta charset="utf-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link
-	href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap"
-	rel="stylesheet">
-<link
-	href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,500,500i,600,600i,700,700i&display=swap"
-	rel="stylesheet">
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,500,500i,600,600i,700,700i&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="css/animate.css">
 <link rel="stylesheet" href="css/owl.carousel.min.css">
 <link rel="stylesheet" href="css/owl.theme.default.min.css">
@@ -26,13 +20,13 @@
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+	<!-- 상단바 영역 -->
 	<div class="wrap">
 		<div class="container">
 			<div class="row justify-content-between">
 				<div class="col d-flex align-items-center">
 					<p class="mb-0 phone">
-						<span class="mailus">Phone no:</span> <a href="#">+82
-							10-5597-3042</a> or <span class="mailus">email us:</span> <a href="#">leeyseok6@naver.com</a>
+						<span class="mailus">Phone no:</span> <a href="#">+82 10-5597-3042</a> or <span class="mailus">email us:</span> <a href="#">leeyseok6@naver.com</a>
 					</p>
 				</div>
 				<div class="col d-flex justify-content-end">
@@ -53,9 +47,7 @@
 			</div>
 		</div>
 	</div>
-	<nav
-		class="navbar sticky-top navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light"
-		id="ftco-navbar">
+	<nav class="navbar sticky-top navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
 		<div class="container">
 			<a class="navbar-brand" href="index.jsp"><font size="7em">
 					Osaka </font><span> グルメ</span></a>
@@ -74,30 +66,32 @@
 			</div>
 		</div>
 	</nav>
-	<!-- END nav -->
+	<!-- 상단바 영역 -->
 
+
+
+	<!-- 이미지 영역 -->
 	<section class="hero-wrap hero-wrap-2"
 		style="background-image: url('images/delRes2.png');"
 		data-stellar-background-ratio="0.5">
 		<div class="overlay"></div>
 		<div class="container">
-			<div
-				class="row no-gutters slider-text align-items-center justify-content-center">
+			<div class="row no-gutters slider-text align-items-center justify-content-center">
 				<div class="col-md-9 ftco-animate text-center">
 					<p class="breadcrumbs mb-2">
-						<span class="mr-2"><a href="index.jsp">Home <i
-								class="fa fa-chevron-right"></i></a></span> <span class="mr-2"><a
-							href="deliciousRestaurant.jsp">Delicious <i
-								class="fa fa-chevron-right"></i></a></span>
+						<span class="mr-2"><a href="index.jsp">Home <i class="fa fa-chevron-right"></i></a></span>
+						<span class="mr-2"><a href="deliciousRestaurant.jsp">Delicious <i class="fa fa-chevron-right"></i></a></span>
 					</p>
 					<h1 class="mb-0 bread">소개 게시판</h1>
 				</div>
 			</div>
 		</div>
 	</section>
+	<!-- 이미지 영역 -->
+	
+	
 	<script>
-		//$('#search_moode').val('title');
-		
+		// 콤보박스의 아이템을 클릭했을 시 실행될 함수들
 		function selectTitle()
 			{
 				$('#search_mode').val('title');
@@ -116,7 +110,9 @@
 				$("#btn_select").text("노선");
 			}
 	</script>
+	
 
+	<!-- 게시판 표시 영역 -->
 	<section class="ftco-section bg-light">
 		<div class="row row-cols">
 			<div class="col"></div>
@@ -125,7 +121,7 @@
 					<button type="button" id="btn_select"
 						class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
 						<%
-							String strSearch = request.getParameter("search");
+						String strSearch = request.getParameter("search");
 						String strSearchMode = request.getParameter("search_mode");
 						if (strSearch == null)
 							strSearch = "";
@@ -157,13 +153,10 @@
 				<form method="get" action="./deliciousRestaurant.jsp">
 					<div class="input-group-append">
 						<input type="hidden" id="search_mode" name="search_mode"
-							value="<%=strSearchMode%>"> <input type="text"
-							class="form-control" style="font-size: 1vw;" id="search"
-							name="search"
-							<%if (strSearch != "")
-	out.print("value=\"" + strSearch + "\"");%>
-							placeholder="Search"> <input type="submit"
-							class="btn btn-primary" value="Go!">
+							value="<%=strSearchMode%>"> <input type="text" class="form-control" style="font-size: 1vw;" id="search" name="search"
+							<%if (strSearch != "") out.print("value=\"" + strSearch + "\"");%>
+							placeholder="Search">
+							<input type="submit" class="btn btn-primary" value="Go!">
 					</div>
 				</form>
 			</div>
@@ -174,7 +167,7 @@
 			<div class="row d-flex">
 
 				<%
-					int iArticleCount = 0;
+				int iArticleCount = 0;							// 페이지 갯수
 				SQLHelper sql = new SQLHelper();
 				SQLHelper subsql = new SQLHelper();
 				final SQLHelper replysql = new SQLHelper();
@@ -185,24 +178,24 @@
 
 				int iPage = Integer.parseInt(strPage);
 
-				String strSearchSQL = null;
-				final int iShowMax = 6;
-				String StationArray = "";
+				String strSearchSQL = null;	// SQL 검색에 사용될 변수 선언
+				final int iShowMax = 6;		// 최대 페이지 갯수
+				String StationArray = "";	// 역을 받을 변수 선언
 				switch (strSearchMode) {
 					case "lane" : {
-						sql.sqlExecute("SELECT", "SELECT * FROM STATION WHERE LANE LIKE '%" + strSearch + "%'", null);
+						sql.sqlExecute("SELECT", "SELECT * FROM STATION WHERE LANE LIKE '%" + strSearch + "%'", null);	// 검색 키워드에 대한 데이터 요청
 
-						if (sql.rs != null && sql.rs.next())
-					StationArray = sql.rs.getString("ID");
+						if (sql.rs != null && sql.rs.next())								// ResultSet에 값이 있고, ResultSet의 다음항목이 있다면
+							StationArray = sql.rs.getString("ID");							// 그 항목의 ID 받기 
 						while (sql.rs != null && sql.rs.next())
-					StationArray = StationArray + ", " + sql.rs.getString("ID");
+							StationArray = StationArray + ", " + sql.rs.getString("ID");
 
 						strSearchSQL = "SELECT * FROM ARTICLE WHERE BOARDID=1 AND STATIONID IN (" + StationArray
 						+ ") ORDER BY POSTDATE DESC";
 						sql.sqlExecute("SELECT",
 						"SELECT COUNT(*) AS CNT FROM ARTICLE WHERE BOARDID=1 AND STATIONID IN (" + StationArray + ")", null);
 						if (sql.rs != null && sql.rs.next())
-					iArticleCount = sql.rs.getInt("CNT");
+							iArticleCount = sql.rs.getInt("CNT");
 						System.out.println("SELECT * FROM (SELECT ROWNUM NUM,L.* FROM (" + strSearchSQL + ")L) WHERE NUM BETWEEN "
 						+ Integer.toString(((iPage - 1) * iShowMax) + 1) + " AND " + Integer.toString(iPage * iShowMax));
 						sql.sqlExecute("SELECT",
@@ -491,6 +484,7 @@
 		</div>
 		</div>
 	</section>
+	<!-- 게시판 표시 영역 -->
 
 	<footer class="footer">
 		<div class="container">

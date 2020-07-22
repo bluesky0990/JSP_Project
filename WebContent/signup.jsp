@@ -23,6 +23,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
 <body>
+	<!-- 상단바 영역 -->
 	<div class="wrap">
 		<div class="container">
 			<div class="row justify-content-between">
@@ -47,12 +48,13 @@
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="fa fa-bars"></span> Menu
 			</button>
-			<!-- 내비게이션바 오른쪽 메뉴  -->
 		</div>
 	</nav>
-	<!-- END nav -->
+	<!-- 상단바 영역 -->
 
-<!--  -->	<section class="py-5">
+	
+	<!-- 회원가입폼 영역 -->
+	<section class="py-5">
 		<div class="container">
 			<div class="row justify-content-center">
 				<div class="py-5 col-lg-4">
@@ -97,7 +99,10 @@
 			</div>
 		</div>
 	</section>
-
+	<!-- 회원가입폼 영역 -->
+	
+	
+	<!-- 하단바 영역 -->
 	<footer class="footer">
 		<div class="container">
 			<div class="row">
@@ -149,6 +154,7 @@
 			</div>
 		</div>
 	</footer>
+	<!-- 하단바 영역 -->
 
 
 
@@ -178,37 +184,34 @@
 	<script src="js/main.js"></script>
 	
 	<script>
-$(document).ready(function(){
+		$(document).ready(function(){
+			  $("#duplicateCheck").click(function(){				// ID 중복체크 함수
+				  var postData = 'userId=' + $("#userId").val();
+				  event.preventDefault();
+				  $.ajax({url: "./_member/isDuplicated.jsp", 
+				        data: postData,
+				        success: function(result){
+				        	console.log(result);
+				        	$("#alertInfo").prepend(result);
+				    	}
+				  });
 		
-	  $("#duplicateCheck").click(function(){
-		  
-		  var postData = 'userId=' + $("#userId").val();
-		  event.preventDefault();
-		  $.ajax({url: "./_member/isDuplicated.jsp", 
-		        data: postData,
-		        success: function(result){
-		        	console.log(result);
-		        	$("#alertInfo").prepend(result);
-		    	}
-		  });
-
-	  });
-	  $("#signUp").click(function(){
-		  var postData = 'userId=' + $("#userId").val() +
-		  '&userPw=' + $("#userPw").val() +
-		  '&userNick=' + $("#userNick").val() +
-		  '&userEmail=' + $("#userEmail").val();
-		  
-		  event.preventDefault();
-		  $.ajax({url: "./_member/doRegister.jsp", 
-		        data: postData,
-		        success: function(result){
-		        	$("#alertInfo").prepend(result);		        	
-		    	}
-		  });
-		  
-	  });
-});
+			  });
+			  $("#signUp").click(function(){						// 회원가입 버튼 클릭 시 실행 될 함수
+				  var postData = 'userId=' + $("#userId").val() +
+				  '&userPw=' + $("#userPw").val() +
+				  '&userNick=' + $("#userNick").val() +
+				  '&userEmail=' + $("#userEmail").val();
+				  
+				  event.preventDefault();
+				  $.ajax({url: "./_member/doRegister.jsp", 
+				        data: postData,
+				        success: function(result){
+				        	$("#alertInfo").prepend(result);		        	
+				    	}
+				  });
+			  });
+		});
 </script>
 
 </body>
