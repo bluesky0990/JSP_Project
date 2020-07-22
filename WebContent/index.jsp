@@ -325,14 +325,14 @@
 								</p>
 								<!-- <p class="mb-0"><span class="price mr-1">$120.00</span> <span class="per">per night</span></p> -->
 								<h3 class="mb-3">
-									<a href="./deliciousRestaurant.jsp?search_mode=title&search=오코노미야키">오코노미야키</a>
+									<a href="./deliciousRestaurant.jsp?search_mode=title&search=오코노미야끼">오코노미야끼</a>
 								</h3>
 								<ul class="list-accomodation">
 	    							<li><span>더운 날씨에 시원한 생맥과 어울리는 철판요리</span></li>
-	    							<li><span>오코노미야키 맛있을 것 같지 않나요?</span></li>
+	    							<li><span>오코노미야끼 맛있을 것 같지 않나요?</span></li>
 								</ul>
 								<p class="pt-1">
-									<a href="./deliciousRestaurant.jsp?search_mode=title&search=오코노미야키" class="btn-custom px-3 py-2">맛집 보러가기 <span class="icon-long-arrow-right"></span></a>
+									<a href="./deliciousRestaurant.jsp?search_mode=title&search=오코노미야끼" class="btn-custom px-3 py-2">맛집 보러가기 <span class="icon-long-arrow-right"></span></a>
 								</p>
 							</div>
 						</div>
