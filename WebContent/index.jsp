@@ -252,17 +252,17 @@
 								</p>
 								<!-- <p class="mb-0"><span class="price mr-1">$120.00</span> <span class="per">per night</span></p> -->
 								<h3 class="mb-3">
-									<a href="./deliciousRestaurant.jsp?search_mode=title&search=초밥">초 밥</a>
+									<a href="./deliciousRestaurant.jsp?search_mode=title&search=스시">스 시</a>
 								</h3>
 								<ul class="list-accomodation">
 									<li><span>많은 사람들이 일본하면 떠오르는 음식!</span></li>
-									<li><span>초밥은 어떠신가요?</span></li>
+									<li><span>스시는 어떠신가요?</span></li>
 									<br>
 									<!-- <li><span>View:</span> Sea View</li>
 	    							<li><span>Bed:</span> 1</li> -->
 								</ul>
 								<p class="pt-1">
-									<a href="./deliciousRestaurant.jsp?search_mode=title&search=초밥" class="btn-custom px-3 py-2">맛집 보러가기 <span class="icon-long-arrow-right"></span></a>
+									<a href="./deliciousRestaurant.jsp?search_mode=title&search=스시" class="btn-custom px-3 py-2">맛집 보러가기 <span class="icon-long-arrow-right"></span></a>
 								</p>
 							</div>
 						</div>
