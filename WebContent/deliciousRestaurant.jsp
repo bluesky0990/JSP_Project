@@ -249,38 +249,40 @@
 					</div>
 				</div>
 				<%
-					} catch (Exception e) {
-				System.out.println(e.toString());
-				}
-				}
+						} catch (Exception e) {
+							System.out.println(e.toString());
+						}
+					}
 				}
 				break;
+				
+				
 
 				case "station" : {
-				sql.sqlExecute("SELECT", "SELECT * FROM STATION WHERE STATION LIKE '%" + strSearch + "%'", null);
-				if (sql.rs != null && sql.rs.next()) {
-				StationArray = sql.rs.getString("ID");
-				}
-				while (sql.rs != null && sql.rs.next()) {
-				StationArray = StationArray + ", " + sql.rs.getString("ID");
-				}
-				strSearchSQL = "SELECT * FROM ARTICLE WHERE BOARDID=1 AND STATIONID IN (" + StationArray + ") ORDER BY POSTDATE DESC";
-				sql.sqlExecute("SELECT", "SELECT COUNT(*) AS CNT FROM ARTICLE WHERE BOARDID=1 AND STATIONID IN (" + StationArray + ")",
-						null);
-				if (sql.rs != null && sql.rs.next())
-				iArticleCount = sql.rs.getInt("CNT");
-				System.out.println("SELECT * FROM (SELECT ROWNUM NUM,L.* FROM (" + strSearchSQL + ")L) WHERE NUM BETWEEN "
-						+ Integer.toString(((iPage - 1) * iShowMax) + 1) + " AND " + Integer.toString(iPage * iShowMax));
-				sql.sqlExecute("SELECT", "SELECT * FROM (SELECT ROWNUM NUM,L.* FROM (" + strSearchSQL + ")L) WHERE NUM BETWEEN "
-						+ Integer.toString(((iPage - 1) * iShowMax) + 1) + " AND " + Integer.toString(iPage * iShowMax), null);
-				while (sql.rs != null && sql.rs.next()) {
-				subsql.sqlExecute("SELECT", "SELECT * FROM STATION WHERE ID='" + sql.rs.getString("STATIONID") + "'", null);
-				try {
-				String articleNo = sql.rs.getString(2);
-				String title = sql.rs.getString(3);
-				String writer = sql.rs.getString(7);
-				String postDate = sql.rs.getString(5);
-				subsql.sqlExecute("SELECT", "SELECT * FROM STATION WHERE ID='" + sql.rs.getString("STATIONID") + "'", null);
+					sql.sqlExecute("SELECT", "SELECT * FROM STATION WHERE STATION LIKE '%" + strSearch + "%'", null);
+					if (sql.rs != null && sql.rs.next()) {
+					StationArray = sql.rs.getString("ID");
+					}
+					while (sql.rs != null && sql.rs.next()) {
+					StationArray = StationArray + ", " + sql.rs.getString("ID");
+					}
+					strSearchSQL = "SELECT * FROM ARTICLE WHERE BOARDID=1 AND STATIONID IN (" + StationArray + ") ORDER BY POSTDATE DESC";
+					sql.sqlExecute("SELECT", "SELECT COUNT(*) AS CNT FROM ARTICLE WHERE BOARDID=1 AND STATIONID IN (" + StationArray + ")",
+							null);
+					if (sql.rs != null && sql.rs.next())
+					iArticleCount = sql.rs.getInt("CNT");
+					System.out.println("SELECT * FROM (SELECT ROWNUM NUM,L.* FROM (" + strSearchSQL + ")L) WHERE NUM BETWEEN "
+							+ Integer.toString(((iPage - 1) * iShowMax) + 1) + " AND " + Integer.toString(iPage * iShowMax));
+					sql.sqlExecute("SELECT", "SELECT * FROM (SELECT ROWNUM NUM,L.* FROM (" + strSearchSQL + ")L) WHERE NUM BETWEEN "
+							+ Integer.toString(((iPage - 1) * iShowMax) + 1) + " AND " + Integer.toString(iPage * iShowMax), null);
+					while (sql.rs != null && sql.rs.next()) {
+					subsql.sqlExecute("SELECT", "SELECT * FROM STATION WHERE ID='" + sql.rs.getString("STATIONID") + "'", null);
+					try {
+						String articleNo = sql.rs.getString(2);
+						String title = sql.rs.getString(3);
+						String writer = sql.rs.getString(7);
+						String postDate = sql.rs.getString(5);
+						subsql.sqlExecute("SELECT", "SELECT * FROM STATION WHERE ID='" + sql.rs.getString("STATIONID") + "'", null);
 				%>
 				<div class="col-md-4 d-flex ftco-animate">
 					<div class="blog-entry align-self-stretch">
@@ -307,12 +309,8 @@
 							<%
 								if (subsql.rs != null && subsql.rs.next()) {
 							%>
-							<p>
-								역 :
-								<%=subsql.rs.getString("STATION")%></p>
-							<p>
-								노선 :
-								<%=subsql.rs.getString("LANE")%></p>
+							<p>역 :<%=subsql.rs.getString("STATION")%></p>
+							<p>노선 :<%=subsql.rs.getString("LANE")%></p>
 							<%
 								}
 							%>
@@ -320,12 +318,15 @@
 					</div>
 				</div>
 				<%
-					} catch (Exception e) {
-				System.out.println(e.toString());
-				}
-				}
+						} catch (Exception e) {
+							System.out.println(e.toString());
+						}
+					}
 				}
 				break;
+				
+				
+				
 				case "title" : {
 					strSearchSQL = "SELECT * FROM ARTICLE WHERE BOARDID=1 AND TITLE LIKE '%" + strSearch + "%' ORDER BY POSTDATE DESC";
 					sql.sqlExecute("SELECT", "SELECT COUNT(*) AS CNT FROM ARTICLE WHERE BOARDID=1 AND TITLE LIKE '%" + strSearch + "%'", null);
@@ -381,12 +382,15 @@
 						</div>
 					</div>
 					<%
-						} catch (Exception e) {
-					System.out.println(e.toString());
-					}
-					}
+							} catch (Exception e) {
+								System.out.println(e.toString());
+							}
+						}
 					}
 					break;
+					
+					
+					
 				default : {
 				strSearchSQL = "SELECT * FROM ARTICLE WHERE BOARDID=1 ORDER BY POSTDATE DESC";
 				sql.sqlExecute("SELECT", "SELECT COUNT(*) AS CNT FROM ARTICLE WHERE BOARDID=1", null);
@@ -398,11 +402,11 @@
 						+ Integer.toString(((iPage - 1) * iShowMax) + 1) + " AND " + Integer.toString(iPage * iShowMax), null);
 				while (sql.rs != null && sql.rs.next()) {
 				try {
-				String articleNo = sql.rs.getString(2);
-				String title = sql.rs.getString(3);
-				String writer = sql.rs.getString(7);
-				String postDate = sql.rs.getString(5);
-				subsql.sqlExecute("SELECT", "SELECT * FROM STATION WHERE ID='" + sql.rs.getString("STATIONID") + "'", null);
+					String articleNo = sql.rs.getString(2);
+					String title = sql.rs.getString(3);
+					String writer = sql.rs.getString(7);
+					String postDate = sql.rs.getString(5);
+					subsql.sqlExecute("SELECT", "SELECT * FROM STATION WHERE ID='" + sql.rs.getString("STATIONID") + "'", null);
 				%>
 				<div class="col-md-4 d-flex flex-column ftco-animate">
 					<div class="blog-entry align-self-stretch">
@@ -442,10 +446,10 @@
 					</div>
 				</div>
 				<%
-					} catch (Exception e) {
-				System.out.println(e.toString());
-				}
-				}
+						} catch (Exception e) {
+							System.out.println(e.toString());
+						}
+					}
 				}
 				break;
 				}

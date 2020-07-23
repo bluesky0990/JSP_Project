@@ -49,20 +49,24 @@
 			</div>
 		</div>
 	</div>
-	<%
-		request.setCharacterEncoding("utf-8");
-		SQLHelper sql = new SQLHelper();
-		String articleNo = request.getParameter("articleNo");
-		int iBoardId = 0;
-		sql.sqlExecute("SELECT", "SELECT * FROM ARTICLE WHERE NO='" + articleNo + "'", new String[] {});
-		if (sql.rs != null && sql.rs.next())
-		{
-			int iHit = sql.rs.getInt("HITS");
-			sql.sqlExecute("UPDATE", "UPDATE ARTICLE SET HITS='" + Integer.toString(++iHit) + "' WHERE NO='" + articleNo + "'", new String[] { });
-			iBoardId = sql.rs.getInt("BOARDID");
-		}
-		sql.closeSQL();
-	%>
+		<%-- 클릭한 게시글에 대한 처리 --%>
+		<%
+			request.setCharacterEncoding("utf-8");
+			SQLHelper sql = new SQLHelper();
+			String articleNo = request.getParameter("articleNo");
+			int iBoardId = 0;
+			sql.sqlExecute("SELECT", "SELECT * FROM ARTICLE WHERE NO='" + articleNo + "'", new String[] {});
+			if (sql.rs != null && sql.rs.next())
+			{
+				int iHit = sql.rs.getInt("HITS");
+				
+				// 받아온 게시글의 번호로 조회수를 올린다.
+				sql.sqlExecute("UPDATE", "UPDATE ARTICLE SET HITS='" + Integer.toString(++iHit) + "' WHERE NO='" + articleNo + "'", new String[] { });
+				iBoardId = sql.rs.getInt("BOARDID");
+			}
+			sql.closeSQL();
+		%>
+		<%-- 클릭한 게시글에 대한 처리 --%>
 	<nav class="navbar sticky-top navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
 		<div class="container">
 			<a class="navbar-brand" href="index.jsp"><font size="7em"> Osaka </font><span> グルメ</span></a>
@@ -81,7 +85,7 @@
 	<!-- 상단바 영역 -->
 	
 	
-
+	<!-- 이미지 영역 -->
 	<section class="hero-wrap hero-wrap-2" style="background-image: url('images/review.jpg');" data-stellar-background-ratio="0.5">
 		<div class="overlay"></div>
 		<div class="container">
@@ -92,12 +96,15 @@
 			</div>
 		</div>
 	</section>
+	<!-- 이미지 영역 -->
+
 
 	<section>
 		<br> <br>
 		<div>
 			<div class="container">
 				<div class="row">
+					<%-- 게시글 정보 요청 --%>
 					<div class="col-lg-8 col-md-10 mx-auto">
 						<%
 							request.setCharacterEncoding("utf-8");
@@ -119,8 +126,8 @@
 							}
 							sql.closeSQL();
 						%>
-
 					</div>
+					<%-- 게시글 정보 요청 --%>
 				</div>
 			</div>
 
@@ -130,28 +137,35 @@
 					<br>
 					<br>
 					<div class="form-group">
+					
+						<!-- 게시글 영역 -->
 						<div class="container">
 							<div>
-								<from> <%
-    	SQLHelper sql2 = new SQLHelper();
-    	
-    	sql2.sqlExecute("SELECT", "SELECT * FROM REPLY WHERE ARTICLENO='" + articleNo + "' ORDER BY POSTDATE", new String[]{});
-    	while(sql2.rs != null && sql2.rs.next())
-    	{
-    		%>
-								<div class="form-group">
-									<span><strong><%= sql2.rs.getString("WRITER") %></strong></span>
-									<p><%=sql2.rs.getString("CONTENT") %></p>
-								</div>
-								<hr>
-								<!--<p><%=sql2.rs.getString("POSTDATE") %></p>  날짜 --> <%
- 	}
-     	sql2.closeSQL();
- %> </from>
+								<from>
+									<%
+							    	SQLHelper sql2 = new SQLHelper();
+  	
+  										sql2.sqlExecute("SELECT", "SELECT * FROM REPLY WHERE ARTICLENO='" + articleNo + "' ORDER BY POSTDATE", new String[]{});
+  										while(sql2.rs != null && sql2.rs.next()) {
+  									%>
+									<div class="form-group">
+										<span><strong><%= sql2.rs.getString("WRITER") %></strong></span>
+										<p><%=sql2.rs.getString("CONTENT") %></p>
+									</div>
+									<hr>
+									<!--<p><%=sql2.rs.getString("POSTDATE") %></p>  날짜 --> <%
+										}
+   										sql2.closeSQL();
+									%>
+ 								</from>
 							</div>
 						</div>
+						<!-- 게시글 영역 -->
 
 
+
+
+						<!-- 댓글 폼 영역 -->
 						<div class="form-group">
 							<div>
 								<span><strong>Comments</strong></span>
@@ -173,6 +187,7 @@
 								</form>
 							</div>
 						</div>
+						<!-- 댓글 폼 영역 -->
 					</div>
 					<!-- </form>-->
 				</div>
@@ -266,8 +281,8 @@
 	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
 	
 	<script>
-	    $('#content').summernote(
-	    {
+		// SummerNote API를 #content로 불러오기 및 설정
+	    $('#content').summernote({
 			height: 600,
 			lang : 'ko-KR'
 	    });

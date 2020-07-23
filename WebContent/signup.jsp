@@ -212,7 +212,7 @@
 				  });
 			  });
 		});
-</script>
+	</script>
 
 </body>
 </html>

@@ -6,6 +6,7 @@ javax.sql.rowset.CachedRowSet,
 data.ConnectionPool"
 %><%!
 public static class SQLHelper {
+	// SQLHelper에 대한 생성자
 	public SQLHelper()
 	{
 		try
@@ -16,6 +17,12 @@ public static class SQLHelper {
 			sError = "JDBC INIT ERROR\n" + e.toString();
 		}
 	}
+	
+	
+	
+	
+	
+	// JDBC 구성에 필요한 객체 및 변수 선언
 	private ConnectionPool cp = null;
 	private Connection con = null;
 	private Statement st = null;
@@ -23,10 +30,18 @@ public static class SQLHelper {
 	private ResultSet rs = null;
 	private String sError = "";
 	
+	
+	
+	
+	
+	// ResultSet 값 받아오기
 	public ResultSet getrs()
 	{
 		return rs;
 	}
+	
+	
+	
 	
 	// SQL 실행 메소드
 	public void sqlExecute(String type, String sql, String[] parameter) {
@@ -52,6 +67,8 @@ public static class SQLHelper {
 		}
 	}
 
+	
+	
 	
 	// SQL을 사용하고 나서 공간을 다시 확보해주기 위한 작업
 	public void closeSQL() {
@@ -84,6 +101,11 @@ public static class SQLHelper {
             }
         }
 	}
+	
+	
+	
+	
+	// 실행한 SQL 타입별 메소드 실행
 	private void sqlSelect(String sql) {
 		try {
 			st = con.createStatement();

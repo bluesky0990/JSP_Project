@@ -27,9 +27,10 @@
 	//로그인 되어 있지 않음, 게시글 작성 불가.
 	out.print("<script>alert('로그인을 해주세요. 게시글 작성이 불가능합니다.');");
 	out.print("window.location.href = \"./index.jsp\"</script>");
-}
-boolean isAdmin = Integer.parseInt(session.getAttribute("isAdmin").toString()) == 1;
+	}
 
+	// 어드민 계정 여부 확인
+	boolean isAdmin = Integer.parseInt(session.getAttribute("isAdmin").toString()) == 1;
 %>
 </head>
 <body>
@@ -86,6 +87,8 @@ boolean isAdmin = Integer.parseInt(session.getAttribute("isAdmin").toString()) =
 	<!-- 이미지 표시 영역 -->
 	
 	
+	
+	<!-- 게시글 작성 영역 -->
 	<section>
 		<br><br>
 		<div>
@@ -104,6 +107,7 @@ boolean isAdmin = Integer.parseInt(session.getAttribute("isAdmin").toString()) =
 									<label class="input-group-text" for="inputGroupSelect01">게시판</label>
 								</div>
 								<select class="custom-select" id="boardId" name="boardId">
+									<%-- 어드민 여부에 따른 게시판종류 콤보박스 추가(일반 유저의 경우 소개 게시판을 표시하지 않음) --%>
 									<%
 										try {
 											SQLHelper sql = new SQLHelper();
@@ -121,6 +125,7 @@ boolean isAdmin = Integer.parseInt(session.getAttribute("isAdmin").toString()) =
 										} catch (Exception e) {
 										}
 									%>
+									<%-- 어드민 여부에 따른 게시판종류 콤보박스 추가(일반 유저의 경우 소개 게시판을 표시하지 않음) --%>
 								</select>
 							</div>
 							<div class="input-group mb-3">
@@ -128,6 +133,7 @@ boolean isAdmin = Integer.parseInt(session.getAttribute("isAdmin").toString()) =
 									<label class="input-group-text" for="inputGroupSelect02">역</label>
 								</div>
 								<select class="custom-select" id="stationId" name="stationId">
+									<%-- 역 콤보박스에 담을 데이터 받기 --%>
 									<%
 										try {
 										SQLHelper sql = new SQLHelper();
@@ -139,9 +145,10 @@ boolean isAdmin = Integer.parseInt(session.getAttribute("isAdmin").toString()) =
 											out.print("<option value=\"" + sql.rs.getInt("ID") + "\">" + sql.rs.getString("STATION") + "</option>");
 										}
 										sql.closeSQL();
-									} catch (Exception e) {
-									}
+										} catch (Exception e) {
+										}
 									%>
+									<%-- 역 콤보박스에 담을 데이터 받기 --%>
 								</select>
 							</div>
 							<textarea id="content" name="content"></textarea>
@@ -153,6 +160,7 @@ boolean isAdmin = Integer.parseInt(session.getAttribute("isAdmin").toString()) =
 			<hr>
 		</div>
 	</section>
+	<!-- 게시글 작성 영역 -->
 	
 	
 	

@@ -24,6 +24,7 @@
 
 </head>
 <body>
+	<!-- 상단바 영역 -->
 	<div class="wrap">
 		<div class="container">
 			<div class="row justify-content-between">
@@ -57,7 +58,7 @@
 			</div>
 		</div>
 	</nav>
-	<!-- END nav -->
+	<!-- 상단바 영역 -->
 
 	<section class="hero-wrap hero-wrap-2" style="background-image: url('images/review.jpg');" data-stellar-background-ratio="0.5">
 		<div class="overlay"></div>
@@ -75,6 +76,7 @@
 	<script>
 		//$('#search_moode').val('title');
 
+		// 콤보박스에서 선택된 항목에 대한 함수 실행
 		function selectTitle() {
 			$('#search_mode').val('title');
 			$('#btn_select').text('제목');
@@ -90,7 +92,10 @@
 			$("#btn_select").text("노선");
 		}
 	</script>
+	
+	
 	<section class="ftco-loader">
+		<!-- 콤보박스, 검색바, 검색버튼 -->
 		<div class="row row-cols">
 			<div class="col"></div>
 			<div class="col-4 input-group mt-3 mb-3">
@@ -138,8 +143,13 @@
 			</div>
 			<div class="col"></div>
 		</div>
+		<!-- 콤보박스, 검색바, 검색버튼 -->
+		
+		
+		
 		<hr>
 		<div>
+			<!-- 리뷰 게시판 영역 -->
 			<div class="container">
 				<div class="row">
 					<div class="col-lg-8 col-md-10 mx-auto">
@@ -148,7 +158,7 @@
 						</div> -->
 
 						<%
-							int iArticleCount = 0;
+						int iArticleCount = 0;
 						SQLHelper sql = new SQLHelper();
 
 						String strPage = request.getParameter("page");
@@ -187,24 +197,27 @@
 								String title = sql.rs.getString(3);
 								String writer = sql.rs.getString(7);
 								String postDate = sql.rs.getString(5);
-						%>
-						<div class="post-preview">
-							<a href="./readArticle.jsp?articleNo=<%=articleNo%>">
-								<h2 class="post-title">
-									<%=title%>
-								</h2>
-								<h3 class="post-subtitle"></h3>
-							</a>
-							<p class="post-meta">
-								작성자
-								<%=postDate%></p>
-						</div>
-						<%
-							} catch (Exception e) {
-						System.out.println(e.toString());
-						}
-						}
-						break;
+								%>
+								<div class="post-preview">
+									<a href="./readArticle.jsp?articleNo=<%=articleNo%>">
+										<h2 class="post-title">
+											<%=title%>
+										</h2>
+										<h3 class="post-subtitle"></h3>
+									</a>
+									<p class="post-meta">
+										작성자
+										<%=postDate%></p>
+								</div>
+								<%
+									} catch (Exception e) {
+										System.out.println(e.toString());
+									}
+								}
+							break;
+							
+							
+							
 						case "station" :
 						sql.sqlExecute("SELECT", "SELECT * FROM STATION WHERE STATION LIKE '%" + strSearch + "%'", null);
 						if (sql.rs != null && sql.rs.next()) {
@@ -242,10 +255,13 @@
 						</div>
 						<%
 							} catch (Exception e) {
-						System.out.println(e.toString());
-						}
+								System.out.println(e.toString());
+							}
 						}
 						break;
+						
+						
+						
 						case "title":
 							strSearchSQL = "SELECT * FROM ARTICLE WHERE BOARDID=0 AND TITLE LIKE '%" + strSearch + "%' ORDER BY POSTDATE DESC";
 							sql.sqlExecute("SELECT", "SELECT COUNT(*) AS CNT FROM ARTICLE WHERE BOARDID=0 AND TITLE LIKE '%" + strSearch + "%'", null);
@@ -275,8 +291,8 @@
 							</div>
 							<%
 								} catch (Exception e) {
-							System.out.println(e.toString());
-							}
+									System.out.println(e.toString());
+								}
 							}
 							break;
 						default :
@@ -308,20 +324,22 @@
 						</div>
 						<%
 							} catch (Exception e) {
-						System.out.println(e.toString());
-						}
+								System.out.println(e.toString());
+							}
 						}
 						break;
 						}
 						sql.closeSQL();
 						%>
 						<!-- Pager -->
-
 					</div>
 				</div>
 			</div>
 			<hr>
 		</div>
+		<!-- 리뷰 게시판 영역 -->
+		
+		
 		<div class="d-flex justify-content-around mb-2">
 			<div class="p-2"></div>
 			<div class="p-2">
@@ -329,6 +347,7 @@
 					<div class="col text-center">
 						<div class="block-27">
 							<ul>
+								<%-- 페이지 갯수 계산 및 갯수에 대한 페이징 버튼 생성 --%>
 								<%
 									int iPageCount = (int) Math.ceil((double) iArticleCount / (double) iShowMax);
 								for (int k = 0; k < iPageCount; k++) {
@@ -339,6 +358,7 @@
 										+ Integer.toString(k + 1) + "</a></li>");
 								}
 								%>
+								<%-- 페이지 갯수 계산 및 갯수에 대한 페이징 버튼 생성 --%>
 							</ul>
 						</div>
 					</div>
@@ -350,6 +370,8 @@
 		</div>
 	</section>
 
+
+	<!-- 하단바 영역 -->
 	<footer class="footer">
 		<div class="container">
 			<div class="row">
@@ -403,6 +425,7 @@
 			</div>
 		</div>
 	</footer>
+	<!-- 하단바 영역 -->
 
 
 
