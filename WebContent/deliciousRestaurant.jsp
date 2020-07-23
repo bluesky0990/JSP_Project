@@ -130,10 +130,10 @@
 
 						switch (strSearchMode) {
 							case "lane" :
-								out.print("역");
+								out.print("노선");
 								break;
 							case "station" :
-								out.print("노선");
+								out.print("역");
 								break;
 							case "title" :
 								out.print("제목");
