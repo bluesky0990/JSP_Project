@@ -39,9 +39,12 @@ realFolder = context.getRealPath(saveFolder);
 
 	try
 	{
-	if (files != null && files.hasMoreElements())
+		String tmpFileName = "";
+		while(files != null && files.hasMoreElements()) tmpFileName = (String)files.nextElement();
+		
+	if (tmpFileName != "")
 	{
-		String uploadedFileName = (String)files.nextElement();
+		String uploadedFileName = tmpFileName;
 		File uploadedFile = multi.getFile(uploadedFileName);
 		String originalFileName = multi.getOriginalFileName(uploadedFileName);
 		String fileExtension = originalFileName.substring(originalFileName.lastIndexOf("."));
