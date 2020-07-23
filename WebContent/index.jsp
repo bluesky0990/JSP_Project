@@ -131,9 +131,11 @@
 				<div class="col-md-7 ftco-animate">
 					<h2 class="subheading">환영합니다</h2>
 					<h1 class="mb-4">오사카 맛집 소개</h1>
+					<!--
 					<p>
 						<a href="#" class="btn btn-primary">Learn more</a> <a href="#" class="btn btn-white">Contact us</a>
 					</p>
+					-->
 				</div>
 			</div>
 		</div>
